@@ -1,0 +1,7 @@
+.page-container {
+  display: grid;
+  grid-gap: $l-size;
+  grid-auto-rows: auto;
+  grid-template-columns: 80% 17.25%;
+  margin: 0 5%;
+}
