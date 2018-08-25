@@ -16,6 +16,11 @@ export const startSignUp = (userData) => {
     } = userData;
     const signUpDate = moment().toDate();
     const user = { email, password, signUpDate };
+    // const header = {
+    //   headers: {
+    //     'x-auth': jwtToken
+    //   }
+    // };
 
     try {
       const response = await axios.post('/api/users', user);

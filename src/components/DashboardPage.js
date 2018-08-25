@@ -1,8 +1,9 @@
 import React from 'react';
+import FriendListContainer from './friend-list/FriendListContainer';
 
 const DashboardPage = () => (
   <div className="page-container">
-    Put stuff here
+    <FriendListContainer />
   </div>
 );
 
