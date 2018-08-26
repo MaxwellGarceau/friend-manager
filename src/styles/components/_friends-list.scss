@@ -1,6 +1,12 @@
-.friends-list {
+.friends-area {
   &__container {
-    // display: grid;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+.friends-list {
+  &__table {
   }
   &__row {
 
