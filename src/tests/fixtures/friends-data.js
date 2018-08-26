@@ -18,20 +18,26 @@ export const friends = [{
   id: 3
 }, {
   name: 'Jorge',
-  relationship: 'acquaintance',
+  relationship: 'friend',
   location: 'Nashville, TN',
   ranking: '5',
   id: 4
 }, {
   name: 'Jose',
-  relationship: 'family',
+  relationship: 'acquaintance',
   location: 'Nashville, TN',
-  ranking: '5',
+  ranking: '3',
   id: 5
 }, {
   name: 'Juan',
-  relationship: 'friend',
+  relationship: 'acquaintance',
+  location: 'Nashville, TN',
+  ranking: '1',
+  id: 6
+}, {
+  name: 'Raul',
+  relationship: 'family',
   location: 'Nashville, TN',
   ranking: '5',
-  id: 6
+  id: 7
 }];

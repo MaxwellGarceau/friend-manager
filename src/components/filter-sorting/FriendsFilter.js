@@ -37,6 +37,10 @@ class FriendsFilter extends React.Component {
             />
             <br />
           </fieldset>
+          <fieldset>
+            <legend>Location</legend>
+            <br />
+          </fieldset>
         </form>
       </div>
     );
