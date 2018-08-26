@@ -17,7 +17,9 @@ export const sortAlphabetically = (friendsListArr, sortDirection, sortParam) => 
 };
 
 export const sortNumerically = (friendsListArr, sortDirection) => {
-
+  return friendsListArr.sort(
+    firstBy((a, b) => a.ranking - b.ranking, sortDirection)
+  );
 };
 
 export const sortByLocation = (friendsListArr, sortDirection) => {

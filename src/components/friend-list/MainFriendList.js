@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { friends } from '../../tests/fixtures/friends-data';
-import { determineSortDirection, sortAlphabetically, sortByLocation } from '../../utils/sorting-logic/main-friend-list-sorting';
+import { determineSortDirection, sortAlphabetically, sortNumerically, sortByLocation } from '../../utils/sorting-logic/main-friend-list-sorting';
 
 class MainFriendList extends React.Component {
   // REPLACE FRIENDS VARIABLE WITH FRIENDS DATA FROM REDUX/MONGODB
@@ -37,9 +37,12 @@ class MainFriendList extends React.Component {
     });
   };
   handleSortByRanking = () => {
+    const { friends, rankingSortDirection } = this.state;
+    const sortedFriendsList = sortNumerically(friends, rankingSortDirection);
 
-    determineSortDirection(this, 'rankingSortDirection');
-    console.log('handleSortByRanking');
+    this.setState({ friends: sortedFriendsList }, () => {
+      determineSortDirection(this, 'rankingSortDirection');
+    });
   };
   render () {
     return (
