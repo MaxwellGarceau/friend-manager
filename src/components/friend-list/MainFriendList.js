@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { friends } from '../../tests/fixtures/friends-data';
-import { determineSortDirection, sortFriendsListAlphabetically } from '../../utils/sorting-logic/main-friend-list-sorting';
+import { determineSortDirection, sortAlphabetically, sortByLocation } from '../../utils/sorting-logic/main-friend-list-sorting';
 
 class MainFriendList extends React.Component {
   // REPLACE FRIENDS VARIABLE WITH FRIENDS DATA FROM REDUX/MONGODB
@@ -14,7 +14,7 @@ class MainFriendList extends React.Component {
   };
   handleSortByName = () => {
     const { friends, nameSortDirection } = this.state;
-    const sortedFriendsList = sortFriendsListAlphabetically(friends, nameSortDirection, 'name');
+    const sortedFriendsList = sortAlphabetically(friends, nameSortDirection, 'name');
 
     this.setState({ friends: sortedFriendsList }, () => {
       determineSortDirection(this, 'nameSortDirection');
@@ -22,16 +22,20 @@ class MainFriendList extends React.Component {
   };
   handleSortByRelationship = () => {
     const { friends, relationshipSortDirection } = this.state;
-    const sortedFriendsList = sortFriendsListAlphabetically(friends, relationshipSortDirection, 'relationship');
+    const sortedFriendsList = sortAlphabetically(friends, relationshipSortDirection, 'relationship');
 
     this.setState({ friends: sortedFriendsList }, () => {
       determineSortDirection(this, 'relationshipSortDirection');
     });
   };
   handleSortByLocation = () => {
+    const { friends, locationSortDirection } = this.state;
+    const sortedFriendsList = sortByLocation(friends, locationSortDirection);
+    console.log('sortByLocation', sortedFriendsList);
 
-    determineSortDirection(this, 'locationSortDirection');
-    console.log('handleSortByLocation');
+    this.setState({ friends: sortedFriendsList }, () => {
+      determineSortDirection(this, 'locationSortDirection');
+    });
   };
   handleSortByRanking = () => {
 
@@ -55,8 +59,8 @@ class MainFriendList extends React.Component {
               <tr key={friend.id} className="friends-list__row">
                 <td>{friend.name}</td>
                 <td>{friend.relationship}</td>
-                <td>{friend.location}</td>
-                <td>{friend.ranking}</td>
+                <td>{`${friend.location.city}, ${friend.location.region} ${friend.location.country}`}</td>
+                <td>{`${friend.ranking} star (REPLACE WITH STAR PIC LATER)`}</td>
               </tr>
             );
           })}
