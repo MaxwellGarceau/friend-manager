@@ -3,7 +3,7 @@ import { firstBy } from 'thenby';
 
 export const determineSortDirection = (that, sortField) => {
   that.setState((prevState) => {
-    const newSortDirection = prevState[sortField] === 'ascending' ? 'descending' : 'ascending';
+    const newSortDirection = prevState[sortField] === 1 ? -1 : 1;
     return {
       [sortField]: newSortDirection
     };
@@ -11,18 +11,19 @@ export const determineSortDirection = (that, sortField) => {
 };
 
 export const sortAlphabetically = (friendsListArr, sortDirection, sortParam) => {
-  if (sortDirection === 'ascending') {
-    return friendsListArr.sort((a, b) => a[sortParam].localeCompare(b[sortParam]));
-  } else {
-    return friendsListArr.sort((a, b) => b[sortParam].localeCompare(a[sortParam]));
-  }
-}
+  return friendsListArr.sort(
+    firstBy((a, b) => a[sortParam].localeCompare(b[sortParam]), sortDirection)
+  );
+};
+
+export const sortNumerically = (friendsListArr, sortDirection) => {
+
+};
 
 export const sortByLocation = (friendsListArr, sortDirection) => {
-  const sortDirectionNum = sortDirection === 'ascending' ? 1 : -1;
   return friendsListArr.sort(
-    firstBy((a, b) => a.location.country.localeCompare(b.location.country), sortDirectionNum)
-      .thenBy((a, b) => a.location.region.localeCompare(b.location.region), sortDirectionNum)
-      .thenBy((a, b) => a.location.city.localeCompare(b.location.city), sortDirectionNum)
+    firstBy((a, b) => a.location.country.localeCompare(b.location.country), sortDirection)
+      .thenBy((a, b) => a.location.region.localeCompare(b.location.region), sortDirection)
+      .thenBy((a, b) => a.location.city.localeCompare(b.location.city), sortDirection)
   );
 };

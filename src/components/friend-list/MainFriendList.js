@@ -7,10 +7,10 @@ class MainFriendList extends React.Component {
   // REPLACE FRIENDS VARIABLE WITH FRIENDS DATA FROM REDUX/MONGODB
   state = {
     friends,
-    nameSortDirection: 'ascending',
-    relationshipSortDirection: 'ascending',
-    locationSortDirection: 'ascending',
-    rankingSortDirection: 'ascending'
+    nameSortDirection: 1,
+    relationshipSortDirection: 1,
+    locationSortDirection: 1,
+    rankingSortDirection: 1
   };
   handleSortByName = () => {
     const { friends, nameSortDirection } = this.state;
@@ -31,7 +31,6 @@ class MainFriendList extends React.Component {
   handleSortByLocation = () => {
     const { friends, locationSortDirection } = this.state;
     const sortedFriendsList = sortByLocation(friends, locationSortDirection);
-    console.log('sortByLocation', sortedFriendsList);
 
     this.setState({ friends: sortedFriendsList }, () => {
       determineSortDirection(this, 'locationSortDirection');
