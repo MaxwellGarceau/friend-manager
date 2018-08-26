@@ -38,12 +38,6 @@ class MainFriendList extends React.Component {
     determineSortDirection(this, 'rankingSortDirection');
     console.log('handleSortByRanking');
   };
-  // determineSortDirection = (sortField) => {
-  //   this.setState((prevState) => {
-  //     const newSortDirection = prevState[sortField] === 'ascending' ? 'descending' : 'ascending';
-  //     return { [sortField]: newSortDirection };
-  //   });
-  // };
   render () {
     return (
       <table className="friends-list__table">
