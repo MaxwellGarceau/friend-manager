@@ -62,12 +62,18 @@ class MainFriendList extends React.Component {
         </thead>
         <tbody>
           {this.state.friends.map((friend) => {
+            let stars = [];
+            for (let i = 0; i < friend.ranking; i++) {
+              stars.push(<i className="far fa-star"></i>);
+            }
             return (
               <tr key={friend.id} className="friends-list__row">
                 <td>{friend.name}</td>
                 <td>{friend.relationship}</td>
                 <td>{`${friend.location.city}, ${friend.location.region} ${friend.location.country}`}</td>
-                <td>{`${friend.ranking} star (REPLACE WITH STAR PIC LATER)`}</td>
+                <td>
+                  {stars.map((star) => star)}
+                </td>
               </tr>
             );
           })}
