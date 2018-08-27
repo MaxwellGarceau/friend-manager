@@ -26,5 +26,8 @@
     &--up {
       transform: rotate(-90deg);
     }
+    &--not-active {
+      opacity: .3;
+    }
   }
 }

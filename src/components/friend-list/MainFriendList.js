@@ -11,7 +11,8 @@ class MainFriendList extends React.Component {
     nameSortDirection: 1,
     relationshipSortDirection: 1,
     locationSortDirection: 1,
-    rankingSortDirection: 1
+    rankingSortDirection: 1,
+    activeSort: ''
   };
   handleSortByName = (sortDirection) => {
     // const { friends, nameSortDirection } = this.state;
@@ -23,13 +24,19 @@ class MainFriendList extends React.Component {
     // });
     this.setState({ friends: sortedFriendsList });
   };
-  handleSortByRelationship = () => {
-    const { friends, relationshipSortDirection } = this.state;
-    const sortedFriendsList = sortAlphabetically(friends, relationshipSortDirection, 'relationship');
+  handleSortByRelationship = (sortDirection) => {
+//     const { friends, relationshipSortDirection } = this.state;
+//     const sortedFriendsList = sortAlphabetically(friends, relationshipSortDirection, 'relationship');
+// 
+//     this.setState({ friends: sortedFriendsList }, () => {
+//       determineSortDirection(this, 'relationshipSortDirection');
+//     });
+    const sortedFriendsList = sortAlphabetically(this.state.friends, sortDirection, 'relationship');
 
-    this.setState({ friends: sortedFriendsList }, () => {
-      determineSortDirection(this, 'relationshipSortDirection');
-    });
+    // this.setState({ friends: sortedFriendsList }, () => {
+    //   determineSortDirection(this, 'nameSortDirection');
+    // });
+    this.setState({ friends: sortedFriendsList });
   };
   handleSortByLocation = () => {
     const { friends, locationSortDirection } = this.state;
@@ -47,6 +54,9 @@ class MainFriendList extends React.Component {
       determineSortDirection(this, 'rankingSortDirection');
     });
   };
+  setActiveSort = (activeSort) => {
+    this.setState({ activeSort });
+  };
   render () {
     // const nameSortIconDirection = this.state.nameSortDirection === 1 ? 'fa-rotate-90' : 'fa-rotate-270';
     return (
@@ -56,8 +66,9 @@ class MainFriendList extends React.Component {
             {/* <th className="friends-list__category-title" onClick={this.handleSortByName}> */}
             {/*   Name <i className={`fas fa-caret-right friends-list__sort-icon`}></i> */}
             {/* </th> */}
-            <FriendListTableCategoryTitle title={'Name'} handleSort={this.handleSortByName}/>
-            <th className="friends-list__category-title" onClick={this.handleSortByRelationship}>Relationship</th>
+            <FriendListTableCategoryTitle title={'Name'} handleSort={this.handleSortByName} activeSort={this.state.activeSort} setActiveSort={this.setActiveSort} />
+            <FriendListTableCategoryTitle title={'Relationship'} handleSort={this.handleSortByRelationship} activeSort={this.state.activeSort} setActiveSort={this.setActiveSort} />
+            {/* <th className="friends-list__category-title" onClick={this.handleSortByRelationship}>Relationship</th> */}
             <th className="friends-list__category-title" onClick={this.handleSortByLocation}>Location</th>
             <th className="friends-list__category-title" onClick={this.handleSortByRanking}>Ranking</th>
           </tr>
