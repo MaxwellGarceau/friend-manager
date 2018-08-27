@@ -9,10 +9,6 @@ class MainFriendList extends React.Component {
   state = {
     // REPLACE FRIENDS VARIABLE WITH FRIENDS DATA FROM REDUX/MONGODB
     friends,
-    nameSortDirection: 1,
-    relationshipSortDirection: 1,
-    locationSortDirection: 1,
-    rankingSortDirection: 1,
     activeSort: ''
   };
   handleSortByName = (sortDirection) => {
@@ -62,10 +58,11 @@ class MainFriendList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.friends.map((friend, ind) => {
+          {this.state.friends.map((friend) => {
             let stars = [];
             for (let i = 0; i < friend.ranking; i++) {
-              stars.push(<i key={`star-ranking-key-${i}--${ind}`} className="far fa-star"></i>);
+              // Caused problems when adding map index to key
+              stars.push(<i key={`star-ranking-key-${i}`} className="far fa-star"></i>);
             }
             return (
               <tr key={friend.id} className="friends-list__row">
