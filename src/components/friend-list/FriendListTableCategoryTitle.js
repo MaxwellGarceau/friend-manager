@@ -7,12 +7,11 @@ const initialState = {
   iconIsNotActive: ' friends-list__sort-icon--not-active'
 };
 const initialStateClone = cloneDeep(initialState);
-console.log(initialStateClone);
 
 class FriendListTableCategoryTitle extends React.Component {
   state = initialState;
 
-// Renders component twice in order to do check. Consider refactoring in the future
+  // Renders component twice in order to do check. Consider refactoring in the future
   componentDidUpdate (prevProps) {
     if (this.props.activeSort !== this.props.title && this.state.sortIconDirection !== '') {
       this.setState(initialStateClone.__wrapped__);
