@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
+import ManuallyAddFriend from './ManuallyAddFriend';
 import { friends } from '../../tests/fixtures/friends-data';
 import { sortAlphabetically, sortNumerically, sortByLocation } from '../../utils/sorting-logic/main-friend-list-sorting';
 
@@ -61,10 +62,10 @@ class MainFriendList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.friends.map((friend) => {
+          {this.state.friends.map((friend, ind) => {
             let stars = [];
             for (let i = 0; i < friend.ranking; i++) {
-              stars.push(<i className="far fa-star"></i>);
+              stars.push(<i key={`star-ranking-key-${i}--${ind}`} className="far fa-star"></i>);
             }
             return (
               <tr key={friend.id} className="friends-list__row">
@@ -77,6 +78,7 @@ class MainFriendList extends React.Component {
               </tr>
             );
           })}
+          <ManuallyAddFriend />
         </tbody>
       </table>
     );
