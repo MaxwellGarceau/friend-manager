@@ -58,9 +58,10 @@ class MainFriendList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.friends.map((friend, ind) => {
+          {this.state.friends.map((friend) => {
             let stars = [];
             for (let i = 0; i < friend.ranking; i++) {
+              // Caused problems when adding map index to key
               stars.push(<i key={`star-ranking-key-${i}`} className="far fa-star"></i>);
             }
             return (

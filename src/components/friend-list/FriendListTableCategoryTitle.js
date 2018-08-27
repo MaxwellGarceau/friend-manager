@@ -9,7 +9,11 @@ const initialState = {
 const initialStateClone = cloneDeep(initialState);
 
 class FriendListTableCategoryTitle extends React.Component {
-  state = initialState;
+  constructor (props) {
+    super(props);
+
+    this.state = initialState;
+  }
 
   // Renders component twice in order to do check. Consider refactoring in the future
   componentDidUpdate (prevProps) {
