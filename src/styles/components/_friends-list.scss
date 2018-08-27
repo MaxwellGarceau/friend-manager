@@ -7,11 +7,24 @@
 
 .friends-list {
   &__table {
+
   }
   &__row {
 
   }
   &__category-title {
     cursor: pointer;
+  }
+  &__sort-icon-container {
+    display: inline-block;
+    transition: all .1s ease-in-out;
+  }
+  &__sort-icon {
+    &--down {
+      transform: rotate(90deg);
+    }
+    &--up {
+      transform: rotate(-90deg);
+    }
   }
 }

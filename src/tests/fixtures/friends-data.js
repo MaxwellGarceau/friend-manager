@@ -6,7 +6,7 @@ export const friends = [{
     region: 'TN',
     city: 'Nashville'
   },
-  ranking: '5',
+  ranking: 5,
   id: 1
 }, {
   name: 'Keenan',
@@ -16,7 +16,7 @@ export const friends = [{
     region: 'TN',
     city: 'Nashville'
   },
-  ranking: '5',
+  ranking: 5,
   id: 2
 }, {
   name: 'Kyle',
@@ -26,7 +26,7 @@ export const friends = [{
     region: 'TN',
     city: 'Nashville'
   },
-  ranking: '5',
+  ranking: 5,
   id: 3
 }, {
   name: 'Jorge',
@@ -36,7 +36,7 @@ export const friends = [{
     region: 'AL',
     city: 'Huntsville'
   },
-  ranking: '5',
+  ranking: 5,
   id: 4
 }, {
   name: 'Jose',
@@ -46,7 +46,7 @@ export const friends = [{
     region: 'NM',
     city: 'El Paso'
   },
-  ranking: '3',
+  ranking: 3,
   id: 5
 }, {
   name: 'Juan',
@@ -56,7 +56,7 @@ export const friends = [{
     region: 'AL',
     city: 'Birmingham'
   },
-  ranking: '1',
+  ranking: 1,
   id: 6
 }, {
   name: 'Raul',
@@ -66,6 +66,6 @@ export const friends = [{
     region: 'NV',
     city: 'Las Vegas'
   },
-  ranking: '5',
+  ranking: 5,
   id: 7
 }];

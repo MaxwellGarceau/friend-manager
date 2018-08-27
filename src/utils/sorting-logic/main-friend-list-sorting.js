@@ -16,9 +16,9 @@ export const sortAlphabetically = (friendsListArr, sortDirection, sortParam) => 
   );
 };
 
-export const sortNumerically = (friendsListArr, sortDirection) => {
+export const sortNumerically = (friendsListArr, sortDirection, sortParam) => {
   return friendsListArr.sort(
-    firstBy((a, b) => a.ranking - b.ranking, sortDirection)
+    firstBy((a, b) => a[sortParam] - b[sortParam], sortDirection)
   );
 };
 

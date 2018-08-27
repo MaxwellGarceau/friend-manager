@@ -5,9 +5,12 @@ import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
-import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import 'react-input-range/lib/css/index.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+// import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+import '@fortawesome/fontawesome-free/js/all.min.js';
+import './styles/styles.scss';
 import LoadingPage from './components/LoadingPage';
 
 const store = configureStore();

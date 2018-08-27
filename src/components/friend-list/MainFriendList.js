@@ -1,24 +1,27 @@
 import React from 'react';
 
+import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
 import { friends } from '../../tests/fixtures/friends-data';
 import { determineSortDirection, sortAlphabetically, sortNumerically, sortByLocation } from '../../utils/sorting-logic/main-friend-list-sorting';
 
 class MainFriendList extends React.Component {
-  // REPLACE FRIENDS VARIABLE WITH FRIENDS DATA FROM REDUX/MONGODB
   state = {
+    // REPLACE FRIENDS VARIABLE WITH FRIENDS DATA FROM REDUX/MONGODB
     friends,
     nameSortDirection: 1,
     relationshipSortDirection: 1,
     locationSortDirection: 1,
     rankingSortDirection: 1
   };
-  handleSortByName = () => {
-    const { friends, nameSortDirection } = this.state;
-    const sortedFriendsList = sortAlphabetically(friends, nameSortDirection, 'name');
+  handleSortByName = (sortDirection) => {
+    // const { friends, nameSortDirection } = this.state;
+    // const sortedFriendsList = sortAlphabetically(friends, nameSortDirection, 'name');
+    const sortedFriendsList = sortAlphabetically(this.state.friends, sortDirection, 'name');
 
-    this.setState({ friends: sortedFriendsList }, () => {
-      determineSortDirection(this, 'nameSortDirection');
-    });
+    // this.setState({ friends: sortedFriendsList }, () => {
+    //   determineSortDirection(this, 'nameSortDirection');
+    // });
+    this.setState({ friends: sortedFriendsList });
   };
   handleSortByRelationship = () => {
     const { friends, relationshipSortDirection } = this.state;
@@ -38,18 +41,22 @@ class MainFriendList extends React.Component {
   };
   handleSortByRanking = () => {
     const { friends, rankingSortDirection } = this.state;
-    const sortedFriendsList = sortNumerically(friends, rankingSortDirection);
+    const sortedFriendsList = sortNumerically(friends, rankingSortDirection, 'ranking');
 
     this.setState({ friends: sortedFriendsList }, () => {
       determineSortDirection(this, 'rankingSortDirection');
     });
   };
   render () {
+    // const nameSortIconDirection = this.state.nameSortDirection === 1 ? 'fa-rotate-90' : 'fa-rotate-270';
     return (
       <table className="friends-list__table">
         <thead>
           <tr>
-            <th className="friends-list__category-title" onClick={this.handleSortByName}>Name</th>
+            {/* <th className="friends-list__category-title" onClick={this.handleSortByName}> */}
+            {/*   Name <i className={`fas fa-caret-right friends-list__sort-icon`}></i> */}
+            {/* </th> */}
+            <FriendListTableCategoryTitle title={'Name'} handleSort={this.handleSortByName}/>
             <th className="friends-list__category-title" onClick={this.handleSortByRelationship}>Relationship</th>
             <th className="friends-list__category-title" onClick={this.handleSortByLocation}>Location</th>
             <th className="friends-list__category-title" onClick={this.handleSortByRanking}>Ranking</th>
