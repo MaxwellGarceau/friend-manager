@@ -23,7 +23,7 @@ class FriendsFilter extends React.Component {
     const selectedFilters = [{
       active: true,
       filterId: 'relationshipFilter',
-      params: ['friends', 'family']
+      params: ['friend', 'family']
     }, {
       active: false,
       filterId: 'rankingFilter'

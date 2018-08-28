@@ -1,35 +1,38 @@
 export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
+  const allFriendsListFilters = new AllFriendsListFilters();
   let filteredFriendsList = friendsList;
   filterSettings.map((filter) => {
     if (filter.active) {
-      filteredFriendsList = allFriendsListFilters[filter.filterId](filteredFriendsList, filter.params);
+      const filterKey = filter.filterId;
+      filteredFriendsList = allFriendsListFilters[filterKey](filteredFriendsList, filter.params);
     }
   });
-  console.log(filteredFriendsList);
+  console.log('filteredFriendsList', filteredFriendsList);
   return filteredFriendsList;
 };
 
-const allFriendsListFilters = () => {
-  return {
-    relationshipFilter,
-    rankingFilter,
-    locationFilter
+class AllFriendsListFilters {
+  relationshipFilter = (friendsList, paramsArr) => {
+    return friendsList.filter((friend) => {
+      return paramsArr.filter((param) => friend.relationship === param).join();
+    });
   };
-};
 
-const relationshipFilter = (friendsList, paramsArr) => {
-  return friendsList.filter((friend) => {
-    return paramsArr.filter((param) => friend.relationship === param);
-  });
-};
+  rankingFilter = (friendsList) => {
+    // Code goes here
+  };
 
-const rankingFilter = (friendsList) => {
-  // Code goes here
-};
+  locationFilter = (friendsList) => {
+    // Code goes here
+  };
+}
 
-const locationFilter = (friendsList) => {
-  // Code goes here
-};
+// const allFriendsListFilters = {
+//   relationshipFilter: relationshipFilter,
+//   rankingFilter,
+//   locationFilter
+// };
+console.log(AllFriendsListFilters);
 
 // 1) Create list of filter functions and store them in an object
 // 2) Provide the function as one key/value pair and the filter id as another key/value pair
