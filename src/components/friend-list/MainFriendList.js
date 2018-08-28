@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
 import { friendsListMasterFilter } from '../../selectors/friend-list-filters';
 
 import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
@@ -10,7 +11,8 @@ import { sortAlphabetically, sortNumerically, sortByLocation } from '../../utils
 class MainFriendList extends React.Component {
   state = {
     // REPLACE FRIENDS VARIABLE WITH FRIENDS DATA FROM REDUX/MONGODB
-    friends: friendsListMasterFilter(friends, {}),
+    // PASS FILTER SETTINGS FROM REDUX AS 2ND ARGUMENT
+    friends: friendsListMasterFilter(friends, this.props.friendsListFilters),
     activeSort: ''
   };
   handleSortByName = (sortDirection) => {
@@ -84,4 +86,8 @@ class MainFriendList extends React.Component {
   }
 }
 
-export default MainFriendList;
+const mapStateToProps = (state) => ({
+  friendsListFilters: state.filters.friendsListFilters
+});
+
+export default connect(mapStateToProps)(MainFriendList);

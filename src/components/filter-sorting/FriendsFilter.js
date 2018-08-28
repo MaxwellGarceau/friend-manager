@@ -20,13 +20,14 @@ class FriendsFilter extends React.Component {
     // Code that prepares data by setting category to object key and filter values as sub key/values
 
     // Dummy data for filter test
-    const selectedFilters = {
-      relationship: {
-        family: true,
-        friends: true,
-        acquaintance: false
-      }
-    };
+    const selectedFilters = [{
+      active: true,
+      filterId: 'relationshipFilter',
+      params: ['friends', 'family']
+    }, {
+      active: false,
+      filterId: 'rankingFilter'
+    }];
     this.props.startUpdateFriendListFilters(selectedFilters);
   };
   render () {
@@ -38,9 +39,9 @@ class FriendsFilter extends React.Component {
             <legend>Relationship</legend>
             <input type="checkbox" name="friend" value="friend" /> Friend
             <br />
-            <input type="checkbox" name="friend" value="friend" /> Family
+            <input type="checkbox" name="family" value="family" /> Family
             <br />
-            <input type="checkbox" name="friend" value="friend" /> Acquaintance
+            <input type="checkbox" name="acquaintance" value="acquaintance" /> Acquaintance
             <br />
           </fieldset>
           <fieldset>
