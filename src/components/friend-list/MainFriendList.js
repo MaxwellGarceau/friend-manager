@@ -87,7 +87,8 @@ class MainFriendList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  friendsListFilters: state.filters.friendsListFilters
+  friendsListFilters: state.filters.friendsListFilters,
+  friends: state.friends
 });
 
 export default connect(mapStateToProps)(MainFriendList);
