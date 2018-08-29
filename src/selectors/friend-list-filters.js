@@ -3,8 +3,9 @@ export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
   let filteredFriendsList = friendsList;
   filterSettings.map((filter) => {
     if (filter.active) {
-      const filterKey = filter.filterId;
-      filteredFriendsList = allFriendsListFilters[filterKey](filteredFriendsList, filter.params);
+      const filterMethod = filter.filterId;
+      const activeFilters = filter.params;
+      filteredFriendsList = allFriendsListFilters[filterMethod](filteredFriendsList, activeFilters);
     }
   });
   console.log('filteredFriendsList', filteredFriendsList);
@@ -26,14 +27,3 @@ class AllFriendsListFilters {
     // Code goes here
   };
 }
-
-// const allFriendsListFilters = {
-//   relationshipFilter: relationshipFilter,
-//   rankingFilter,
-//   locationFilter
-// };
-console.log(AllFriendsListFilters);
-
-// 1) Create list of filter functions and store them in an object
-// 2) Provide the function as one key/value pair and the filter id as another key/value pair
-// 3) Inside the map function call the correct function per filter based on the filter id key/value pair

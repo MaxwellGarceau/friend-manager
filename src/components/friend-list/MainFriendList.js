@@ -34,6 +34,11 @@ class MainFriendList extends React.Component {
   setActiveSort = (activeSort) => {
     this.setState({ activeSort });
   };
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.friends !== this.props.friends) {
+      this.setState({ friends: nextProps.friends });
+    }
+  };
   render () {
     return (
       <table className="friends-list__table">
