@@ -3,9 +3,11 @@ export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
   let filteredFriendsList = friendsList;
   filterSettings.map((filter) => {
     if (filter.active) {
-      const filterMethod = filter.filterId;
+      console.log('filterCategory', filter.filterCategory);
+      const filterMethod = filter.type;
+      const filterCategory = filter.filterCategory;
       const activeFilters = filter.params;
-      filteredFriendsList = allFriendsListFilters[filterMethod](filteredFriendsList, activeFilters);
+      filteredFriendsList = allFriendsListFilters[filterMethod](filteredFriendsList, activeFilters, filterCategory);
     }
   });
   console.log('filteredFriendsList', filteredFriendsList);
@@ -13,9 +15,9 @@ export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
 };
 
 class AllFriendsListFilters {
-  relationshipFilter = (friendsList, paramsArr) => {
+  checkbox = (friendsList, paramsArr, filterCategory) => {
     return friendsList.filter((friend) => {
-      return paramsArr.filter((param) => friend.relationship === param).join();
+      return paramsArr.filter((param) => friend[filterCategory] === param).join();
     });
   };
 

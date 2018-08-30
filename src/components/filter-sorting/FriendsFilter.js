@@ -44,10 +44,12 @@ class FriendsFilter extends React.Component {
   handleInputFieldChange = (e) => {
     let value;
     const input = e.target;
+    const type = input.type;
     const parentName = input.dataset.parent;
+    const filterCategory = input.dataset.filterCategory;
     const name = input.name;
 
-    switch (input.type) {
+    switch (type) {
       case 'checkbox':
         value = input.checked;
         break;
@@ -68,8 +70,10 @@ class FriendsFilter extends React.Component {
       // Written this way to avoid undefined error from trying to check an object property that doesn't exist.
       const prevParams = (prevFilterState) ? prevFilterState.params ? prevFilterState.params : [] : [];
       return this.state.selectedFilters.push({
+        filterParent: parentName,
+        filterCategory,
         active: true,
-        filterId: parentName,
+        type,
         params: [...prevParams, name]
       });
     });
@@ -85,7 +89,8 @@ class FriendsFilter extends React.Component {
               type="checkbox"
               name="friend"
               onChange={this.handleInputFieldChange}
-              data-parent="relationshipFilter" /> Friend
+              data-parent="relationshipFilter"
+              data-filter-category="relationship" /> Friend
             <br />
             <input
               type="checkbox"
