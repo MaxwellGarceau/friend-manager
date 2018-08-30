@@ -50,19 +50,16 @@ class FriendsFilter extends React.Component {
     const name = input.name;
     const selectedFilters = this.state.selectedFilters;
     let prevFilter = false;
-    // console.log('prevFilterLength', prevFilter.length > 0);
     // If there are previous filters...
     if (selectedFilters.length > 0) {
       // Return filter that input field belongs to
       prevFilter = selectedFilters.filter((filter) => {
         return filter.filterParent === parentName;
-      }).reduce((acc) => acc);
+      })[0];
     }
-    // console.log(selectedFilters.indexOf(prevFilter));
 
     // Location of filter in selected filters array
     const prevFilterIndex = selectedFilters.indexOf(prevFilter);
-    console.log('name', name);
     // Determine type of input field
     switch (type) {
       case 'checkbox':
@@ -95,7 +92,7 @@ class FriendsFilter extends React.Component {
     }
 
     // Add params and filters
-    const prevParams = prevFilter.length > 0 ? prevFilter.params : [];
+    const prevParams = prevFilter ? prevFilter.params : [];
     this.setState((prevState) => {
       selectedFilters.splice(prevFilterIndex, 1);
       // If prevFilterState AND prevFilterState.params exists then prevParams is prevFilterState.params. Else prevParams is [].
