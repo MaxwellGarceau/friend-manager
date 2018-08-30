@@ -3,14 +3,12 @@ export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
   let filteredFriendsList = friendsList;
   filterSettings.map((filter) => {
     if (filter.active) {
-      console.log('filterCategory', filter.filterCategory);
       const filterMethod = filter.type;
       const filterCategory = filter.filterCategory;
       const activeFilters = filter.params;
       filteredFriendsList = allFriendsListFilters[filterMethod](filteredFriendsList, activeFilters, filterCategory);
     }
   });
-  console.log('filteredFriendsList', filteredFriendsList);
   return filteredFriendsList;
 };
 
@@ -21,11 +19,13 @@ class AllFriendsListFilters {
     });
   };
 
-  rankingFilter = (friendsList) => {
+  // MAKE SURE THAT RANKING SLIDER IS SENDING THE TYPE OF rangeSlider
+  rangeSlider = (friendsList) => {
     // Code goes here
   };
 
-  locationFilter = (friendsList) => {
+  // MAKE SURE THAT LOCATION SELECTOR IS SENDING THE TYPE dropdown
+  dropdown = (friendsList) => {
     // Code goes here
   };
 }

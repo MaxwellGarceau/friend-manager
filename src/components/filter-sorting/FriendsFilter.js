@@ -27,22 +27,10 @@ class FriendsFilter extends React.Component {
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
   handleUpdateFilter = (e) => {
     e.preventDefault();
-    // Code that prepares data by setting category to object key and filter values as sub key/values
     const selectedFilters = this.state.selectedFilters;
     this.props.startUpdateFriendListFilters(selectedFilters);
-    // Dummy data for filter test
-    // const selectedFilters = [{
-    //   active: true,
-    //   filterId: 'relationshipFilter',
-    //   params: ['friend', 'family']
-    // }, {
-    //   active: false,
-    //   filterId: 'rankingFilter'
-    // }];
-    // this.props.startUpdateFriendListFilters(selectedFilters);
   };
-  handleInputFieldChange = (e) => {
-    let value;
+  handleCheckboxChange = (e) => {
     const input = e.target;
     const type = input.type;
     const parentName = input.dataset.parent;
@@ -57,20 +45,12 @@ class FriendsFilter extends React.Component {
         return filter.filterParent === parentName;
       })[0];
     }
-
     // Location of filter in selected filters array
     const prevFilterIndex = selectedFilters.indexOf(prevFilter);
-    // Determine type of input field
-    switch (type) {
-      case 'checkbox':
-        value = input.checked;
-        break;
-      default:
-        value = input.value;
-    }
+    const prevParams = prevFilter ? prevFilter.params : [];
 
     // Remove params and filters
-    if (!value) {
+    if (!input.checked) {
       this.setState((prevState) => {
         // Deep copy without mutating state
         let stateCopy = Object.assign({}, prevState);
@@ -79,7 +59,7 @@ class FriendsFilter extends React.Component {
         stateCopy.selectedFilters[prevFilterIndex].params = stateCopy.selectedFilters[prevFilterIndex].params.filter((param) => param !== name)
         // Set state
         return stateCopy;
-        // return selectedFilters[prevFilterIndex].params.filter((param) => param !== name)
+        // Return selectedFilters[prevFilterIndex].params.filter((param) => param !== name)
       }, () => {
         const selectedFilters = this.state.selectedFilters;
         if (!selectedFilters[prevFilterIndex].params.length > 0) {
@@ -92,13 +72,8 @@ class FriendsFilter extends React.Component {
     }
 
     // Add params and filters
-    const prevParams = prevFilter ? prevFilter.params : [];
     this.setState((prevState) => {
       selectedFilters.splice(prevFilterIndex, 1);
-      // If prevFilterState AND prevFilterState.params exists then prevParams is prevFilterState.params. Else prevParams is [].
-      // Written this way to avoid undefined error from trying to check an object property that doesn't exist.
-      // const prevParams = prevFilter ? prevFilter.params ? prevFilter.params : [] : [];
-
       return selectedFilters.push({
         filterParent: parentName,
         filterCategory,
@@ -118,21 +93,21 @@ class FriendsFilter extends React.Component {
             <input
               type="checkbox"
               name="friend"
-              onChange={this.handleInputFieldChange}
+              onChange={this.handleCheckboxChange}
               data-parent="relationshipFilter"
               data-filter-category="relationship" /> Friend
             <br />
             <input
               type="checkbox"
               name="family"
-              onChange={this.handleInputFieldChange}
+              onChange={this.handleCheckboxChange}
               data-parent="relationshipFilter"
               data-filter-category="relationship" /> Family
             <br />
             <input
               type="checkbox"
               name="acquaintance"
-              onChange={this.handleInputFieldChange}
+              onChange={this.handleCheckboxChange}
               data-parent="relationshipFilter"
               data-filter-category="relationship" /> Acquaintance
             <br />
