@@ -2,7 +2,9 @@ export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
   const allFriendsListFilters = new AllFriendsListFilters();
   let filteredFriendsList = friendsList;
   filterSettings.map((filter) => {
-    if (filter.active) {
+    // Possibly refactor to filter.params.length > 0 for conditonal statement (wouldn't need "active" property)
+    // if (filter.active) {
+    if (filter.params.length > 0) {
       const filterMethod = filter.type;
       const filterCategory = filter.filterCategory;
       const activeFilters = filter.params;

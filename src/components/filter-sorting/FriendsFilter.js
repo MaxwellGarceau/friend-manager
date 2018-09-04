@@ -30,10 +30,20 @@ class FriendsFilter extends React.Component {
     const selectedFilters = this.state.selectedFilters;
     this.props.startUpdateFriendListFilters(selectedFilters);
   };
+//   handleUpdateFilterTest = (e) => {
+//     e.preventDefault();
+//     let checkboxFilters = [];
+//     Object.keys(this.state).map((key) => {
+//       if (key.isChecked) {
+//         if (checkboxFilters.hasOwnProperty(key.filterCategory)) {
+// 
+//         }
+//       }
+//     });
+//   };
   handleCheckboxChange = (e) => {
     const input = e.target;
     const type = input.type;
-    const parentName = input.dataset.parent;
     const filterCategory = input.dataset.filterCategory;
     const name = input.name;
     const selectedFilters = this.state.selectedFilters;
@@ -42,7 +52,7 @@ class FriendsFilter extends React.Component {
     if (selectedFilters.length > 0) {
       // Return filter that input field belongs to
       prevFilter = selectedFilters.filter((filter) => {
-        return filter.filterParent === parentName;
+        return filter.filterCategory === filterCategory;
       })[0];
     }
     // Location of filter in selected filters array
@@ -59,12 +69,11 @@ class FriendsFilter extends React.Component {
         stateCopy.selectedFilters[prevFilterIndex].params = stateCopy.selectedFilters[prevFilterIndex].params.filter((param) => param !== name)
         // Set state
         return stateCopy;
-        // Return selectedFilters[prevFilterIndex].params.filter((param) => param !== name)
       }, () => {
         const selectedFilters = this.state.selectedFilters;
         if (!selectedFilters[prevFilterIndex].params.length > 0) {
           this.setState({
-            selectedFilters: selectedFilters.filter((filter) => filter.filterParent !== parentName)
+            selectedFilters: selectedFilters.filter((filter) => filter.filterCategory !== filterCategory)
           });
         }
       });
@@ -75,14 +84,23 @@ class FriendsFilter extends React.Component {
     this.setState((prevState) => {
       selectedFilters.splice(prevFilterIndex, 1);
       return selectedFilters.push({
-        filterParent: parentName,
         filterCategory,
-        active: true,
         type,
         params: [...prevParams, name]
       });
     });
   };
+  // handleCheckboxChangeTest = (e) => {
+  //   console.log(e.target.checked);
+  //   this.setState({
+  //     [e.target.name]: {
+  //       filterCategory: e.target.dataset.filterCategory,
+  //       type: e.target.type,
+  //       param: e.target.name,
+  //       isChecked: e.target.checked
+  //     }
+  //   });
+  // };
   render () {
     return (
       <div>
@@ -94,6 +112,7 @@ class FriendsFilter extends React.Component {
               type="checkbox"
               name="friend"
               onChange={this.handleCheckboxChange}
+              // onChange={this.handleCheckboxChangeTest}
               data-parent="relationshipFilter"
               data-filter-category="relationship" /> Friend
             <br />
