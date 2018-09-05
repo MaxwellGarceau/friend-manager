@@ -5,9 +5,13 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { startUpdateFriendListFilters } from '../../actions/filters';
 
+import LocationDropdown from './LocationDropdown';
+
 class FriendsFilter extends React.Component {
   constructor (props) {
     super(props);
+
+    // Initial API request to geonames for country data
     axios.get('http://api.geonames.org/countryInfoJSON?username=maxgarceau').then((res) => {
       console.log('res', res);
       const allCountries = res.data.geonames;
@@ -19,6 +23,11 @@ class FriendsFilter extends React.Component {
       rankingSliderValue: {
         min: 1,
         max: 5
+      },
+      location: {
+        country: '',
+        region: '',
+        city: ''
       }
     };
   };
@@ -118,7 +127,22 @@ class FriendsFilter extends React.Component {
   //     </select>
   //   );
   // };
+  handleLocationPickerOnChange = (e, area) => {
+    const selection = e.target.value;
+    this.setState({ location: {
+      [area]: selection
+    } }, () => {
+      area === 'country' ? this.handleLocationRegion() : this.handleLocationCity();
+    });
+  };
+  handleLocationRegion = async () => {
+    const geonameId = this.state.location.country;
+    const response = await axios.get(`http://api.geonames.org/childrenJSON?username=maxgarceau&geonameId=${geonameId}`);
+    const allRegions = response.data.geonames;
+    this.setState({ allRegions });
+  };
   render () {
+    const location = this.state.location;
     return (
       <div>
         <h2>Filter</h2>
@@ -158,11 +182,15 @@ class FriendsFilter extends React.Component {
           </fieldset>
           <fieldset name="locationFilter">
             <legend>Location</legend>
-            <select>
+            <select onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
               {!!this.state.allCountries && this.state.allCountries.map((country) => {
-                return <option value={country.geonameId}>{country.countryName}</option>;
+                return <option key={country.geonameId} value={country.geonameId}>{country.countryName}</option>;
               })}
             </select>
+            {!!location.country &&
+              <LocationDropdown
+                handleLocationPickerOnChange={this.handleLocationPickerOnChange}
+                locationData={this.state.allRegions} />}
             <br />
           </fieldset>
           <button>Set Filter</button>
