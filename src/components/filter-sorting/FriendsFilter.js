@@ -1,5 +1,6 @@
 import React from 'react';
 import InputRange from 'react-input-range';
+import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { startUpdateFriendListFilters } from '../../actions/filters';
@@ -7,6 +8,12 @@ import { startUpdateFriendListFilters } from '../../actions/filters';
 class FriendsFilter extends React.Component {
   constructor (props) {
     super(props);
+    axios.get('http://api.geonames.org/countryInfoJSON?username=maxgarceau').then((res) => {
+      console.log('res', res);
+      const allCountries = res.data.geonames;
+      this.setState({ allCountries });
+    });
+
     this.state = {
       selectedFilters: [],
       rankingSliderValue: {
@@ -15,15 +22,15 @@ class FriendsFilter extends React.Component {
       }
     };
   };
-  generateInputField = (type, name, onChange, parent) => {
+  generateInputField = (type, name, onChange, filterCategory) => {
     return (
       <input
         type={type}
         name={name}
         onChange={onChange}
-        data-parent={parent} />
+        data-filter-category={filterCategory} />
     );
-  }
+  };
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
   handleUpdateFilter = (e) => {
     e.preventDefault();
@@ -101,6 +108,16 @@ class FriendsFilter extends React.Component {
   //     }
   //   });
   // };
+  // handleLocationPicker = async () => {
+  //   const allCountries = await axios.post('http://api.geonames.org/countryInfoJSON?username=maxgarceau');
+  //   return (
+  //     <select>
+  //       {allCountries.geonames.map((country) => {
+  //         return <option value={country.geonameId}>{country.countryName}</option>;
+  //       })}
+  //     </select>
+  //   );
+  // };
   render () {
     return (
       <div>
@@ -113,21 +130,18 @@ class FriendsFilter extends React.Component {
               name="friend"
               onChange={this.handleCheckboxChange}
               // onChange={this.handleCheckboxChangeTest}
-              data-parent="relationshipFilter"
               data-filter-category="relationship" /> Friend
             <br />
             <input
               type="checkbox"
               name="family"
               onChange={this.handleCheckboxChange}
-              data-parent="relationshipFilter"
               data-filter-category="relationship" /> Family
             <br />
             <input
               type="checkbox"
               name="acquaintance"
               onChange={this.handleCheckboxChange}
-              data-parent="relationshipFilter"
               data-filter-category="relationship" /> Acquaintance
             <br />
           </fieldset>
@@ -144,6 +158,11 @@ class FriendsFilter extends React.Component {
           </fieldset>
           <fieldset name="locationFilter">
             <legend>Location</legend>
+            <select>
+              {!!this.state.allCountries && this.state.allCountries.map((country) => {
+                return <option value={country.geonameId}>{country.countryName}</option>;
+              })}
+            </select>
             <br />
           </fieldset>
           <button>Set Filter</button>
