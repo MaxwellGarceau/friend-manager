@@ -3,9 +3,9 @@ import React from 'react';
 
 const LocationDropdown = (props) => {
   return (
-    <select onChange={props.handleLocationPickerOnChange}>
+    <select onChange={(e) => props.handleLocationPickerOnChange(e, props.locationType)}>
       {!!props.locationData && props.locationData.map((location) => {
-        return <option key={location.geonameId} value={location.adminCodes1.ISO3166_2}>{location.name}</option>;
+        return <option key={location.geonameId} value={location.adminCode1}>{location.name}</option>;
       })}
     </select>
   );
