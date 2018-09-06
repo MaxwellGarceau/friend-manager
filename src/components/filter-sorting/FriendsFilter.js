@@ -44,7 +44,11 @@ class FriendsFilter extends React.Component {
   handleUpdateFilter = (e) => {
     e.preventDefault();
     const {country, region, city} = this.state.location;
-    const locationFilter = { country, region, city };
+    const locationFilter = {
+      filterCategory: 'location',
+      type: 'dropdown',
+      params: [country, region, city]
+    };
     const selectedFilters = this.state.selectedFilters;
     this.props.startUpdateFriendListFilters(selectedFilters);
   };
