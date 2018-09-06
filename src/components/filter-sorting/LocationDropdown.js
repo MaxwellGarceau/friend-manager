@@ -1,10 +1,13 @@
 import React from 'react';
-// import axios from 'axios';
+import _ from 'lodash';
 
 const LocationDropdown = (props) => {
+  const isLocationData = !!props.locationData;
+  const defaultOption = isLocationData && props.locationData.length > 0 ? `**Select A ${_.capitalize(props.locationType)}**` : `**No available ${_.capitalize(props.locationType)}**`;
   return (
     <select onChange={(e) => props.handleLocationPickerOnChange(e, props.locationType)}>
-      {!!props.locationData && props.locationData.map((location) => {
+      <option value="">{defaultOption}</option>
+      {isLocationData && props.locationData.map((location) => {
         return <option key={location.geonameId} value={location.adminCode1}>{location.name}</option>;
       })}
     </select>

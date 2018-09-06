@@ -31,18 +31,20 @@ class FriendsFilter extends React.Component {
       }
     };
   };
-  generateInputField = (type, name, onChange, filterCategory) => {
-    return (
-      <input
-        type={type}
-        name={name}
-        onChange={onChange}
-        data-filter-category={filterCategory} />
-    );
-  };
+  // generateInputField = (type, name, onChange, filterCategory) => {
+  //   return (
+  //     <input
+  //       type={type}
+  //       name={name}
+  //       onChange={onChange}
+  //       data-filter-category={filterCategory} />
+  //   );
+  // };
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
   handleUpdateFilter = (e) => {
     e.preventDefault();
+    const {country, region, city} = this.state.location;
+    const locationFilter = { country, region, city };
     const selectedFilters = this.state.selectedFilters;
     this.props.startUpdateFriendListFilters(selectedFilters);
   };
@@ -150,13 +152,14 @@ class FriendsFilter extends React.Component {
           break;
         case 'region':
           this.handleLocationCity();
-          // this.setState((prevState) => ({
-          //   location: {
-          //     ...prevState.location,
-          //     city: '',
-          //     cityId: ''
-          //   }
-          // }));
+          // If region is selected reset city
+          this.setState((prevState) => ({
+            location: {
+              ...prevState.location,
+              city: '',
+              cityId: ''
+            }
+          }));
           break;
         default:
           break;
@@ -217,16 +220,17 @@ class FriendsFilter extends React.Component {
           <fieldset name="locationFilter">
             <legend>Location</legend>
             <select onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
+              <option value="">*Select A Country*</option>
               {!!this.state.allCountries && this.state.allCountries.map((country) => {
                 return <option key={country.geonameId} value={country.geonameId} data-name={country.countryName}>{country.countryName}</option>;
               })}
             </select>
-            {!!location.country &&
+            {!!location.countryId &&
               <LocationDropdown
                 handleLocationPickerOnChange={this.handleLocationPickerOnChange}
                 locationType="region"
                 locationData={this.state.allRegions} />}
-            {!!location.region &&
+            {!!location.regionId &&
               <LocationDropdown
                 handleLocationPickerOnChange={this.handleLocationPickerOnChange}
                 locationType="city"
