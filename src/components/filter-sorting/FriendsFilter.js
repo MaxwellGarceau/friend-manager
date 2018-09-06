@@ -31,15 +31,6 @@ class FriendsFilter extends React.Component {
       }
     };
   };
-  // generateInputField = (type, name, onChange, filterCategory) => {
-  //   return (
-  //     <input
-  //       type={type}
-  //       name={name}
-  //       onChange={onChange}
-  //       data-filter-category={filterCategory} />
-  //   );
-  // };
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
   handleUpdateFilter = (e) => {
     e.preventDefault();
@@ -50,19 +41,9 @@ class FriendsFilter extends React.Component {
       params: [country, region, city]
     };
     const selectedFilters = this.state.selectedFilters;
+    selectedFilters.push(locationFilter);
     this.props.startUpdateFriendListFilters(selectedFilters);
   };
-//   handleUpdateFilterTest = (e) => {
-//     e.preventDefault();
-//     let checkboxFilters = [];
-//     Object.keys(this.state).map((key) => {
-//       if (key.isChecked) {
-//         if (checkboxFilters.hasOwnProperty(key.filterCategory)) {
-// 
-//         }
-//       }
-//     });
-//   };
   handleCheckboxChange = (e) => {
     const input = e.target;
     const type = input.type;
@@ -112,27 +93,6 @@ class FriendsFilter extends React.Component {
       });
     });
   };
-  // handleCheckboxChangeTest = (e) => {
-  //   console.log(e.target.checked);
-  //   this.setState({
-  //     [e.target.name]: {
-  //       filterCategory: e.target.dataset.filterCategory,
-  //       type: e.target.type,
-  //       param: e.target.name,
-  //       isChecked: e.target.checked
-  //     }
-  //   });
-  // };
-  // handleLocationPicker = async () => {
-  //   const allCountries = await axios.post('http://api.geonames.org/countryInfoJSON?username=maxgarceau');
-  //   return (
-  //     <select>
-  //       {allCountries.geonames.map((country) => {
-  //         return <option value={country.geonameId}>{country.countryName}</option>;
-  //       })}
-  //     </select>
-  //   );
-  // };
   handleLocationPickerOnChange = (e, area) => {
     const areaName = e.target.options[e.target.selectedIndex].text;
     const selection = e.target.value;

@@ -27,7 +27,10 @@ class AllFriendsListFilters {
   };
 
   // MAKE SURE THAT LOCATION SELECTOR IS SENDING THE TYPE dropdown
-  dropdown = (friendsList) => {
+  dropdown = (friendsList, activeFilters, filterCategory) => {
     // Code goes here
+    console.log('friendsList', friendsList);
+    console.log('activeFilters', activeFilters);
+    console.log('filterCategory', filterCategory);
   };
 }
