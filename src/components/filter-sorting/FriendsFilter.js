@@ -13,7 +13,6 @@ class FriendsFilter extends React.Component {
 
     // Initial API request to geonames for country data
     axios.get('http://api.geonames.org/countryInfoJSON?username=maxgarceau').then((res) => {
-      console.log('res', res);
       const allCountries = res.data.geonames;
       this.setState({ allCountries });
     });
@@ -35,13 +34,15 @@ class FriendsFilter extends React.Component {
   handleUpdateFilter = (e) => {
     e.preventDefault();
     const {country, region, city} = this.state.location;
+    const paramsArr = [country, region, city].filter((param) => param !== '');
+
     const locationFilter = {
       filterCategory: 'location',
       type: 'dropdown',
-      params: [country, region, city]
+      params: paramsArr
     };
-    const selectedFilters = this.state.selectedFilters;
-    selectedFilters.push(locationFilter);
+
+    const selectedFilters = [...this.state.selectedFilters, locationFilter];
     this.props.startUpdateFriendListFilters(selectedFilters);
   };
   handleCheckboxChange = (e) => {

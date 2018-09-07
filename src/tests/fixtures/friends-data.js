@@ -2,8 +2,8 @@ export const friends = [{
   name: 'Rafael',
   relationship: 'friend',
   location: {
-    country: 'US',
-    region: 'TN',
+    country: 'United States',
+    region: 'Tennessee',
     city: 'Nashville'
   },
   ranking: 5,
@@ -12,8 +12,8 @@ export const friends = [{
   name: 'Keenan',
   relationship: 'friend',
   location: {
-    country: 'US',
-    region: 'TN',
+    country: 'United States',
+    region: 'Tennessee',
     city: 'Nashville'
   },
   ranking: 5,
@@ -22,8 +22,8 @@ export const friends = [{
   name: 'Kyle',
   relationship: 'friend',
   location: {
-    country: 'US',
-    region: 'TN',
+    country: 'United States',
+    region: 'Tennessee',
     city: 'Nashville'
   },
   ranking: 5,
@@ -32,8 +32,8 @@ export const friends = [{
   name: 'Jorge',
   relationship: 'friend',
   location: {
-    country: 'US',
-    region: 'AL',
+    country: 'United States',
+    region: 'Alabama',
     city: 'Huntsville'
   },
   ranking: 5,
@@ -42,8 +42,8 @@ export const friends = [{
   name: 'Jose',
   relationship: 'acquaintance',
   location: {
-    country: 'US',
-    region: 'NM',
+    country: 'United States',
+    region: 'Texas',
     city: 'El Paso'
   },
   ranking: 3,
@@ -52,8 +52,8 @@ export const friends = [{
   name: 'Juan',
   relationship: 'acquaintance',
   location: {
-    country: 'US',
-    region: 'AL',
+    country: 'United States',
+    region: 'Alabama',
     city: 'Birmingham'
   },
   ranking: 1,
@@ -62,8 +62,8 @@ export const friends = [{
   name: 'Raul',
   relationship: 'family',
   location: {
-    country: 'US',
-    region: 'NV',
+    country: 'United States',
+    region: 'Nevada',
     city: 'Las Vegas'
   },
   ranking: 5,
