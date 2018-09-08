@@ -26,18 +26,19 @@ class AllFriendsListFilters {
     // Code goes here
   };
 
-  // MAKE SURE THAT LOCATION SELECTOR IS SENDING THE TYPE dropdown
   dropdown = (friendsList, paramsArr, filterCategory) => {
     return friendsList.filter((friend) => {
       // const { country, region, city } = friend.location;
       const friendListLocation = friend.location;
       return paramsArr.filter((param) => {
+        console.log('params', param);
         for (const location in friendListLocation) {
+          console.log('iterate through friend.location', friendListLocation[location]);
           if (friendListLocation[location] === param) {
             return param;
           }
         }
-      }).length > 0;
+      }).length === paramsArr.length;
     });
 
     // console.log('friendsList', friendsList);

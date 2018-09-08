@@ -24,9 +24,9 @@ class FriendsFilter extends React.Component {
         max: 5
       },
       location: {
-        country: '',
-        region: '',
-        city: ''
+        country: undefined,
+        region: undefined,
+        city: undefined
       }
     };
   };
@@ -34,7 +34,8 @@ class FriendsFilter extends React.Component {
   handleUpdateFilter = (e) => {
     e.preventDefault();
     const {country, region, city} = this.state.location;
-    const paramsArr = [country, region, city].filter((param) => param !== '');
+    const paramsArr = [country, region, city].filter((param) => !!param);
+    console.log('paramsArr in component', paramsArr);
 
     const locationFilter = {
       filterCategory: 'location',
@@ -95,8 +96,10 @@ class FriendsFilter extends React.Component {
     });
   };
   handleLocationPickerOnChange = (e, area) => {
-    const areaName = e.target.options[e.target.selectedIndex].text;
+    let areaName = e.target.options[e.target.selectedIndex].text;
     const selection = e.target.value;
+    areaName = !selection ? areaName = '' : areaName;
+
     this.setState((prevState) => ({ location: {
       ...prevState.location,
       [`${area}Id`]: selection,
@@ -121,8 +124,8 @@ class FriendsFilter extends React.Component {
           this.setState((prevState) => ({
             location: {
               ...prevState.location,
-              city: '',
-              cityId: ''
+              city: undefined,
+              cityId: undefined
             }
           }));
           break;
