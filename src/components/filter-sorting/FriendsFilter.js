@@ -1,38 +1,45 @@
 import React from 'react';
 import InputRange from 'react-input-range';
 import axios from 'axios';
+import _ from 'lodash';
 
 import { connect } from 'react-redux';
 import { startUpdateFriendListFilters } from '../../actions/filters';
 
 import LocationDropdown from './LocationDropdown';
+import LocationPicker from './LocationPicker';
+
+// Initial State and deep copy
+const initialState = {
+  selectedFilters: [],
+  rankingSliderValue: {
+    min: 1,
+    max: 5
+  },
+  location: {
+    country: '',
+    region: '',
+    city: ''
+  }
+};
+
+const cloneDeepState = _.cloneDeep(initialState);
 
 class FriendsFilter extends React.Component {
   constructor (props) {
     super(props);
 
-    // Initial API request to geonames for country data
-    axios.get('http://api.geonames.org/countryInfoJSON?username=maxgarceau').then((res) => {
-      const allCountries = res.data.geonames;
-      this.setState({ allCountries });
-    });
-
-    this.state = {
-      selectedFilters: [],
-      rankingSliderValue: {
-        min: 1,
-        max: 5
-      },
-      location: {
-        country: undefined,
-        region: undefined,
-        city: undefined
-      }
-    };
+    this.state = initialState;
+  };
+  setLocationState = (location) => {
+    this.setState({ location });
   };
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
   handleUpdateFilter = (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
+
     const {country, region, city} = this.state.location;
     const paramsArr = [country, region, city].filter((param) => !!param);
     console.log('paramsArr in component', paramsArr);
@@ -45,6 +52,11 @@ class FriendsFilter extends React.Component {
 
     const selectedFilters = [...this.state.selectedFilters, locationFilter];
     this.props.startUpdateFriendListFilters(selectedFilters);
+  };
+  handleResetFilter = () => {
+    this.setState(cloneDeepState, () => {
+      this.handleUpdateFilter();
+    });
   };
   handleCheckboxChange = (e) => {
     const input = e.target;
@@ -71,7 +83,7 @@ class FriendsFilter extends React.Component {
         let stateCopy = Object.assign({}, prevState);
         stateCopy.selectedFilters = stateCopy.selectedFilters.slice();
         stateCopy.selectedFilters[prevFilterIndex] = Object.assign({}, stateCopy.selectedFilters[prevFilterIndex]);
-        stateCopy.selectedFilters[prevFilterIndex].params = stateCopy.selectedFilters[prevFilterIndex].params.filter((param) => param !== name)
+        stateCopy.selectedFilters[prevFilterIndex].params = stateCopy.selectedFilters[prevFilterIndex].params.filter((param) => param !== name);
         // Set state
         return stateCopy;
       }, () => {
@@ -95,59 +107,7 @@ class FriendsFilter extends React.Component {
       });
     });
   };
-  handleLocationPickerOnChange = (e, area) => {
-    let areaName = e.target.options[e.target.selectedIndex].text;
-    const selection = e.target.value;
-    areaName = !selection ? areaName = '' : areaName;
-
-    this.setState((prevState) => ({ location: {
-      ...prevState.location,
-      [`${area}Id`]: selection,
-      [area]: areaName
-    } }), () => {
-      switch (area) {
-        case 'city':
-          break;
-        case 'country':
-          this.handleLocationRegion();
-          // If country is selected reset region and city
-          this.setState((prevState) => ({
-            location: {
-              country: prevState.location.country,
-              countryId: prevState.location.countryId
-            }
-          }));
-          break;
-        case 'region':
-          this.handleLocationCity();
-          // If region is selected reset city
-          this.setState((prevState) => ({
-            location: {
-              ...prevState.location,
-              city: undefined,
-              cityId: undefined
-            }
-          }));
-          break;
-        default:
-          break;
-      }
-    });
-  };
-  handleLocationRegion = async () => {
-    const geonameId = this.state.location.countryId;
-    const response = await axios.get(`http://api.geonames.org/childrenJSON?username=maxgarceau&geonameId=${geonameId}`);
-    const allRegions = response.data.geonames;
-    this.setState({ allRegions });
-  };
-  handleLocationCity = async () => {
-    const adminCode1 = this.state.location.regionId;
-    const response = await axios.get(`http://api.geonames.org/searchJSON?username=maxgarceau&featureClass=P&cities=cities15000&adminCode1=${adminCode1}`);
-    const allCities = response.data.geonames;
-    this.setState({ allCities });
-  };
   render () {
-    const location = this.state.location;
     return (
       <div>
         <h2>Filter</h2>
@@ -158,7 +118,6 @@ class FriendsFilter extends React.Component {
               type="checkbox"
               name="friend"
               onChange={this.handleCheckboxChange}
-              // onChange={this.handleCheckboxChangeTest}
               data-filter-category="relationship" /> Friend
             <br />
             <input
@@ -187,25 +146,11 @@ class FriendsFilter extends React.Component {
           </fieldset>
           <fieldset name="locationFilter">
             <legend>Location</legend>
-            <select onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
-              <option value="">*Select A Country*</option>
-              {!!this.state.allCountries && this.state.allCountries.map((country) => {
-                return <option key={country.geonameId} value={country.geonameId} data-name={country.countryName}>{country.countryName}</option>;
-              })}
-            </select>
-            {!!location.countryId &&
-              <LocationDropdown
-                handleLocationPickerOnChange={this.handleLocationPickerOnChange}
-                locationType="region"
-                locationData={this.state.allRegions} />}
-            {!!location.regionId &&
-              <LocationDropdown
-                handleLocationPickerOnChange={this.handleLocationPickerOnChange}
-                locationType="city"
-                locationData={this.state.allCities} />}
+            <LocationPicker setLocationState={this.setLocationState} />
             <br />
           </fieldset>
           <button>Set Filter</button>
+          <button type="button" onClick={this.handleResetFilter}>Reset Filter</button>
         </form>
       </div>
     );

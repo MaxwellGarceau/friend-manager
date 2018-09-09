@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn run full-stack-deb
+  /usr/local/bin/node /usr/local/bin/yarn run start-local0db
 
 PATH: 
   /Users/maxgarceau/.rvm/gems/ruby-2.4.1/bin:/Users/maxgarceau/.rvm/gems/ruby-2.4.1@global/bin:/Users/maxgarceau/.rvm/rubies/ruby-2.4.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/maxgarceau/.rvm/bin
@@ -8248,7 +8248,7 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Command "full-stack-deb" not found. Did you mean "full-stack-dev"?
+  Error: Command "start-local0db" not found. Did you mean "start-local-db"?
       at new MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
       at /usr/local/lib/node_modules/yarn/lib/cli.js:87307:17
       at Generator.next (<anonymous>)
