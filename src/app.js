@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
+import { saveState } from './store/local-storage';
 import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
@@ -14,6 +15,10 @@ import './styles/styles.scss';
 import LoadingPage from './components/LoadingPage';
 
 const store = configureStore();
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 const jsx = (
   <Provider store={store}>

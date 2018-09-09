@@ -1,4 +1,8 @@
-export default (state = {}, action) => {
+import { loadState } from '../store/local-storage';
+
+const persistedState = loadState();
+
+export default (state = persistedState || {}, action) => {
   switch (action.type) {
     case 'SIGN_UP':
       return {

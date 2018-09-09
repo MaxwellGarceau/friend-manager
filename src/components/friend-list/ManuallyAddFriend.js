@@ -2,6 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import StarRatingComponent from 'react-star-rating-component';
 
+import LocationPicker from '../filter-sorting/LocationPicker';
+
 class ManuallyAddFriend extends React.Component {
   state = {
     relationshipOptions: ['friend', 'family', 'acquaintance'],
@@ -15,6 +17,7 @@ class ManuallyAddFriend extends React.Component {
     const name = e.target.value;
     this.setState({ name });
   };
+  setLocationState = (location) => this.setState({ location });
   render () {
     return (
       <tr>
@@ -26,8 +29,9 @@ class ManuallyAddFriend extends React.Component {
             })}
           </select>
         </td>
-        {/* REPLACE WITH LIBRARY OF COUNTRY, REGION, CITIES */}
-        <td><input placeholder="Location" /></td>
+        <td>
+          <LocationPicker setLocationState={this.setLocationState} />
+        </td>
         <td>
           <StarRatingComponent
             name="manually-add-friend-ranking"

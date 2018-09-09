@@ -19,7 +19,7 @@ class LocationPicker extends React.Component {
         region: '',
         city: ''
       }
-    };
+    }
   }
 
   handleLocationPickerOnChange = (e, area) => {
@@ -74,12 +74,17 @@ class LocationPicker extends React.Component {
     const allCities = response.data.geonames;
     this.setState({ allCities });
   };
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this.setState({ location: nextProps.location });
+    }
+  };
   render () {
     const { location } = this.state;
     return (
       <div>
-        <select onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
-          <option value="">*Select A Country*</option>
+        <select value={this.state.countryId} onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
+          <option value="initial">*Select A Country*</option>
           {!!this.state.allCountries && this.state.allCountries.map((country) => {
             return <option key={country.geonameId} value={country.geonameId} data-name={country.countryName}>{country.countryName}</option>;
           })}

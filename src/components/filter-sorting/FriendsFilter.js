@@ -31,9 +31,7 @@ class FriendsFilter extends React.Component {
 
     this.state = initialState;
   };
-  setLocationState = (location) => {
-    this.setState({ location });
-  };
+  setLocationState = (location) => this.setState({ location });
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
   handleUpdateFilter = (e) => {
     if (e) {
@@ -42,7 +40,6 @@ class FriendsFilter extends React.Component {
 
     const {country, region, city} = this.state.location;
     const paramsArr = [country, region, city].filter((param) => !!param);
-    console.log('paramsArr in component', paramsArr);
 
     const locationFilter = {
       filterCategory: 'location',
@@ -54,7 +51,14 @@ class FriendsFilter extends React.Component {
     this.props.startUpdateFriendListFilters(selectedFilters);
   };
   handleResetFilter = () => {
-    this.setState(cloneDeepState, () => {
+    // Iterates through refs and unchecks inputs with checkbox type
+    for (const key in this.refs) {
+      if (this.refs[key].type === 'checkbox') {
+        this.refs[key].checked = false;
+      }
+    }
+    let cloneDeeper = _.cloneDeep(cloneDeepState);
+    this.setState(cloneDeeper, () => {
       this.handleUpdateFilter();
     });
   };
@@ -118,19 +122,22 @@ class FriendsFilter extends React.Component {
               type="checkbox"
               name="friend"
               onChange={this.handleCheckboxChange}
-              data-filter-category="relationship" /> Friend
+              data-filter-category="relationship"
+              ref="friendCheckbox" /> Friend
             <br />
             <input
               type="checkbox"
               name="family"
               onChange={this.handleCheckboxChange}
-              data-filter-category="relationship" /> Family
+              data-filter-category="relationship"
+              ref="familyCheckbox" /> Family
             <br />
             <input
               type="checkbox"
               name="acquaintance"
               onChange={this.handleCheckboxChange}
-              data-filter-category="relationship" /> Acquaintance
+              data-filter-category="relationship"
+              ref="acquaintanceCheckbox" /> Acquaintance
             <br />
           </fieldset>
           <fieldset name="rankingFilter">
@@ -146,7 +153,7 @@ class FriendsFilter extends React.Component {
           </fieldset>
           <fieldset name="locationFilter">
             <legend>Location</legend>
-            <LocationPicker setLocationState={this.setLocationState} />
+            <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />
             <br />
           </fieldset>
           <button>Set Filter</button>
