@@ -1,8 +1,9 @@
 import { loadState } from '../store/local-storage';
 
-const persistedState = loadState();
+// Loads user auth (login) state from localStorage to auth reducer as default state
+const persistedAuthState = loadState().auth;
 
-export default (state = persistedState || {}, action) => {
+export default (state = persistedAuthState || {}, action) => {
   switch (action.type) {
     case 'SIGN_UP':
       return {

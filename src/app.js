@@ -16,6 +16,7 @@ import LoadingPage from './components/LoadingPage';
 
 const store = configureStore();
 
+// Saves state from localStorage to redux
 store.subscribe(() => {
   saveState(store.getState());
 });
