@@ -38,7 +38,7 @@ export class SignUpPage extends React.Component {
           type="text"
           placeholder="Email"
           autoFocus
-          className="text-input"
+          className="text-input text-input__auth"
           name="email"
           value={this.state.email}
           onChange={this.onTextInputChange}
@@ -46,7 +46,7 @@ export class SignUpPage extends React.Component {
         <input
           type="text"
           placeholder="Password"
-          className="text-input"
+          className="text-input text-input__auth"
           name="password"
           value={this.state.password}
           onChange={this.onTextInputChange}

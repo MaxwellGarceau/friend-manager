@@ -120,9 +120,9 @@ class FriendsFilter extends React.Component {
   };
   render () {
     return (
-      <div>
-        <h2>Filter</h2>
-        <form className="form" onSubmit={this.handleUpdateFilter}>
+      <div className="friends-filter">
+        <h2 className="friends-filter__title">Filter</h2>
+        <form className="form friends-filter__form" onSubmit={this.handleUpdateFilter}>
           <fieldset name="relationshipFilter">
             <legend>Relationship</legend>
             <input
@@ -161,11 +161,10 @@ class FriendsFilter extends React.Component {
           <fieldset name="locationFilter">
             <legend>Location</legend>
             <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />
-            <br />
           </fieldset>
-          <div>
-            <button>Set Filter</button>
-            <button type="button" onClick={this.handleResetFilter}>Reset Filter</button>
+          <div className="friends-filter__button-container">
+            <button className="button button--friends-filter">Set Filter</button>
+            <button className="button button--friends-filter" type="button" onClick={this.handleResetFilter}>Reset Filter</button>
           </div>
         </form>
       </div>

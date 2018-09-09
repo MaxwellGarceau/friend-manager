@@ -26,7 +26,7 @@ export class SignUpPage extends React.Component {
   };
   render (props) {
     return (
-      <div className="box-layout box-layout--full-page">
+      <div className="box-layout box-layout--full-page box-layout--auth-page">
         <div className="box-layout__box box-layout__box--auth-page">
           <h1 className="box-layout__title">Sign Up</h1>
           <p>Automate Your Social Life</p>

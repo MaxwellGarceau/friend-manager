@@ -21,25 +21,26 @@ class ManuallyAddFriend extends React.Component {
   setLocationState = (location) => this.setState({ location });
   render () {
     return (
-      <tr>
-        <td><input type="text" placeholder="Name" value={this.state.name} onChange={this.handleName} /></td>
-        <td>
-          <select placeholder="Relationship">
+      <tr className="manually-add-friend">
+        <td align="center"><input type="text" className="text-input" placeholder="Name" value={this.state.name} onChange={this.handleName} /></td>
+        <td align="center">
+          <select className="select" placeholder="Relationship">
             {this.state.relationshipOptions.map((option, ind) => {
               return <option key={`add-friend-relationship-option-key-${ind}`}>{startCase(option)}</option>;
             })}
           </select>
         </td>
-        <td>
+        <td align="center">
           <LocationPicker setLocationState={this.setLocationState} />
         </td>
-        <td>
+        <td align="center">
           <StarRatingComponent
             name="manually-add-friend-ranking"
             value={this.state.rank}
             onStarClick={this.onStarClick}
             starCount={5}
             renderStarIcon={() => <i className="far fa-star"></i>}
+            className="manually-add-friend__dv-star-rating"
           /></td>
       </tr>
     );

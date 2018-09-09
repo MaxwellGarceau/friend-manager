@@ -2,7 +2,7 @@ import React from 'react';
 import FriendListContainer from './friend-list/FriendListContainer';
 
 const DashboardPage = () => (
-  <div className="page-container">
+  <div className="page-layout">
     <FriendListContainer />
   </div>
 );

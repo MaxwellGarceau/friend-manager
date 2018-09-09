@@ -1,0 +1,26 @@
+.location-picker-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.friends-filter {
+  margin: auto;
+  max-width: 300px;
+}
+
+.friends-filter {
+  &__button-container {
+    margin: auto
+  }
+  &__title {
+    text-align: center;
+  }
+  &__form {
+    background-color: $sky-blue;
+    border-radius: 10px;
+    // box-shadow: 10px 10px 15px #96b2ff;
+    // box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+    box-shadow: inset 0 0 10px $pure-white;
+    padding: 1.2rem;
+  }
+}

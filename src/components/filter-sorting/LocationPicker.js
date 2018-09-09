@@ -82,8 +82,8 @@ class LocationPicker extends React.Component {
   render () {
     const { location } = this.state;
     return (
-      <div>
-        <select value={this.state.countryId} onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
+      <div className="location-picker-container">
+        <select className="select select__location-picker" value={this.state.countryId} onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
           <option value="initial">*Select A Country*</option>
           {!!this.state.allCountries && this.state.allCountries.map((country) => {
             return <option key={country.geonameId} value={country.geonameId} data-name={country.countryName}>{country.countryName}</option>;

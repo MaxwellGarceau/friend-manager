@@ -1,4 +1,29 @@
-.page-container {
+// Color Gradient
+// .default-bg-image {
+//   background-image: linear-gradient(to bottom, #475e81, #70819f, #9aa5bd, #c4cbdd, #eff3fd);
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   height: -webkit-fill-available;
+//   min-height: 100vh;
+// }
+
+// Stick figure holding image
+.default-bg-image {
+  background: url('/images/stick-figure-holding-two.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 99999;
+  background-position: center 51rem;
+}
+
+.page-layout {
+  max-width: 1260px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: auto;
+}
+
+.page-grid {
   display: grid;
   grid-gap: $l-size;
   grid-auto-rows: auto;

@@ -3,16 +3,20 @@
   display: flex;
 
   &--full-page {
-    background: url('/images/bg.jpg');
-    background-size: cover;
     height: 100vh;
     justify-content: center;
     width: 100vw;
   }
+  &--auth-page {
+    // background: url('/images/bg.jpg');
+    background: url('/images/stick-figure-holding-one.jpg');
+    background-size: cover;
+  }
 }
 
 .box-layout__box {
-  background: fade-out(white, .15);
+  // background: fade-out($pure-white, .15);
+  background: $off-white;
   border-radius: 3px;
   padding: $l-size $m-size;
   text-align: center;
