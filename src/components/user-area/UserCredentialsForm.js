@@ -52,7 +52,7 @@ export class SignUpPage extends React.Component {
           onChange={this.onTextInputChange}
         />
         <div>
-          <button className="button">{this.props.submitButtonTitle || 'Login'}</button>
+          <button className="button button--auth-page">{this.props.submitButtonTitle || 'Login'}</button>
         </div>
       </form>
     );

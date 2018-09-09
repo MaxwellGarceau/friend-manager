@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { history } from '../../routers/AppRouter';
 
 import { startLogin } from '../../actions/auth';
@@ -22,17 +21,18 @@ export class LoginPage extends React.Component {
       history.push('/dashboard');
     }
   };
+  handleToSignUp = () => {
+    history.push('/signup');
+  };
   render (props) {
     return (
-      <div className="box-layout">
-        <div className="box-layout__box">
+      <div className="box-layout box-layout--full-page">
+        <div className="box-layout__box box-layout__box--auth-page">
           <h1 className="box-layout__title">Friend Manager</h1>
           <p>Automate Your Social Life</p>
           {this.state.error && <p className="form__error">{this.state.error}</p>}
           <UserCredentialsForm onSubmit={this.onSubmit} submitButtonTitle={'Login'}/>
-          <Link className="header__title" to="/signup">
-            <button className="button">Sign Up</button>
-          </Link>
+          <button type="button" className="button button--auth-page" onClick={this.handleToSignUp}>Sign Up</button>
         </div>
       </div>
     );

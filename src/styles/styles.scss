@@ -9,6 +9,7 @@
 @import './components/header';
 @import './components/content-container';
 @import './components/page-header';
+@import './components/page-layout';
 @import './components/input-group';
 @import './components/inputs';
 @import './components/form';
@@ -16,5 +17,6 @@
 @import './components/list';
 @import './components/loader';
 
-@import './components/page-layout';
-@import './components/friends-list';
+// Page Specific
+@import './page-specific/auth-area';
+@import './page-specific/friends-list';

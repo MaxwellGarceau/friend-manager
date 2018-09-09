@@ -122,7 +122,7 @@ class FriendsFilter extends React.Component {
     return (
       <div>
         <h2>Filter</h2>
-        <form onSubmit={this.handleUpdateFilter}>
+        <form className="form" onSubmit={this.handleUpdateFilter}>
           <fieldset name="relationshipFilter">
             <legend>Relationship</legend>
             <input
@@ -163,8 +163,10 @@ class FriendsFilter extends React.Component {
             <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />
             <br />
           </fieldset>
-          <button>Set Filter</button>
-          <button type="button" onClick={this.handleResetFilter}>Reset Filter</button>
+          <div>
+            <button>Set Filter</button>
+            <button type="button" onClick={this.handleResetFilter}>Reset Filter</button>
+          </div>
         </form>
       </div>
     );
