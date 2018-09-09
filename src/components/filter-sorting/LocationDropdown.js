@@ -1,9 +1,10 @@
 import React from 'react';
-import _ from 'lodash';
+// import _ from 'lodash';
+import { capitalize } from 'lodash-es';
 
 const LocationDropdown = (props) => {
   const isLocationData = !!props.locationData;
-  const defaultOption = isLocationData && props.locationData.length > 0 ? `**Select A ${_.capitalize(props.locationType)}**` : `**No available ${_.capitalize(props.locationType)}**`;
+  const defaultOption = isLocationData && props.locationData.length > 0 ? `**Select A ${capitalize(props.locationType)}**` : `**No available ${capitalize(props.locationType)}**`;
   return (
     <select onChange={(e) => props.handleLocationPickerOnChange(e, props.locationType)}>
       <option value="">{defaultOption}</option>

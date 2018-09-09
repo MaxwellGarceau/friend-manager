@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
+// import _ from 'lodash';
+import { startCase } from 'lodash-es';
 import StarRatingComponent from 'react-star-rating-component';
 
 import LocationPicker from '../filter-sorting/LocationPicker';
@@ -25,7 +26,7 @@ class ManuallyAddFriend extends React.Component {
         <td>
           <select placeholder="Relationship">
             {this.state.relationshipOptions.map((option, ind) => {
-              return <option key={`add-friend-relationship-option-key-${ind}`}>{_.startCase(option)}</option>;
+              return <option key={`add-friend-relationship-option-key-${ind}`}>{startCase(option)}</option>;
             })}
           </select>
         </td>

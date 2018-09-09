@@ -1,7 +1,8 @@
 import React from 'react';
 import InputRange from 'react-input-range';
 import axios from 'axios';
-import _ from 'lodash';
+// import _ from 'lodash';
+import { cloneDeep } from 'lodash-es';
 
 import { connect } from 'react-redux';
 import { startUpdateFriendListFilters } from '../../actions/filters';
@@ -23,7 +24,7 @@ const initialState = {
   }
 };
 
-const cloneDeepState = _.cloneDeep(initialState);
+const cloneDeepState = cloneDeep(initialState);
 
 class FriendsFilter extends React.Component {
   constructor (props) {
@@ -47,7 +48,13 @@ class FriendsFilter extends React.Component {
       params: paramsArr
     };
 
-    const selectedFilters = [...this.state.selectedFilters, locationFilter];
+    const rankingFilter = {
+      filterCategory: 'ranking',
+      type: 'rangeSlider',
+      params: this.state.rankingSliderValue
+    };
+
+    const selectedFilters = [...this.state.selectedFilters, locationFilter, rankingFilter];
     this.props.startUpdateFriendListFilters(selectedFilters);
   };
   handleResetFilter = () => {
@@ -57,7 +64,7 @@ class FriendsFilter extends React.Component {
         this.refs[key].checked = false;
       }
     }
-    let cloneDeeper = _.cloneDeep(cloneDeepState);
+    let cloneDeeper = cloneDeep(cloneDeepState);
     this.setState(cloneDeeper, () => {
       this.handleUpdateFilter();
     });

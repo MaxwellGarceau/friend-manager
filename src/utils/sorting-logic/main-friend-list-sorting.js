@@ -1,15 +1,6 @@
 import { firstBy } from 'thenby';
 // Sorting functions for friends list
 
-// export const determineSortDirection = (that, sortField) => {
-//   that.setState((prevState) => {
-//     const newSortDirection = prevState[sortField] === 1 ? -1 : 1;
-//     return {
-//       [sortField]: newSortDirection
-//     };
-//   });
-// };
-
 export const sortAlphabetically = (friendsListArr, sortDirection, sortParam) => {
   return friendsListArr.sort(
     firstBy((a, b) => a[sortParam].localeCompare(b[sortParam]), sortDirection)
