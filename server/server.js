@@ -13,6 +13,7 @@ const { authenticate } = require('./middleware/user-authentication');
 
 // Models
 const { User } = require('./models/user');
+const { Friend } = require('./models/friend');
 
 const app = express();
 const publicPath = path.join(__dirname, '..', 'public');
@@ -20,6 +21,20 @@ const publicPath = path.join(__dirname, '..', 'public');
 const port = parseInt(process.env.PORT, 10) + 1 || 3000;
 
 app.use(bodyParser.json());
+
+// Add Friend
+app.post('/api/friend', async (req, res) => {
+  try {
+    const body = req.body;
+    const friend = new Friend(body);
+
+    const response = await friend.save();
+    res.send(response);
+    // FINISH API ROUTE DEFINITION FOR ADDING FRIEND (Might be done, just double check)
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
 
 // User Sign Up
 app.post('/api/users', async (req, res) => {
