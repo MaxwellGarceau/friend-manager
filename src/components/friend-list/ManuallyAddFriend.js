@@ -9,7 +9,8 @@ class ManuallyAddFriend extends React.Component {
   state = {
     relationshipOptions: ['friend', 'family', 'acquaintance'],
     rank: 5,
-    name: ''
+    name: '',
+    relationship: 'friend'
   };
   onStarClick = (nextValue, prevValue, name) => {
     this.setState({ rank: nextValue });
@@ -18,13 +19,17 @@ class ManuallyAddFriend extends React.Component {
     const name = e.target.value;
     this.setState({ name });
   };
+  handleRelationship = (e) => {
+    const relationship = e.target.value;
+    this.setState({ relationship });
+  };
   setLocationState = (location) => this.setState({ location });
   render () {
     return (
       <tr className="manually-add-friend">
         <td align="center"><input type="text" className="text-input" placeholder="Name" value={this.state.name} onChange={this.handleName} /></td>
         <td align="center">
-          <select className="select" placeholder="Relationship">
+          <select value={this.state.relationship} className="select" onChange={this.handleRelationship} placeholder="Relationship">
             {this.state.relationshipOptions.map((option, ind) => {
               return <option key={`add-friend-relationship-option-key-${ind}`}>{startCase(option)}</option>;
             })}
