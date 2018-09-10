@@ -27,7 +27,7 @@ class ManuallyAddFriend extends React.Component {
     this.setState({ relationship });
   };
   setLocationState = (location) => this.setState({ location });
-  handleSubmit = () => {
+  onSubmit = () => {
     const { name, relationship, location, ranking } = this.state;
     const newFriend = {
       name,
@@ -64,7 +64,7 @@ class ManuallyAddFriend extends React.Component {
             />
           </td>
         </tr>
-        <tr><button type="button" onClick={this.handleSubmit}>Add Friend</button></tr>
+        <tr><td><button type="button" onClick={this.onSubmit}>Add Friend</button></td></tr>
       </React.Fragment>
     );
   }
