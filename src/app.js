@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import { dispatch } from 'react-redux';
 import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
+import { startPopulateFriendList } from './actions/friends';
 import { saveState } from './store/local-storage';
 import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
@@ -26,9 +28,10 @@ const jsx = (
     <AppRouter />
   </Provider>
 );
-
 let hasRendered = false;
-const renderApp = () => {
+const renderApp = async () => {
+  // const response = await store.dispatch(startPopulateFriendList());
+  // console.log(response);
   if (!hasRendered) {
     ReactDOM.render(jsx, document.getElementById('app'));
     hasRendered = true;

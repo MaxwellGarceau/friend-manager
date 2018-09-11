@@ -23,14 +23,28 @@ const port = parseInt(process.env.PORT, 10) + 1 || 3000;
 app.use(bodyParser.json());
 
 // Add Friend
-app.post('/api/friend', async (req, res) => {
+app.post('/api/friend', authenticate, async (req, res) => {
   try {
     const body = req.body;
-    const friend = new Friend(body);
+    const friend = new Friend({
+      _creator: req.user._id,
+      ...body
+    });
 
     const response = await friend.save();
     res.send(response);
-    // FINISH API ROUTE DEFINITION FOR ADDING FRIEND (Might be done, just double check)
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+// Get All Friends
+app.get('/api/friend', authenticate, async (req, res) => {
+  try {
+    const response = await Friend.find({
+      _creator: req.user._id
+    });
+    res.send(response);
   } catch (e) {
     res.status(400).send(e);
   }

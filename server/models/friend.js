@@ -33,8 +33,12 @@ const FriendSchema = new mongoose.Schema({
     require: false
   },
   dateAdded: {
-    type: Date,
+    type: String,
     require: true
+  },
+  _creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
   }
 });
 

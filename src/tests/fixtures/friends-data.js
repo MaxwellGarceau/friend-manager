@@ -7,7 +7,8 @@ export const friends = [{
     city: 'Nashville'
   },
   ranking: 5,
-  id: 1
+  id: 1,
+  _creator: '5b81c42195a1771a2a8ee1fc'
 }, {
   name: 'Keenan',
   relationship: 'friend',
@@ -17,7 +18,8 @@ export const friends = [{
     city: 'Nashville'
   },
   ranking: 5,
-  id: 2
+  id: 2,
+  _creator: '5b81c42195a1771a2a8ee1fc'
 }, {
   name: 'Kyle',
   relationship: 'friend',
@@ -27,7 +29,8 @@ export const friends = [{
     city: 'Nashville'
   },
   ranking: 5,
-  id: 3
+  id: 3,
+  _creator: '5b81c42195a1771a2a8ee1fc'
 }, {
   name: 'Jorge',
   relationship: 'friend',
@@ -37,7 +40,8 @@ export const friends = [{
     city: 'Huntsville'
   },
   ranking: 5,
-  id: 4
+  id: 4,
+  _creator: '5b81c42195a1771a2a8ee1fc'
 }, {
   name: 'Jose',
   relationship: 'acquaintance',
@@ -47,7 +51,8 @@ export const friends = [{
     city: 'El Paso'
   },
   ranking: 3,
-  id: 5
+  id: 5,
+  _creator: '5b81c42195a1771a2a8ee1fc'
 }, {
   name: 'Juan',
   relationship: 'acquaintance',
@@ -57,7 +62,8 @@ export const friends = [{
     city: 'Birmingham'
   },
   ranking: 1,
-  id: 6
+  id: 6,
+  _creator: '5b81c42195a1771a2a8ee1fc'
 }, {
   name: 'Raul',
   relationship: 'family',
@@ -67,5 +73,6 @@ export const friends = [{
     city: 'Las Vegas'
   },
   ranking: 5,
-  id: 7
+  id: 7,
+  _creator: '5b81c42195a1771a2a8ee1fc'
 }];
