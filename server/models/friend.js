@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 // const validator = require('validator');
-// const jwt = require('jsonwebtoken');
-// const _ = require('lodash');
-// const bcrypt = require('bcryptjs');
 // const { CustomValidation } = require('../../src/utils/custom-validation/user-custom-validation');
 // const customValidation = new CustomValidation();
 
@@ -41,7 +38,7 @@ const FriendSchema = new mongoose.Schema({
   }
 });
 
-const Friend = mongoose.model('User', FriendSchema);
+const Friend = mongoose.model('Friend', FriendSchema);
 
 module.exports = {
   Friend

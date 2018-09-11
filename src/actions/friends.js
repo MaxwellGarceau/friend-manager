@@ -1,3 +1,6 @@
+import axios from 'axios';
+import moment from 'moment';
+
 export const addFriend = (newFriend) => ({
   type: 'ADD_FRIEND',
   newFriend
@@ -5,10 +8,20 @@ export const addFriend = (newFriend) => ({
 
 export const startAddFriend = (newFriend = {}) => {
   return async (dispatch, getState) => {
+    const {
+      name,
+      relationship,
+      location,
+      ranking,
+      dateAdded = moment().toDate()
+    } = newFriend;
+    const addNewFriend = { name, relationship, location, ranking, dateAdded };
     try {
-      // CALL DATABASE HERE TO ADD NEW FRIEND
-      // ADD ID THAT MONGO DB GENERATES TO newFriend OBJECT AND SEND TO REDUX
-      dispatch(addFriend(newFriend));
+      const response = await axios.post('/api/friend', addNewFriend);
+      dispatch(addFriend({
+        ...addNewFriend,
+        id: response.data._id
+      }));
     } catch (e) {
       console.log('Error!', e);
     }
