@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { history } from '../../routers/AppRouter';
 
 import { startLogin } from '../../actions/auth';
+import { startPopulateFriendList } from '../../actions/friends';
 import UserCredentialsForm from './UserCredentialsForm';
 
 export class LoginPage extends React.Component {
@@ -18,6 +19,8 @@ export class LoginPage extends React.Component {
     if (!!response && response.name === 'Error') {
       this.setState(() => ({ error: `Error Occured **DON'T FORGET TO PRINT MONGOOSE'S VALIDATION ERRORS HERE =))))))!!!!!!**` }))
     } else {
+      // Possibly use await (or something else) to force friends list to populate before page is loaded
+      this.props.startPopulateFriendList();
       history.push('/dashboard');
     }
   };
@@ -40,7 +43,8 @@ export class LoginPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startLogin: (userData) => dispatch(startLogin(userData))
+  startLogin: (userData) => dispatch(startLogin(userData)),
+  startPopulateFriendList: () => dispatch(startPopulateFriendList())
 });
 
 export default connect(undefined, mapDispatchToProps)(LoginPage);

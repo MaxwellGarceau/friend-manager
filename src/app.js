@@ -11,7 +11,6 @@ import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import 'react-input-range/lib/css/index.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-// import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
 import '@fortawesome/fontawesome-free/js/all.min.js';
 import './styles/styles.scss';
 import LoadingPage from './components/LoadingPage';
@@ -30,8 +29,6 @@ const jsx = (
 );
 let hasRendered = false;
 const renderApp = async () => {
-  // const response = await store.dispatch(startPopulateFriendList());
-  // console.log(response);
   if (!hasRendered) {
     ReactDOM.render(jsx, document.getElementById('app'));
     hasRendered = true;

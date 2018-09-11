@@ -44,8 +44,15 @@ export const populateFriendList = (friendList) => ({
 export const startPopulateFriendList = () => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.get('/api/friend');
-      dispatch(populateFriendList(response));
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yjk3Y2Y5NTAzZGM4NDE2NTNjNmYxMDgiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTM2Njc1NzMzfQ.wPbtX2hAIQmNpelKXVLQ8iWvLdZG-jpLdVffTGrfXd4'
+        }
+      }
+      const response = await axios.get('/api/friend', config);
+      console.log('friend list action response', response.data);
+      dispatch(populateFriendList(response.data));
     } catch (e) {
       console.log('Error!', e);
     }

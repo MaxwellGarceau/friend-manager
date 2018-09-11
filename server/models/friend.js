@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-// const validator = require('validator');
-// const { CustomValidation } = require('../../src/utils/custom-validation/user-custom-validation');
-// const customValidation = new CustomValidation();
 
 const FriendSchema = new mongoose.Schema({
   name: {
