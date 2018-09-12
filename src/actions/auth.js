@@ -14,7 +14,7 @@ export const startSignUp = (userData) => {
       email = '',
       password = ''
     } = userData;
-    const signUpDate = moment().toDate();
+    const signUpDate = new Date();
     const user = { email, password, signUpDate };
     // const header = {
     //   headers: {
@@ -50,6 +50,7 @@ export const startLogin = (userData) => {
 
     try {
       const response = await axios.post('/api/users/login', user);
+      console.log('loginResponse', response);
 
       return dispatch(login({
         _id: response.data._id,

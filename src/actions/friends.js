@@ -15,7 +15,7 @@ export const startAddFriend = (newFriend = {}) => {
       relationship,
       location,
       ranking,
-      dateAdded = moment().toDate()
+      dateAdded = new Date()
     } = newFriend;
     const addNewFriend = { name, relationship, location, ranking, dateAdded };
     const config = {
@@ -47,7 +47,7 @@ export const startPopulateFriendList = () => {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          'x-auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yjk3Y2Y5NTAzZGM4NDE2NTNjNmYxMDgiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTM2Njc1NzMzfQ.wPbtX2hAIQmNpelKXVLQ8iWvLdZG-jpLdVffTGrfXd4'
+          'x-auth': jwtToken
         }
       }
       const response = await axios.get('/api/friend', config);

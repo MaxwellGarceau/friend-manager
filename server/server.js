@@ -55,6 +55,7 @@ app.post('/api/users', async (req, res) => {
   try {
     const body = _.pick(req.body, ['email', 'password', 'signUpDate']);
     const user = new User(body);
+    console.log('/api/users', user);
 
     await user.save();
     const token = await user.generateAuthToken();
@@ -83,6 +84,7 @@ app.post('/api/users/login', async (req, res) => {
       expires: moment().add(1, 'h').toDate(),
       maxAge: moment().add(1, 'h').valueOf() - moment().valueOf()
     };
+    console.log('USER from server login', user);
     res.header('x-auth', token).cookie('jwtToken', token, cookieProperties).send(user);
   } catch (e) {
     res.status(400).send(e);

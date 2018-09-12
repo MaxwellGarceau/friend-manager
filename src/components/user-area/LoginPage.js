@@ -16,6 +16,7 @@ export class LoginPage extends React.Component {
   };
   onSubmit = async (userCredentials) => {
     const response = await this.props.startLogin(userCredentials);
+    console.log('startLogin response', response);
     if (!!response && response.name === 'Error') {
       this.setState(() => ({ error: `Error Occured **DON'T FORGET TO PRINT MONGOOSE'S VALIDATION ERRORS HERE =))))))!!!!!!**` }))
     } else {
