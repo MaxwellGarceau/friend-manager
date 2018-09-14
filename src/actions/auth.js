@@ -19,15 +19,14 @@ export const startSignUp = (userData) => {
 
     try {
       const response = await axios.post('/api/users', user);
-      console.log('User response', response);
-      const jwtToken = getJwtToken();
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth': jwtToken
-        }
-      };
-      await axios.get('/api/users/me', config);
+      // const jwtToken = getJwtToken();
+      // const config = {
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'x-auth': jwtToken
+      //   }
+      // };
+      // await axios.get('/api/users/me', config);
 
       return dispatch(signUp({
         _id: response.data._id,
@@ -79,7 +78,7 @@ export const startLogout = () => {
         'x-auth': jwtToken
       }
     };
-    console.log('JWTTOKEN', jwtToken);
+
     try {
       await axios.delete('/api/users/me/token', config);
       return dispatch(logout());

@@ -4,6 +4,7 @@ import { history } from '../../routers/AppRouter';
 
 import { startLogin } from '../../actions/auth';
 import { startPopulateFriendList } from '../../actions/friends';
+import { clearState } from '../../store/local-storage';
 import UserCredentialsForm from './UserCredentialsForm';
 
 export class LoginPage extends React.Component {
@@ -27,6 +28,9 @@ export class LoginPage extends React.Component {
   };
   handleToSignUp = () => {
     history.push('/signup');
+  };
+  componentDidMount () {
+    clearState();
   };
   render (props) {
     return (

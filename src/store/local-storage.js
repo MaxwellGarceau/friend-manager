@@ -15,6 +15,14 @@ export const saveState = (state) => {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('state', serializedState);
   } catch (e) {
-    // Error
+    return undefined;
+  }
+}
+
+export const clearState = () => {
+  try {
+    localStorage.clear();
+  } catch (e) {
+    return undefined;
   }
 }
