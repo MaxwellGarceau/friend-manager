@@ -60,12 +60,13 @@ app.post('/api/users', async (req, res) => {
     await user.save();
     const token = await user.generateAuthToken();
     const cookieProperties = {
-      httpOnly: true,
+      // httpOnly: true,
       // secure: true,
       expires: moment().add(1, 'h').toDate(),
       maxAge: moment().add(1, 'h').valueOf() - moment().valueOf()
     };
-    res.header('x-auth', token).cookie('jwtToken', token, cookieProperties).send(user);
+    res.cookie('jwtToken', token, cookieProperties);
+    res.header('x-auth', token).send(user);
   } catch (e) {
     res.status(400).send(e);
   }
