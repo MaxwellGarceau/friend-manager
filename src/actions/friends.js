@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 
-import { jwtToken } from '../utils/custom-validation/user-credentials';
+import { getJwtToken } from '../utils/custom-validation/user-credentials';
 
 export const addFriend = (newFriend) => ({
   type: 'ADD_FRIEND',
@@ -18,6 +18,7 @@ export const startAddFriend = (newFriend = {}) => {
       dateAdded = new Date()
     } = newFriend;
     const addNewFriend = { name, relationship, location, ranking, dateAdded };
+    const jwtToken = getJwtToken();
     const config = {
       headers: {
         'x-auth': jwtToken
@@ -44,6 +45,7 @@ export const populateFriendList = (friendList) => ({
 export const startPopulateFriendList = () => {
   return async (dispatch, getState) => {
     try {
+      const jwtToken = getJwtToken();
       const config = {
         headers: {
           'Content-Type': 'application/json',

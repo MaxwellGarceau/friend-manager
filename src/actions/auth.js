@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 
-import { jwtToken } from '../utils/custom-validation/user-credentials';
+import { getJwtToken } from '../utils/custom-validation/user-credentials';
 
 export const signUp = (user) => ({
   type: 'SIGN_UP',
@@ -69,11 +69,13 @@ export const logout = () => ({
 
 export const startLogout = () => {
   return async (dispatch, getState) => {
+    const jwtToken = getJwtToken();
     const config = {
       headers: {
         'x-auth': jwtToken
       }
     };
+    console.log('JWTTOKEN', jwtToken);
     try {
       await axios.delete('/api/users/me/token', config);
       return dispatch(logout());

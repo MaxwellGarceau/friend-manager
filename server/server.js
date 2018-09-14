@@ -85,7 +85,8 @@ app.post('/api/users/login', async (req, res) => {
       maxAge: moment().add(1, 'h').valueOf() - moment().valueOf()
     };
     console.log('USER from server login', user);
-    res.header('x-auth', token).cookie('jwtToken', token, cookieProperties).send(user);
+    res.cookie('jwtToken', token, cookieProperties);
+    res.header('x-auth', token).send(user);
   } catch (e) {
     res.status(400).send(e);
   }
@@ -100,7 +101,9 @@ app.get('/api/users/me', authenticate, (req, res) => {
 app.delete('/api/users/me/token', authenticate, async (req, res) => {
   try {
     await req.user.removeToken(req.token);
-    res.status(200).clearCookie('jwtToken').send();
+    console.log('user after deleting token', req.user);
+    res.clearCookie('jwtToken');
+    res.status(200).send();
   } catch (e) {
     res.status(400).send(e);
   }
