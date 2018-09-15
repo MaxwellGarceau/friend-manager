@@ -25,7 +25,7 @@ export const startAddFriend = (newFriend = {}) => {
     }
     try {
       const response = await axios.post('/api/friend', addNewFriend, config);
-      dispatch(addFriend({
+      return dispatch(addFriend({
         _id: response.data._id,
         _creator: response.data._creator,
         ...addNewFriend
@@ -50,9 +50,9 @@ export const startPopulateFriendList = () => {
           'Content-Type': 'application/json',
           'x-auth': jwtToken
         }
-      }
+      };
       const response = await axios.get('/api/friend', config);
-      dispatch(populateFriendList(response.data));
+      return dispatch(populateFriendList(response.data));
     } catch (e) {
       console.log('Error!', e);
     }
