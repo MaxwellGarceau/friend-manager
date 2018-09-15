@@ -1,4 +1,5 @@
-export const friends = [{
+const { ObjectID } = require('mongodb');
+const friends = [{
   name: 'Rafael',
   relationship: 'friend',
   location: {
@@ -7,8 +8,8 @@ export const friends = [{
     city: 'Nashville'
   },
   ranking: 5,
-  id: 1,
-  _creator: '5b81c42195a1771a2a8ee1fc'
+  _id: ObjectID('5b9d38a38fbeaf13bc4a2e88'),
+  _creator: '5b97cf9503dc841653c6f108'
 }, {
   name: 'Keenan',
   relationship: 'friend',
@@ -18,8 +19,8 @@ export const friends = [{
     city: 'Nashville'
   },
   ranking: 5,
-  id: 2,
-  _creator: '5b81c42195a1771a2a8ee1fc'
+  _id: ObjectID('5b9d38a38fbeaf13bc4a2e89'),
+  _creator: '5b97cf9503dc841653c6f108'
 }, {
   name: 'Kyle',
   relationship: 'friend',
@@ -29,8 +30,8 @@ export const friends = [{
     city: 'Nashville'
   },
   ranking: 5,
-  id: 3,
-  _creator: '5b81c42195a1771a2a8ee1fc'
+  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8a'),
+  _creator: '5b97cf9503dc841653c6f108'
 }, {
   name: 'Jorge',
   relationship: 'friend',
@@ -40,8 +41,8 @@ export const friends = [{
     city: 'Huntsville'
   },
   ranking: 5,
-  id: 4,
-  _creator: '5b81c42195a1771a2a8ee1fc'
+  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8b'),
+  _creator: '5b97cf9503dc841653c6f108'
 }, {
   name: 'Jose',
   relationship: 'acquaintance',
@@ -51,8 +52,8 @@ export const friends = [{
     city: 'El Paso'
   },
   ranking: 3,
-  id: 5,
-  _creator: '5b81c42195a1771a2a8ee1fc'
+  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8c'),
+  _creator: '5b97cf9503dc841653c6f108'
 }, {
   name: 'Juan',
   relationship: 'acquaintance',
@@ -62,8 +63,8 @@ export const friends = [{
     city: 'Birmingham'
   },
   ranking: 1,
-  id: 6,
-  _creator: '5b81c42195a1771a2a8ee1fc'
+  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8d'),
+  _creator: '5b97cf9503dc841653c6f108'
 }, {
   name: 'Raul',
   relationship: 'family',
@@ -73,6 +74,10 @@ export const friends = [{
     city: 'Las Vegas'
   },
   ranking: 5,
-  id: 7,
-  _creator: '5b81c42195a1771a2a8ee1fc'
+  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8e'),
+  _creator: '5b97cf9503dc841653c6f108'
 }];
+
+module.exports = {
+  friends
+};

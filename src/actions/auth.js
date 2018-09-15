@@ -55,11 +55,12 @@ export const startLogin = (userData) => {
     try {
       const response = await axios.post('/api/users/login', user);
 
-      return dispatch(login({
+      dispatch(login({
         _id: response.data._id,
         signUpDate: response.data.signUpDate,
         email
       }));
+      return response;
     } catch (e) {
       return e;
     }

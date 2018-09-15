@@ -1,6 +1,6 @@
-import { friends } from '../tests/fixtures/friends-data';
+// import { friends } from '../tests/fixtures/friends-data';
 
-export default (state = friends, action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case 'POPULATE_FRIEND_LIST':
       return [...state, ...action.friendList];

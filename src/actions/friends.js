@@ -1,5 +1,4 @@
 import axios from 'axios';
-import moment from 'moment';
 
 import { getJwtToken } from '../utils/custom-validation/user-credentials';
 
@@ -53,7 +52,6 @@ export const startPopulateFriendList = () => {
         }
       }
       const response = await axios.get('/api/friend', config);
-      console.log('friend list action response', response.data);
       dispatch(populateFriendList(response.data));
     } catch (e) {
       console.log('Error!', e);

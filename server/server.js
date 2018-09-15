@@ -20,6 +20,18 @@ const publicPath = path.join(__dirname, '..', 'public');
 // Listens on a port exactly one number higher than specified in .env.development/.env.development
 const port = parseInt(process.env.PORT, 10) + 1 || 3000;
 
+const friendTestData = require('../src/tests/fixtures/friends-data');
+
+// friendTestData.friends.forEach((testFriend) => {
+//   if (!testFriend.hasOwnProperty('_id')) {
+//     testFriend._id = new ObjectID();
+//   }
+// });
+
+friendTestData.friends.map((testFriend) => {
+  return mongoose.connection.collection('friends').replaceOne({ _id: testFriend._id }, testFriend, { upsert: true });
+});
+
 app.use(bodyParser.json());
 
 // Add Friend
