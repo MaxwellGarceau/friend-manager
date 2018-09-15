@@ -2,7 +2,6 @@ const { User } = require('./../models/user');
 
 const authenticate = (req, res, next) => {
   const token = req.header('x-auth');
-  console.log('TOKEN', token)
 
   User.findByToken(token).then((user) => {
     if (!user) {
@@ -11,11 +10,8 @@ const authenticate = (req, res, next) => {
 
     req.user = user;
     req.token = token;
-    console.log('user', user);
-    console.log('token', token);
     next();
   }).catch((e) => {
-    console.log('TRIGGERED AN ERROR', e);
     res.status(401).send();
   });
 };

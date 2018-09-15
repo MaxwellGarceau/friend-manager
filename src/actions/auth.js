@@ -19,6 +19,7 @@ export const startSignUp = (userData) => {
 
     try {
       const response = await axios.post('/api/users', user);
+      // // If getting authorization problems try this
       // const jwtToken = getJwtToken();
       // const config = {
       //   headers: {
@@ -53,7 +54,6 @@ export const startLogin = (userData) => {
 
     try {
       const response = await axios.post('/api/users/login', user);
-      console.log('loginResponse', response);
 
       return dispatch(login({
         _id: response.data._id,

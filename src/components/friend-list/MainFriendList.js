@@ -68,6 +68,10 @@ class MainFriendList extends React.Component {
           </thead>
           <tbody>
             {this.state.friends.map((friend) => {
+              const formattedCity = friend.location.city ? `${friend.location.city}, ` : '';
+              const formattedRegion = friend.location.region ? `${friend.location.region} ` : '';
+              const formattedCountry = friend.location.country ? `${friend.location.country}` : '';
+
               let stars = [];
               for (let i = 0; i < friend.ranking; i++) {
                 // Caused problems when adding map index to key
@@ -77,7 +81,7 @@ class MainFriendList extends React.Component {
                 <tr key={friend.id} className="friends-list__row">
                   <td>{friend.name}</td>
                   <td>{capitalize(friend.relationship)}</td>
-                  <td>{`${friend.location.city}, ${friend.location.region} ${friend.location.country}`}</td>
+                  <td>{`${formattedCity}${formattedRegion}${formattedCountry}`}</td>
                   <td>
                     {stars.map((star) => star)}
                   </td>

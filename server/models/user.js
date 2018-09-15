@@ -79,7 +79,6 @@ UserSchema.methods.removeToken = function (token) {
 
 UserSchema.statics.findByToken = function (token) {
   const User = this;
-  console.log('User Schema', token);
   let decoded;
 
   try {

@@ -28,7 +28,13 @@ class ManuallyAddFriend extends React.Component {
   };
   setLocationState = (location) => this.setState({ location });
   onSubmit = () => {
-    const { name, relationship, location, ranking } = this.state;
+    let { name, relationship, location, ranking } = this.state;
+    location = {
+      city: '',
+      region: '',
+      country: '',
+      ...location
+    };
     const newFriend = {
       name,
       relationship,
