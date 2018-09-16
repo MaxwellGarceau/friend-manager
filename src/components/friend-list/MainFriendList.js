@@ -3,6 +3,7 @@ import capitalize from 'lodash/capitalize';
 
 import { connect } from 'react-redux';
 import { friendsListMasterFilter } from '../../selectors/friend-list-filters';
+import StarRatingComponent from 'react-star-rating-component';
 
 import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
 import ManuallyAddFriend from './ManuallyAddFriend';
@@ -81,18 +82,26 @@ class MainFriendList extends React.Component {
               const formattedRegion = friend.location.region ? `${friend.location.region} ` : '';
               const formattedCountry = friend.location.country ? `${friend.location.country}` : '';
 
-              let stars = [];
-              for (let i = 0; i < friend.ranking; i++) {
-                // Caused problems when adding map index to key
-                stars.push(<i key={`${friend._id}-${i}`} className="far fa-star"></i>);
-              }
+              // let stars = [];
+              // for (let i = 0; i < friend.ranking; i++) {
+              //   // Caused problems when adding map index to key
+              //   stars.push(<i key={`${friend._id}-${i}`} className="far fa-star"></i>);
+              // }
               return (
                 <tr key={friend._id} className="friends-list__row">
-                  <td>{friend.name}</td>
-                  <td>{capitalize(friend.relationship)}</td>
-                  <td>{`${formattedCity}${formattedRegion}${formattedCountry}`}</td>
-                  <td>
-                    {stars}
+                  <td className="friends-list__name">{friend.name}</td>
+                  <td className="friends-list__relationship">{capitalize(friend.relationship)}</td>
+                  <td className="friends-list__location"><input readOnly className="friends-list__input readonly" value={`${formattedCity}${formattedRegion}${formattedCountry}`} readonly /></td>
+                  <td className="friends-list__ranking">
+                    {/* {stars} */}
+                    <StarRatingComponent
+                      name="output-friend-ranking"
+                      value={friend.ranking}
+                      // onStarClick={this.onStarClick}
+                      starCount={5}
+                      renderStarIcon={() => <i className="far fa-star"></i>}
+                      className="manually-add-friend__dv-star-rating"
+                    />
                   </td>
                 </tr>
               );

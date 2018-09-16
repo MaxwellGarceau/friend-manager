@@ -1,7 +1,6 @@
 import React from 'react';
 import InputRange from 'react-input-range';
 import axios from 'axios';
-// import _ from 'lodash';
 import { cloneDeep } from 'lodash-es';
 
 import { connect } from 'react-redux';
@@ -120,7 +119,7 @@ class FriendsFilter extends React.Component {
   };
   render () {
     return (
-      <div className="friends-filter">
+      <div className={`friends-filter ${this.props.className}`}>
         <h2 className="friends-filter__title">Filter</h2>
         <form className="form friends-filter__form" onSubmit={this.handleUpdateFilter}>
           <fieldset name="relationshipFilter">
