@@ -52,7 +52,7 @@ class ManuallyAddFriend extends React.Component {
           <td align="center">
             <select value={this.state.relationship} className="select" onChange={this.handleRelationship} placeholder="Relationship">
               {this.state.relationshipOptions.map((option, ind) => {
-                return <option key={`add-friend-relationship-option-key-${ind}`}>{startCase(option)}</option>;
+                return <option key={`add-friend-relationship-option-key-${ind}`} value={option}>{startCase(option)}</option>;
               })}
             </select>
           </td>

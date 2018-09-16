@@ -27,7 +27,6 @@ class AllFriendsListFilters {
     });
   };
 
-  // MAKE SURE THAT RANKING SLIDER IS SENDING THE TYPE OF rangeSlider
   rangeSlider = (friendsList, params, filterCategory) => {
     return friendsList.filter((friend) => {
       const { ranking } = friend;

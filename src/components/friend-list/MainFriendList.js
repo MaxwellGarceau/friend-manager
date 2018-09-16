@@ -37,6 +37,15 @@ class MainFriendList extends React.Component {
       this.setState({ friends: nextProps.friends });
     }
   };
+  // componentDidCatch (error, errorInfo) {
+  //   // Catch errors in any components below and re-render with error message
+  //   // this.setState({
+  //   //   error: error,
+  //   //   errorInfo: errorInfo
+  //   // })
+  //   console.log(error, errorInfo);
+  //   // You can also log error messages to an error reporting service here
+  // }
   render () {
     return (
       <div className="friends-list">
@@ -75,15 +84,15 @@ class MainFriendList extends React.Component {
               let stars = [];
               for (let i = 0; i < friend.ranking; i++) {
                 // Caused problems when adding map index to key
-                stars.push(<i key={`star-ranking-key-${i}`} className="far fa-star"></i>);
+                stars.push(<i key={`${friend._id}-${i}`} className="far fa-star"></i>);
               }
               return (
-                <tr key={friend.id} className="friends-list__row">
+                <tr key={friend._id} className="friends-list__row">
                   <td>{friend.name}</td>
                   <td>{capitalize(friend.relationship)}</td>
                   <td>{`${formattedCity}${formattedRegion}${formattedCountry}`}</td>
                   <td>
-                    {stars.map((star) => star)}
+                    {stars}
                   </td>
                 </tr>
               );
