@@ -50,7 +50,8 @@ export const startDeleteFriend = (_id) => {
       }
     };
     try {
-      // await axios.delete('/api/friend/delete', _id, config);
+      const response = await axios.delete(`/api/friend/${_id}`, config);
+      console.log('deleteFriendResponse', response);
       return dispatch(deleteFriend(_id));
     } catch (e) {
       console.log('Error!', e);
