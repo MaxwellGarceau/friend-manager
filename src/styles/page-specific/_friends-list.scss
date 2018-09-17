@@ -74,6 +74,11 @@
       opacity: .3;
     }
   }
+  &__edit-friends-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px 0;
+  }
 }
 
 .friends-query {

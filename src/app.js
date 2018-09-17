@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { dispatch } from 'react-redux';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startPopulateFriendList } from './actions/friends';
@@ -15,7 +15,7 @@ import '@fortawesome/fontawesome-free/js/all.min.js';
 import './styles/styles.scss';
 import LoadingPage from './components/LoadingPage';
 
-const store = configureStore();
+const { store, persistor } = configureStore();
 
 // Saves state from localStorage to redux
 store.subscribe(() => {
@@ -24,7 +24,9 @@ store.subscribe(() => {
 
 const jsx = (
   <Provider store={store}>
-    <AppRouter />
+    <PersistGate loading={<LoadingPage />} persistor={persistor}>
+      <AppRouter />
+    </PersistGate>
   </Provider>
 );
 let hasRendered = false;

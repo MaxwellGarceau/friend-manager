@@ -60,6 +60,7 @@
     "react-star-rating-component": "^1.4.1",
     "redux": "4.0.0",
     "redux-mock-store": "1.5.3",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "2.3.0",
     "sass-loader": "7.1.0",
     "style-loader": "0.22.1",

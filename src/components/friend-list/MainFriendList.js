@@ -30,6 +30,9 @@ class MainFriendList extends React.Component {
     const friends = sortNumerically(this.state.friends, sortDirection, 'ranking');
     this.setState({ friends });
   };
+  enableEditFriends = () => {
+    console.log('Enable Edit Friends');
+  };
   setActiveSort = (activeSort) => {
     this.setState({ activeSort });
   };
@@ -38,19 +41,13 @@ class MainFriendList extends React.Component {
       this.setState({ friends: nextProps.friends });
     }
   };
-  // componentDidCatch (error, errorInfo) {
-  //   // Catch errors in any components below and re-render with error message
-  //   // this.setState({
-  //   //   error: error,
-  //   //   errorInfo: errorInfo
-  //   // })
-  //   console.log(error, errorInfo);
-  //   // You can also log error messages to an error reporting service here
-  // }
   render () {
     return (
       <div className="friends-list">
         <h2 className="friends-list__title">Friends List</h2>
+        <div className="friends-list__edit-friends-container">
+          <button className="button button--modify-friends" onClick={this.enableEditFriends}>Edit Friends</button>
+        </div>
         <table className="friends-list__table">
           <thead>
             <tr>
