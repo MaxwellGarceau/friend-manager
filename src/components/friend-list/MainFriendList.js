@@ -1,10 +1,8 @@
 import React from 'react';
-import capitalize from 'lodash/capitalize';
 
 import { connect } from 'react-redux';
-import { startEditFriends } from '../../actions/friends';
+import { startAddFriend, startEditFriends } from '../../actions/friends';
 import { friendsListMasterFilter } from '../../selectors/friend-list-filters';
-import StarRatingComponent from 'react-star-rating-component';
 
 import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
 import ManuallyAddFriend from './ManuallyAddFriend';
@@ -36,6 +34,9 @@ class MainFriendList extends React.Component {
   setActiveSort = (activeSort) => {
     this.setState({ activeSort });
   };
+  handleStartAddFriend = (newFriend) => {
+    this.props.startAddFriend(newFriend);
+  }
   toggleEditFriends = () => {
     !!this.state.canEditFriends ? this.setState({ canEditFriends: false }) : this.setState({ canEditFriends: true });
   };
@@ -85,7 +86,7 @@ class MainFriendList extends React.Component {
           </thead>
           <tbody>
             {this.state.friends.map((friend) => <FriendRow friend={friend} canEditFriends={canEditFriends} />)}
-            <ManuallyAddFriend />
+            <ManuallyAddFriend handleOnSubmit={this.handleStartAddFriend} />
           </tbody>
         </table>
       </div>
@@ -99,7 +100,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  startEditFriends: (friends) => dispatch(startEditFriends(friends))
+  startEditFriends: (friends) => dispatch(startEditFriends(friends)),
+  startAddFriend: (newFriend) => dispatch(startAddFriend(newFriend))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainFriendList);

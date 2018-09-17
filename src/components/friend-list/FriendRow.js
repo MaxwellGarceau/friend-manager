@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 import { startDeleteFriend } from '../../actions/friends';
 
 class FriendRow extends React.Component {
+  state = {
+    friend: this.props.friend
+  };
   handleDeleteFriend = (e) => {
     const _id = e.target.dataset.friendId;
     this.props.startDeleteFriend(_id);

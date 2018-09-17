@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-import { startAddFriend } from '../../actions/friends';
-
 import { startCase } from 'lodash-es';
 import StarRatingComponent from 'react-star-rating-component';
 
@@ -42,7 +39,7 @@ class ManuallyAddFriend extends React.Component {
       ranking
     };
 
-    this.props.startAddFriend(newFriend);
+    this.props.handleOnSubmit(newFriend);
   };
   render () {
     return (
@@ -76,8 +73,4 @@ class ManuallyAddFriend extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  startAddFriend: (newFriend) => dispatch(startAddFriend(newFriend))
-});
-
-export default connect(undefined, mapDispatchToProps)(ManuallyAddFriend);
+export default ManuallyAddFriend;

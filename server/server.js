@@ -68,7 +68,7 @@ app.delete('/api/friend/:_id', authenticate, async (req, res) => {
   }
 });
 
-// Edit Friend
+// Edit Friends (large amount at once)
 app.patch('/api/friend', authenticate, async (req, res) => {
   const _id = req.params._id;
   const body = _.pick(req.body, ['name', 'relationship', 'ranking', 'location']);
