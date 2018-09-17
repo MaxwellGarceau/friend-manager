@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { startAddFriend, startEditFriends } from '../../actions/friends';
+import { startAddFriend, startEditFriend } from '../../actions/friends';
 import { friendsListMasterFilter } from '../../selectors/friend-list-filters';
 
 import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
@@ -40,9 +40,9 @@ class MainFriendList extends React.Component {
   toggleEditFriends = () => {
     !!this.state.canEditFriends ? this.setState({ canEditFriends: false }) : this.setState({ canEditFriends: true });
   };
-  handleEditFriends = () => {
+  handleStartEditFriend = () => {
     console.log('handle Edit Friends');
-    this.props.startEditFriends();
+    this.props.startEditFriend();
   };
   componentWillReceiveProps (nextProps) {
     if (nextProps.friends !== this.props.friends) {
@@ -57,7 +57,7 @@ class MainFriendList extends React.Component {
         <h2 className="friends-list__title">Friends List</h2>
         <div className="friends-list__edit-friends-container">
           <button className="button button--modify-friends" onClick={this.toggleEditFriends}>{toggleEditFriendsButtonText}</button>
-          {!!canEditFriends && <button className="button button--modify-friends" onClick={this.handleEditFriends}>Save Friends</button>}
+          {/* {!!canEditFriends && <button className="button button--modify-friends" onClick={this.handleEditFriends}>Save Friends</button>} */}
         </div>
         <table className="friends-list__table">
           <thead>
@@ -85,7 +85,13 @@ class MainFriendList extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.friends.map((friend) => <FriendRow friend={friend} canEditFriends={canEditFriends} />)}
+            {this.state.friends.map((friend) => {
+              if (this.state.editingFriends) {
+                return <ManuallyAddFriend friend={friend} handleOnSubmit={this.handleStartEditFriend} />;
+              } else {
+                return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
+              }
+            })}
             <ManuallyAddFriend handleOnSubmit={this.handleStartAddFriend} />
           </tbody>
         </table>
@@ -100,7 +106,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  startEditFriends: (friends) => dispatch(startEditFriends(friends)),
+  startEditFriend: (friend) => dispatch(startEditFriend(friend)),
   startAddFriend: (newFriend) => dispatch(startAddFriend(newFriend))
 });
 

@@ -83,6 +83,12 @@
     display: inline-block;
     margin-left: $xs-size;
   }
+  &__edit {
+    @extend .friends-list__delete;
+  }
+  &__cancel-edit {
+    @extend .friends-list__delete;
+  }
 }
 
 .friends-query {

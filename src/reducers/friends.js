@@ -6,12 +6,30 @@ export default (state = [], action) => {
       return [...state, action.newFriend];
     case 'DELETE_FRIEND':
       return state.filter((friend) => friend._id !== action._id);
-    case 'EDIT_FRIENDS':
-      const newFriends = action.edittedFriends;
-      const oldFriends = state.filter((oldFriend) => {
-        return newFriends.filter((newFriend) => oldFriend._id !== newFriend._id);
+    case 'EDIT_FRIEND':
+      return state.map((oldFriend) => {
+        if (oldFriend._id === action.edittedFriend._id) {
+          return {
+            ...oldFriend,
+            ...action.edittedFriend
+          }
+        } else return oldFriend;
       });
-      return [...oldFriends, ...newFriends];
+    case 'CAN_EDIT_FRIEND':
+      return state.map((friend) => {
+        if (friend._id === action._id) {
+          return {
+            ...friend,
+            canEditFriend: true
+          }
+        } else return friend;
+      });
+    // case 'EDIT_FRIENDS':
+    //   const newFriends = action.edittedFriends;
+    //   const oldFriends = state.filter((oldFriend) => {
+    //     return newFriends.filter((newFriend) => oldFriend._id !== newFriend._id);
+    //   });
+    //   return [...oldFriends, ...newFriends];
     default:
       return state;
   }

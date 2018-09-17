@@ -1,6 +1,7 @@
 import React from 'react';
 import capitalize from 'lodash/capitalize';
 import StarRatingComponent from 'react-star-rating-component';
+import ModifyFriendIcons from './ModifyFriendIcons';
 
 import { connect } from 'react-redux';
 import { startDeleteFriend } from '../../actions/friends';
@@ -17,8 +18,11 @@ class FriendRow extends React.Component {
     const update = e.target.value;
     this.setState({ [friendUpdate]: update });
   }
-  handleEditFriend = () => {
-
+  handleEditFriend = (e) => {
+    console.log('Handle Edit Friend');
+  };
+  handleCancelEditFriend = (_id) => {
+    console.log('Cancel Handle Edit Friend');
   };
   render (props) {
     const { friend, canEditFriends } = this.props;
@@ -39,10 +43,7 @@ class FriendRow extends React.Component {
             renderStarIcon={() => <i className="far fa-star"></i>}
             className="manually-add-friend__dv-star-rating"
           />
-          {!!canEditFriends &&
-            <div className={`friends-list__delete`} data-friend-id={friend._id} onClick={this.handleDeleteFriend}>
-              <i data-friend-id={friend._id} className="fas fa-times-circle"></i>
-            </div>}
+          {!!canEditFriends && <ModifyFriendIcons friend={this.state.friend} handleCancelEditFriend={this.handleCancelEditFriend} />}
         </td>
       </tr>
     );

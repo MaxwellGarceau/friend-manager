@@ -59,12 +59,12 @@ export const startDeleteFriend = (_id) => {
   }
 };
 
-export const editFriends = (edittedFriends) => ({
-  type: 'EDIT_FRIENDS',
-  edittedFriends
+export const editFriend = (edittedFriend) => ({
+  type: 'EDIT_FRIEND',
+  edittedFriend
 });
 
-export const startEditFriends = (edittedFriends) => {
+export const startEditFriend = (edittedFriend) => {
   return async (dispatch, getState) => {
     const jwtToken = getJwtToken();
     const config = {
@@ -74,8 +74,8 @@ export const startEditFriends = (edittedFriends) => {
       }
     };
     try {
-      const response = await axios.patch(`/api/friend`, edittedFriends, config);
-      return dispatch(editFriends(response.data));
+      const response = await axios.patch(`/api/friend`, edittedFriend, config);
+      return dispatch(editFriend(response.data));
     } catch (e) {
       console.log('Error!', e);
     }
@@ -99,6 +99,21 @@ export const startPopulateFriendList = () => {
       };
       const response = await axios.get('/api/friend', config);
       return dispatch(populateFriendList(response.data));
+    } catch (e) {
+      console.log('Error!', e);
+    }
+  }
+};
+
+export const canEditFriend = (_id) => ({
+  type: 'CAN_EDIT_FRIEND',
+  _id
+});
+
+export const startCanEditFriend = (_id) => {
+  return (dispatch) => {
+    try {
+      return dispatch(canEditFriend(_id));
     } catch (e) {
       console.log('Error!', e);
     }
