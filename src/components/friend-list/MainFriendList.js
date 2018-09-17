@@ -2,6 +2,7 @@ import React from 'react';
 import capitalize from 'lodash/capitalize';
 
 import { connect } from 'react-redux';
+import { startDeleteFriend } from '../../actions/friends';
 import { friendsListMasterFilter } from '../../selectors/friend-list-filters';
 import StarRatingComponent from 'react-star-rating-component';
 
@@ -38,9 +39,8 @@ class MainFriendList extends React.Component {
     !!this.state.canEditFriends ? this.setState({ canEditFriends: false }) : this.setState({ canEditFriends: true });
   };
   handleDeleteFriend = (e) => {
-    console.log(e.target.dataset);
     const _id = e.target.dataset.friendId;
-    console.log('handleDeleteFriend-Id: ', _id);
+    this.props.startDeleteFriend(_id);
   };
   componentWillReceiveProps (nextProps) {
     if (nextProps.friends !== this.props.friends) {
@@ -117,4 +117,8 @@ const mapStateToProps = (state, ownProps) => ({
   friends: friendsListMasterFilter(state.friends, state.filters.friendsListFilters)
 });
 
-export default connect(mapStateToProps)(MainFriendList);
+const mapDispatchToProps = (dispatch) => ({
+  startDeleteFriend: (_id) => dispatch(startDeleteFriend(_id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainFriendList);

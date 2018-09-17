@@ -36,6 +36,14 @@ export const startAddFriend = (newFriend = {}) => {
   };
 };
 
+export const deleteFriend = () => {
+
+};
+
+export const startDeleteFriend = (_id) => {
+  console.log('startDeleteFriend', _id);
+};
+
 export const populateFriendList = (friendList) => ({
   type: 'POPULATE_FRIEND_LIST',
   friendList
