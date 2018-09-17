@@ -22,7 +22,7 @@ export const startAddFriend = (newFriend = {}) => {
       headers: {
         'x-auth': jwtToken
       }
-    }
+    };
     try {
       const response = await axios.post('/api/friend', addNewFriend, config);
       return dispatch(addFriend({
@@ -36,12 +36,26 @@ export const startAddFriend = (newFriend = {}) => {
   };
 };
 
-export const deleteFriend = () => {
-
-};
+export const deleteFriend = (_id) => ({
+  type: 'DELETE_FRIEND',
+  _id
+});
 
 export const startDeleteFriend = (_id) => {
-  console.log('startDeleteFriend', _id);
+  return async (dispatch, getState) => {
+    const jwtToken = getJwtToken();
+    const config = {
+      headers: {
+        'x-auth': jwtToken
+      }
+    };
+    try {
+      // await axios.delete('/api/friend/delete', _id, config);
+      return dispatch(deleteFriend(_id));
+    } catch (e) {
+      console.log('Error!', e);
+    }
+  }
 };
 
 export const populateFriendList = (friendList) => ({
