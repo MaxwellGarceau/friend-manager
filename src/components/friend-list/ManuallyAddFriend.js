@@ -8,9 +8,14 @@ import LocationPicker from '../filter-sorting/LocationPicker';
 class ManuallyAddFriend extends React.Component {
   state = {
     relationshipOptions: ['friend', 'family', 'acquaintance'],
-    ranking: 5,
-    name: '',
-    relationship: 'friend'
+    ranking: this.props.ranking ? this.props.ranking : 5,
+    name: this.props.name ? this.props.name : '',
+    relationship: this.props.relationship ? this.props.relationship : 'friend',
+    location: this.props.location ? this.props.location : {
+      country: '',
+      region: '',
+      city: ''
+    }
   };
   onStarClick = (nextValue, prevValue, name) => {
     this.setState({ ranking: nextValue });
@@ -54,7 +59,7 @@ class ManuallyAddFriend extends React.Component {
             </select>
           </td>
           <td align="center">
-            <LocationPicker setLocationState={this.setLocationState} />
+            <LocationPicker setLocationState={this.setLocationState} initialLocationState={this.state.location} />
           </td>
           <td align="center">
             <StarRatingComponent

@@ -4,8 +4,8 @@ import axios from 'axios';
 import LocationDropdown from './LocationDropdown';
 
 class LocationPicker extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
 
     // Initial API request to geonames for country data
     axios.get('http://api.geonames.org/countryInfoJSON?username=maxgarceau').then((res) => {
@@ -14,7 +14,7 @@ class LocationPicker extends React.Component {
     });
 
     this.state = {
-      location: {
+      location: this.props.initialLocationState ? this.props.initialLocationState : {
         country: '',
         region: '',
         city: ''

@@ -13,6 +13,13 @@ class FriendRow extends React.Component {
     const _id = e.target.dataset.friendId;
     this.props.startDeleteFriend(_id);
   };
+  setFriendName = (e, friendUpdate) => {
+    const update = e.target.value;
+    this.setState({ [friendUpdate]: update });
+  }
+  handleEditFriend = () => {
+
+  };
   render (props) {
     const { friend, canEditFriends } = this.props;
     const isReadOnly = !!canEditFriends ? '' : 'readonly';
