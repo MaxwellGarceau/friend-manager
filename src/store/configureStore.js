@@ -34,7 +34,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default () => {
   let store = createStore(
-    // rootReducer,
     persistedReducer,
     composeEnhancers(applyMiddleware(thunk))
   );

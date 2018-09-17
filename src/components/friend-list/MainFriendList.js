@@ -12,7 +12,8 @@ import { sortAlphabetically, sortNumerically, sortByLocation } from '../../utils
 class MainFriendList extends React.Component {
   state = {
     friends: this.props.friends,
-    activeSort: ''
+    activeSort: '',
+    canEditFriends: false
   };
   handleSortByName = (sortDirection) => {
     const friends = sortAlphabetically(this.state.friends, sortDirection, 'name');
@@ -30,11 +31,16 @@ class MainFriendList extends React.Component {
     const friends = sortNumerically(this.state.friends, sortDirection, 'ranking');
     this.setState({ friends });
   };
-  enableEditFriends = () => {
-    console.log('Enable Edit Friends');
-  };
   setActiveSort = (activeSort) => {
     this.setState({ activeSort });
+  };
+  toggleEditFriends = () => {
+    !!this.state.canEditFriends ? this.setState({ canEditFriends: false }) : this.setState({ canEditFriends: true });
+  };
+  handleDeleteFriend = (e) => {
+    console.log(e.target.dataset);
+    const _id = e.target.dataset.friendId;
+    console.log('handleDeleteFriend-Id: ', _id);
   };
   componentWillReceiveProps (nextProps) {
     if (nextProps.friends !== this.props.friends) {
@@ -42,11 +48,13 @@ class MainFriendList extends React.Component {
     }
   };
   render () {
+    const { canEditFriends } = this.state;
+    const isReadOnly = !!canEditFriends ? '' : 'readonly';
     return (
       <div className="friends-list">
         <h2 className="friends-list__title">Friends List</h2>
         <div className="friends-list__edit-friends-container">
-          <button className="button button--modify-friends" onClick={this.enableEditFriends}>Edit Friends</button>
+          <button className="button button--modify-friends" onClick={this.toggleEditFriends}>Edit Friends</button>
         </div>
         <table className="friends-list__table">
           <thead>
@@ -80,9 +88,9 @@ class MainFriendList extends React.Component {
               const formattedCountry = friend.location.country ? `${friend.location.country}` : '';
               return (
                 <tr key={friend._id} className="friends-list__row">
-                  <td className="friends-list__name"><input readOnly className="friends-list__input readonly" value={friend.name} /></td>
-                  <td className="friends-list__relationship"><input readOnly className="friends-list__input readonly" value={capitalize(friend.relationship)} /></td>
-                  <td className="friends-list__location"><input readOnly className="friends-list__input readonly" value={`${formattedCity}${formattedRegion}${formattedCountry}`} /></td>
+                  <td className="friends-list__name"><input {...isReadOnly} className={`friends-list__input ${isReadOnly}`} value={friend.name} /></td>
+                  <td className="friends-list__relationship"><input {...isReadOnly} className={`friends-list__input ${isReadOnly}`} value={capitalize(friend.relationship)} /></td>
+                  <td className="friends-list__location"><input {...isReadOnly} className={`friends-list__input ${isReadOnly}`} value={`${formattedCity}${formattedRegion}${formattedCountry}`} /></td>
                   <td className="friends-list__ranking">
                     <StarRatingComponent
                       name="output-friend-ranking"
@@ -91,6 +99,7 @@ class MainFriendList extends React.Component {
                       renderStarIcon={() => <i className="far fa-star"></i>}
                       className="manually-add-friend__dv-star-rating"
                     />
+                    {!!canEditFriends && <div className={`friends-list__delete`} data-friend-id={friend._id} onClick={this.handleDeleteFriend}><i data-friend-id={friend._id} className="fas fa-times-circle"></i></div>}
                   </td>
                 </tr>
               );
