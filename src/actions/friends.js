@@ -46,13 +46,36 @@ export const startDeleteFriend = (_id) => {
     const jwtToken = getJwtToken();
     const config = {
       headers: {
+        'Content-Type': 'application/json',
         'x-auth': jwtToken
       }
     };
     try {
       const response = await axios.delete(`/api/friend/${_id}`, config);
-      console.log('deleteFriendResponse', response);
-      return dispatch(deleteFriend(_id));
+      return dispatch(deleteFriend(response.data._id));
+    } catch (e) {
+      console.log('Error!', e);
+    }
+  }
+};
+
+export const editFriends = (edittedFriends) => ({
+  type: 'EDIT_FRIENDS',
+  edittedFriends
+});
+
+export const startEditFriends = (edittedFriends) => {
+  return async (dispatch, getState) => {
+    const jwtToken = getJwtToken();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth': jwtToken
+      }
+    };
+    try {
+      const response = await axios.patch(`/api/friend`, edittedFriends, config);
+      return dispatch(editFriends(response.data));
     } catch (e) {
       console.log('Error!', e);
     }

@@ -57,18 +57,19 @@ app.delete('/api/friend/:_id', authenticate, async (req, res) => {
       _id,
       _creator: req.user._id
     });
+
     if (!deletedFriend) {
       res.status(404).send();
     }
 
-    res.send({ deletedFriend });
+    res.send(deletedFriend);
   } catch (e) {
     res.status(400).send(e);
   }
 });
 
 // Edit Friend
-app.patch('/api/friend/:_id', authenticate, async (req, res) => {
+app.patch('/api/friend', authenticate, async (req, res) => {
   const _id = req.params._id;
   const body = _.pick(req.body, ['name', 'relationship', 'ranking', 'location']);
 
@@ -86,7 +87,7 @@ app.patch('/api/friend/:_id', authenticate, async (req, res) => {
       return res.status(404).send();
     }
 
-    res.send({ editedFriend });
+    res.send(editedFriend);
   } catch (e) {
     res.status(400).send();
   }
