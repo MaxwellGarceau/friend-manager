@@ -21,9 +21,6 @@ class FriendRow extends React.Component {
   handleEditFriend = (e) => {
     console.log('Handle Edit Friend');
   };
-  handleCancelEditFriend = (_id) => {
-    console.log('Cancel Handle Edit Friend');
-  };
   render (props) {
     const { friend, canEditFriends } = this.props;
     const isReadOnly = !!canEditFriends ? '' : 'readonly';
@@ -43,7 +40,7 @@ class FriendRow extends React.Component {
             renderStarIcon={() => <i className="far fa-star"></i>}
             className="manually-add-friend__dv-star-rating"
           />
-          {!!canEditFriends && <ModifyFriendIcons friend={this.state.friend} handleCancelEditFriend={this.handleCancelEditFriend} />}
+          {!!canEditFriends && <ModifyFriendIcons friend={this.state.friend} />}
         </td>
       </tr>
     );

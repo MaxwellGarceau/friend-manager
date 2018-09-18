@@ -1,11 +1,20 @@
 import React from 'react';
+import { cloneDeep } from 'lodash-es';
 
 import { connect } from 'react-redux';
 import { startCanEditFriend } from '../../actions/friends';
 
+// import { findFriendById } from '../../selectors/friends';
+
 class ModifyFriendIcons extends React.Component {
-  state = {
-    canEditFriendRow: false
+  constructor (props) {
+    super(props);
+    const initialFriendState = cloneDeep(this.props.currentFriend);
+
+    this.state = {
+      canEditFriendRow: false,
+      initialFriendState
+    }
   }
   handleCancelEditFriend = (e) => {
     const _id = e.target.dataset.friendId;
@@ -42,5 +51,9 @@ class ModifyFriendIcons extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   startCanEditFriend: (_id) => dispatch(startCanEditFriend(_id))
 });
+
+// const mapStateToProps = (state, ownProps) => ({
+//   currentFriend: findFriendById(state.friends, ownProps.friend)
+// });
 
 export default connect(undefined, mapDispatchToProps)(ModifyFriendIcons);

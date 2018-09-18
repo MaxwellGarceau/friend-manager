@@ -2,21 +2,28 @@ import React from 'react';
 
 import { startCase } from 'lodash-es';
 import StarRatingComponent from 'react-star-rating-component';
+import ModifyFriendIcons from './ModifyFriendIcons';
 
 import LocationPicker from '../filter-sorting/LocationPicker';
 
 class ManuallyAddFriend extends React.Component {
-  state = {
-    relationshipOptions: ['friend', 'family', 'acquaintance'],
-    ranking: this.props.ranking ? this.props.ranking : 5,
-    name: this.props.name ? this.props.name : '',
-    relationship: this.props.relationship ? this.props.relationship : 'friend',
-    location: this.props.location ? this.props.location : {
-      country: '',
-      region: '',
-      city: ''
-    }
-  };
+  constructor (props) {
+    super(props);
+    const { friend } = props;
+
+    this.state = {
+      relationshipOptions: ['friend', 'family', 'acquaintance'],
+      ranking: friend ? friend.ranking : 5,
+      name: friend ? friend.name : '',
+      relationship: friend ? friend.relationship : 'friend',
+      location: friend ? friend.location : {
+        country: '',
+        region: '',
+        city: ''
+      }
+    };
+  }
+
   onStarClick = (nextValue, prevValue, name) => {
     this.setState({ ranking: nextValue });
   };
@@ -47,6 +54,7 @@ class ManuallyAddFriend extends React.Component {
     this.props.handleOnSubmit(newFriend);
   };
   render () {
+    const { friend } = this.props;
     return (
       <React.Fragment>
         <tr className="manually-add-friend">
@@ -70,9 +78,10 @@ class ManuallyAddFriend extends React.Component {
               renderStarIcon={() => <i className="far fa-star"></i>}
               className="manually-add-friend__dv-star-rating"
             />
+            {!!friend && friend.canEditFriend && <ModifyFriendIcons friend={this.props.friend} />}
           </td>
         </tr>
-        <tr><td><button type="button" onClick={this.onSubmit}>Add Friend</button></td></tr>
+        {!friend && <tr><td><button type="button" onClick={this.onSubmit}>Add Friend</button></td></tr>}
       </React.Fragment>
     );
   }
