@@ -4,27 +4,26 @@ import { cloneDeep } from 'lodash-es';
 import { connect } from 'react-redux';
 import { startCanEditFriend } from '../../actions/friends';
 
-// import { findFriendById } from '../../selectors/friends';
-
 class ModifyFriendIcons extends React.Component {
   constructor (props) {
     super(props);
-    const initialFriendState = cloneDeep(this.props.currentFriend);
 
     this.state = {
-      canEditFriendRow: false,
-      initialFriendState
+      canEditFriendRow: this.props.canEditFriendRow ? this.props.canEditFriendRow : false
     }
   }
   handleCancelEditFriend = (e) => {
     const _id = e.target.dataset.friendId;
-    this.props.handleCancelEditFriend(_id);
+    // MAYBE use _id of friend being edited and call an action in redux to make the selectred friend unEditable.
+    // If that destroys the ManuallyAddFriend componenet for the friend being edited then this would be the best solution
+    this.props.handleCancelEditFriend();
+    // Might not need this line if I reset the redux property of the friend being edited to canEditFriend: false
     !!this.state.canEditFriendRow ? this.setState({ canEditFriendRow: false }) : this.setState({ canEditFriendRow: true });
   };
   handleEditFriend = (e) => {
     const _id = e.target.dataset.friendId;
     if (!!this.state.canEditFriendRow) {
-      this.setState({ canEditFriendRow: false }, () => this.props.handleEditFriend(_id));
+      this.setState({ canEditFriendRow: false }, () => this.props.onSubmit());
     } else {
       this.setState({ canEditFriendRow: true }, () => this.props.startCanEditFriend(_id));
     }

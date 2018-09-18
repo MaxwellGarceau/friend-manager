@@ -53,6 +53,11 @@ class ManuallyAddFriend extends React.Component {
 
     this.props.handleOnSubmit(newFriend);
   };
+  handleCancelEditFriend = () => {
+    // Get the _id of the friend being edited from this.friend.prop
+    // Reset friend data to what it was before editing started.
+    console.log('handleCancelEditFriend called');
+  };
   render () {
     const { friend } = this.props;
     return (
@@ -78,7 +83,7 @@ class ManuallyAddFriend extends React.Component {
               renderStarIcon={() => <i className="far fa-star"></i>}
               className="manually-add-friend__dv-star-rating"
             />
-            {!!friend && friend.canEditFriend && <ModifyFriendIcons friend={this.props.friend} />}
+            {!!friend && friend.canEditFriend && <ModifyFriendIcons friend={this.props.friend} canEditFriendRow={true} onSubmit={this.props.onSubmit} />}
           </td>
         </tr>
         {!friend && <tr><td><button type="button" onClick={this.onSubmit}>Add Friend</button></td></tr>}

@@ -57,7 +57,6 @@ class MainFriendList extends React.Component {
         <h2 className="friends-list__title">Friends List</h2>
         <div className="friends-list__edit-friends-container">
           <button className="button button--modify-friends" onClick={this.toggleEditFriends}>{toggleEditFriendsButtonText}</button>
-          {/* {!!canEditFriends && <button className="button button--modify-friends" onClick={this.handleEditFriends}>Save Friends</button>} */}
         </div>
         <table className="friends-list__table">
           <thead>
@@ -86,13 +85,11 @@ class MainFriendList extends React.Component {
           </thead>
           <tbody>
             {this.state.friends.map((friend) => {
-              // UNCOMMENT ONCE canEditFriend PROPERTY IS SET UP IN REDUX
               if (!!friend.canEditFriend) {
                 return <ManuallyAddFriend friend={friend} handleOnSubmit={this.handleStartEditFriend} />;
               } else {
                 return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
               }
-              // return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
             })}
             <ManuallyAddFriend handleOnSubmit={this.handleStartAddFriend} />
           </tbody>

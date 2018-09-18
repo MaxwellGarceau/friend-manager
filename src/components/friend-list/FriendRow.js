@@ -18,9 +18,6 @@ class FriendRow extends React.Component {
     const update = e.target.value;
     this.setState({ [friendUpdate]: update });
   }
-  handleEditFriend = (e) => {
-    console.log('Handle Edit Friend');
-  };
   render (props) {
     const { friend, canEditFriends } = this.props;
     const isReadOnly = !!canEditFriends ? '' : 'readonly';
