@@ -36,7 +36,7 @@ class MainFriendList extends React.Component {
   };
   handleStartAddFriend = (newFriend) => {
     this.props.startAddFriend(newFriend);
-  }
+  };
   toggleEditFriends = () => {
     !!this.state.canEditFriends ? this.setState({ canEditFriends: false }) : this.setState({ canEditFriends: true });
   };
@@ -86,11 +86,13 @@ class MainFriendList extends React.Component {
           </thead>
           <tbody>
             {this.state.friends.map((friend) => {
-              if (this.state.editingFriends) {
-                return <ManuallyAddFriend friend={friend} handleOnSubmit={this.handleStartEditFriend} />;
-              } else {
-                return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
-              }
+              // // UNCOMMENT ONCE canEditFriend PROPERTY IS SET UP IN REDUX
+              // if (!!friend.canEditFriend) {
+              //   return <ManuallyAddFriend friend={friend} handleOnSubmit={this.handleStartEditFriend} />;
+              // } else {
+              //   return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
+              // }
+              return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
             })}
             <ManuallyAddFriend handleOnSubmit={this.handleStartAddFriend} />
           </tbody>

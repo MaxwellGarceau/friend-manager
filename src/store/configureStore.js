@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore, persistReducer, createTransform } from 'redux-persist';
+import { omit } from 'lodash/omit';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import authReducer from '../reducers/auth';
@@ -7,6 +8,19 @@ import filterReducer from '../reducers/filters';
 import friendsReducer from '../reducers/friends';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+let blacklistTransform = createTransform(
+  (inboundState, key) => {
+    if (key !== 'friends') return inboundState
+    else {
+      const filteredInboundState = inboundState.map((friend) => ({
+        ...friend,
+        canEditFriend: false
+      }));
+      return filteredInboundState;
+    }
+  }
+);
 
 const appReducer = combineReducers({
   auth: authReducer,
@@ -23,14 +37,15 @@ const rootReducer = (state, action) => {
   }
 
   return appReducer(state, action);
-}
-
-const persistConfig = {
-  key: 'root',
-  storage
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const rootPersistConfig = {
+  key: 'root',
+  storage,
+  transforms: [blacklistTransform]
+};
+
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 export default () => {
   let store = createStore(

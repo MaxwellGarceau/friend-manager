@@ -98,7 +98,12 @@ export const startPopulateFriendList = () => {
         }
       };
       const response = await axios.get('/api/friend', config);
-      return dispatch(populateFriendList(response.data));
+      const friendsList = response.data.map((friend) => ({
+        ...friend,
+        canEditFriend: false
+      }));
+
+      return dispatch(populateFriendList(friendsList));
     } catch (e) {
       console.log('Error!', e);
     }
