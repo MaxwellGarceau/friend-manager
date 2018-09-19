@@ -40,8 +40,11 @@ class ManuallyAddFriend extends React.Component {
     let { name, relationship, location, ranking } = this.state;
     location = {
       city: '',
+      cityId: '',
       region: '',
+      regionId: '',
       country: '',
+      countryId: '',
       ...location
     };
     const newFriend = {

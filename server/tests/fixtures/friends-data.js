@@ -1,4 +1,5 @@
 const { ObjectID } = require('mongodb');
+// ADD COUNTRY, REGION, AND CITY ID'S
 const friends = [{
   name: 'Rafael',
   relationship: 'friend',

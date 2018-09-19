@@ -62,6 +62,11 @@ class LocationPicker extends React.Component {
       }
     });
   };
+  handleLocationCountry = async () => {
+    const response = await axios.get('http://api.geonames.org/countryInfoJSON?username=maxgarceau');
+    const allCountries = response.data.geonames;
+    this.setState({ allCountries });
+  };
   handleLocationRegion = async () => {
     const geonameId = this.state.location.countryId;
     const response = await axios.get(`http://api.geonames.org/childrenJSON?username=maxgarceau&geonameId=${geonameId}`);
@@ -76,7 +81,11 @@ class LocationPicker extends React.Component {
   };
   componentWillReceiveProps (nextProps) {
     if (nextProps.location !== this.props.location) {
-      this.setState({ location: nextProps.location });
+      this.setState({ location: nextProps.location }, () => {
+        this.handleLocationCountry();
+        this.handleLocationRegion();
+        this.handleLocationCity();
+      });
     }
   };
   render () {

@@ -1,5 +1,4 @@
 import React from 'react';
-// import _ from 'lodash';
 import { capitalize } from 'lodash-es';
 
 const LocationDropdown = (props) => {

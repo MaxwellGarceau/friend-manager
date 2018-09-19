@@ -16,11 +16,23 @@ const FriendSchema = new mongoose.Schema({
       type: String,
       require: false
     },
+    countryId: {
+      type: String,
+      require: false
+    },
     region: {
       type: String,
       require: false
     },
+    regionId: {
+      type: String,
+      require: false
+    },
     city: {
+      type: String,
+      require: false
+    },
+    cityId: {
       type: String,
       require: false
     }
