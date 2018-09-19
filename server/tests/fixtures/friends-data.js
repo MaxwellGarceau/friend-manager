@@ -7,7 +7,9 @@ const friends = [{
     country: 'United States',
     countryId: '6252001',
     region: 'Tennessee',
-    city: 'Nashville'
+    regionId: 'TN',
+    city: 'Nashville',
+    cityId: 'TN'
   },
   ranking: 5,
   _id: ObjectID('5b9d38a38fbeaf13bc4a2e88'),
@@ -19,7 +21,9 @@ const friends = [{
     country: 'United States',
     countryId: '6252001',
     region: 'Tennessee',
-    city: 'Nashville'
+    regionId: 'TN',
+    city: 'Nashville',
+    cityId: 'TN'
   },
   ranking: 5,
   _id: ObjectID('5b9d38a38fbeaf13bc4a2e89'),
@@ -31,7 +35,9 @@ const friends = [{
     country: 'United States',
     countryId: '6252001',
     region: 'Tennessee',
-    city: 'Nashville'
+    regionId: 'TN',
+    city: 'Nashville',
+    cityId: 'TN'
   },
   ranking: 5,
   _id: ObjectID('5b9d38a38fbeaf13bc4a2e8a'),
@@ -43,7 +49,9 @@ const friends = [{
     country: 'United States',
     countryId: '6252001',
     region: 'Alabama',
-    city: 'Huntsville'
+    regionId: 'AL',
+    city: 'Huntsville',
+    cityId: 'AL'
   },
   ranking: 5,
   _id: ObjectID('5b9d38a38fbeaf13bc4a2e8b'),
@@ -55,7 +63,9 @@ const friends = [{
     country: 'United States',
     countryId: '6252001',
     region: 'Texas',
-    city: 'El Paso'
+    regionId: 'TX',
+    city: 'El Paso',
+    cityId: 'TX'
   },
   ranking: 3,
   _id: ObjectID('5b9d38a38fbeaf13bc4a2e8c'),
@@ -67,7 +77,9 @@ const friends = [{
     country: 'United States',
     countryId: '6252001',
     region: 'Alabama',
-    city: 'Birmingham'
+    regionId: 'AL',
+    city: 'Birmingham',
+    cityId: 'AL'
   },
   ranking: 1,
   _id: ObjectID('5b9d38a38fbeaf13bc4a2e8d'),
@@ -79,7 +91,9 @@ const friends = [{
     country: 'United States',
     countryId: '6252001',
     region: 'Nevada',
-    city: 'Las Vegas'
+    regionId: 'NV',
+    city: 'Las Vegas',
+    cityId: 'NV'
   },
   ranking: 5,
   _id: ObjectID('5b9d38a38fbeaf13bc4a2e8e'),
