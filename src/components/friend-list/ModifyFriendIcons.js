@@ -15,7 +15,7 @@ class ModifyFriendIcons extends React.Component {
   handleCancelEditFriend = (e) => {
     const _id = e.target.dataset.friendId;
     // MAYBE use _id of friend being edited and call an action in redux to make the selectred friend unEditable.
-    // If that destroys the ManuallyAddFriend componenet for the friend being edited then this would be the best solution
+    // If that destroys the EditFriendRow componenet for the friend being edited then this would be the best solution
     this.props.handleCancelEditFriend();
     // Might not need this line if I reset the redux property of the friend being edited to canEditFriend: false
     !!this.state.canEditFriendRow ? this.setState({ canEditFriendRow: false }) : this.setState({ canEditFriendRow: true });

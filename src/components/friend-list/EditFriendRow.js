@@ -6,7 +6,7 @@ import ModifyFriendIcons from './ModifyFriendIcons';
 
 import LocationPicker from '../filter-sorting/LocationPicker';
 
-class ManuallyAddFriend extends React.Component {
+class EditFriendRow extends React.Component {
   constructor (props) {
     super(props);
     const { friend } = props;
@@ -95,4 +95,4 @@ class ManuallyAddFriend extends React.Component {
   }
 }
 
-export default ManuallyAddFriend;
+export default EditFriendRow;

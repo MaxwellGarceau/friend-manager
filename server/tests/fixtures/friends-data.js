@@ -5,6 +5,7 @@ const friends = [{
   relationship: 'friend',
   location: {
     country: 'United States',
+    countryId: '6252001',
     region: 'Tennessee',
     city: 'Nashville'
   },
@@ -16,6 +17,7 @@ const friends = [{
   relationship: 'friend',
   location: {
     country: 'United States',
+    countryId: '6252001',
     region: 'Tennessee',
     city: 'Nashville'
   },
@@ -27,6 +29,7 @@ const friends = [{
   relationship: 'friend',
   location: {
     country: 'United States',
+    countryId: '6252001',
     region: 'Tennessee',
     city: 'Nashville'
   },
@@ -38,6 +41,7 @@ const friends = [{
   relationship: 'friend',
   location: {
     country: 'United States',
+    countryId: '6252001',
     region: 'Alabama',
     city: 'Huntsville'
   },
@@ -49,6 +53,7 @@ const friends = [{
   relationship: 'acquaintance',
   location: {
     country: 'United States',
+    countryId: '6252001',
     region: 'Texas',
     city: 'El Paso'
   },
@@ -60,6 +65,7 @@ const friends = [{
   relationship: 'acquaintance',
   location: {
     country: 'United States',
+    countryId: '6252001',
     region: 'Alabama',
     city: 'Birmingham'
   },
@@ -71,6 +77,7 @@ const friends = [{
   relationship: 'family',
   location: {
     country: 'United States',
+    countryId: '6252001',
     region: 'Nevada',
     city: 'Las Vegas'
   },

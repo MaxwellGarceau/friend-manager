@@ -5,7 +5,7 @@ import { startAddFriend, startEditFriend } from '../../actions/friends';
 import { friendsListMasterFilter } from '../../selectors/friend-list-filters';
 
 import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
-import ManuallyAddFriend from './ManuallyAddFriend';
+import EditFriendRow from './EditFriendRow';
 import FriendRow from './FriendRow';
 import { sortAlphabetically, sortNumerically, sortByLocation } from '../../utils/sorting-logic/main-friend-list-sorting';
 
@@ -86,12 +86,12 @@ class MainFriendList extends React.Component {
           <tbody>
             {this.state.friends.map((friend) => {
               if (!!friend.canEditFriend) {
-                return <ManuallyAddFriend friend={friend} handleOnSubmit={this.handleStartEditFriend} />;
+                return <EditFriendRow friend={friend} handleOnSubmit={this.handleStartEditFriend} />;
               } else {
                 return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
               }
             })}
-            <ManuallyAddFriend handleOnSubmit={this.handleStartAddFriend} />
+            <EditFriendRow handleOnSubmit={this.handleStartAddFriend} />
           </tbody>
         </table>
       </div>
