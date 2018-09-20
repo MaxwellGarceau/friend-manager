@@ -7,6 +7,13 @@
     justify-content: center;
     width: 100vw;
   }
+  &--mandatory-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0, 0.3);
+    z-index: 99999;
+  }
   &--auth-page {
     // background: url('/images/bg.jpg');
     background: url('/images/stick-figure-holding-one.jpg');
@@ -15,7 +22,6 @@
 }
 
 .box-layout__box {
-  // background: fade-out($pure-white, .15);
   background: $off-white;
   border-radius: 3px;
   padding: $l-size $m-size;
