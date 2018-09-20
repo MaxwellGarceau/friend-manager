@@ -57,11 +57,6 @@ class EditFriendRow extends React.Component {
 
     this.props.handleOnSubmit(friend);
   };
-  handleCancelEditFriend = () => {
-    // Get the _id of the friend being edited from this.friend.prop
-    // Reset friend data to what it was before editing started.
-    console.log('handleCancelEditFriend called');
-  };
   render () {
     const { friend } = this.props;
     return (

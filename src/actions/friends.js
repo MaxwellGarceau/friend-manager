@@ -84,6 +84,21 @@ export const startEditFriend = (editedFriend) => {
   }
 };
 
+export const cancelEditFriend = (_id) => ({
+  type: 'CANCEL_EDIT_FRIEND',
+  _id
+});
+
+export const startCancelEditFriend = (_id) => {
+  return (dispatch, getState) => {
+    try {
+      return dispatch(cancelEditFriend(_id));
+    } catch (e) {
+      console.log('Error!', e);
+    }
+  }
+};
+
 export const cancelEditFriends = () => ({
   type: 'CANCEL_EDIT_FRIENDS'
 });
