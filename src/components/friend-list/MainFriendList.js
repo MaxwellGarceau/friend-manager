@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { startAddFriend, startEditFriend } from '../../actions/friends';
+import { startAddFriend, startEditFriend, startCancelEditFriends } from '../../actions/friends';
 import { friendsListMasterFilter } from '../../selectors/friend-list-filters';
 
 import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
@@ -41,7 +41,7 @@ class MainFriendList extends React.Component {
     this.props.startEditFriend(editedFriend);
   };
   toggleEditFriends = () => {
-    !!this.state.canEditFriends ? this.setState({ canEditFriends: false }) : this.setState({ canEditFriends: true });
+    !!this.state.canEditFriends ? this.setState({ canEditFriends: false }, () => this.props.startCancelEditFriends()) : this.setState({ canEditFriends: true });
   };
   componentWillReceiveProps (nextProps) {
     if (nextProps.friends !== this.props.friends) {
@@ -85,7 +85,7 @@ class MainFriendList extends React.Component {
           <tbody>
             {this.state.friends.map((friend) => {
               if (!!friend.canEditFriend) {
-                return <EditFriendRow friend={friend} handleOnSubmit={this.handleStartEditFriend} />;
+                return <EditFriendRow friend={friend} canEditFriends={canEditFriends} handleOnSubmit={this.handleStartEditFriend} />;
               } else {
                 return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
               }
@@ -105,7 +105,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   startEditFriend: (editedFriend) => dispatch(startEditFriend(editedFriend)),
-  startAddFriend: (newFriend) => dispatch(startAddFriend(newFriend))
+  startAddFriend: (newFriend) => dispatch(startAddFriend(newFriend)),
+  startCancelEditFriends: () => dispatch(startCancelEditFriends())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainFriendList);

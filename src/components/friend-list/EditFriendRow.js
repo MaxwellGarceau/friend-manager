@@ -87,7 +87,7 @@ class EditFriendRow extends React.Component {
               renderStarIcon={() => <i className="far fa-star"></i>}
               className="manually-add-friend__dv-star-rating"
             />
-            {!!friend && friend.canEditFriend && <ModifyFriendIcons friend={this.props.friend} canEditFriendRow={true} onSubmit={this.onSubmit} />}
+            {!!friend && friend.canEditFriend && this.props.canEditFriends && <ModifyFriendIcons friend={this.props.friend} canEditFriendRow={true} onSubmit={this.onSubmit} />}
           </td>
         </tr>
         {!friend && <tr><td><button type="button" onClick={this.onSubmit}>Add Friend</button></td></tr>}

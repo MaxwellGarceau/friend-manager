@@ -23,8 +23,6 @@ class ModifyFriendIcons extends React.Component {
   handleEditFriend = (e) => {
     const _id = e.target.dataset.friendId;
     if (!!this.state.canEditFriendRow) {
-      // this.setState({ canEditFriendRow: false });
-      console.log('id', _id);
       this.props.onSubmit(_id);
     } else {
       this.setState({ canEditFriendRow: true }, () => this.props.startCanEditFriend(_id));
@@ -52,9 +50,5 @@ class ModifyFriendIcons extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   startCanEditFriend: (_id) => dispatch(startCanEditFriend(_id))
 });
-
-// const mapStateToProps = (state, ownProps) => ({
-//   currentFriend: findFriendById(state.friends, ownProps.friend)
-// });
 
 export default connect(undefined, mapDispatchToProps)(ModifyFriendIcons);

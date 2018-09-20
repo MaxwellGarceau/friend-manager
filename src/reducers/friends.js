@@ -9,14 +9,6 @@ export default (state = [], action) => {
     case 'EDIT_FRIEND':
       const filteredState = state.filter((friend) => friend._id !== action._id);
       return [...filteredState, action.editedFriend];
-      // return state.map((oldFriend) => {
-      //   if (oldFriend._id === action.edittedFriend._id) {
-      //     return {
-      //       ...oldFriend,
-      //       ...action.edittedFriend
-      //     }
-      //   } else return oldFriend;
-      // });
     case 'CAN_EDIT_FRIEND':
       return state.map((friend) => {
         if (friend._id === action._id) {
@@ -26,12 +18,20 @@ export default (state = [], action) => {
           }
         } else return friend;
       });
-    // case 'EDIT_FRIENDS':
-    //   const newFriends = action.edittedFriends;
-    //   const oldFriends = state.filter((oldFriend) => {
-    //     return newFriends.filter((newFriend) => oldFriend._id !== newFriend._id);
-    //   });
-    //   return [...oldFriends, ...newFriends];
+    case 'CANCEL_EDIT_FRIEND':
+      return state.map((friend) => {
+        if (friend._id === action._id) {
+          return {
+            ...friend,
+            canEditFriend: false
+          }
+        } else return friend;
+      });
+    case 'CANCEL_EDIT_FRIENDS':
+      return state.map((friend) => ({
+        ...friend,
+        canEditFriend: false
+      }));
     default:
       return state;
   }

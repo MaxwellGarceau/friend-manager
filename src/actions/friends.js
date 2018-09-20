@@ -84,6 +84,20 @@ export const startEditFriend = (editedFriend) => {
   }
 };
 
+export const cancelEditFriends = () => ({
+  type: 'CANCEL_EDIT_FRIENDS'
+});
+
+export const startCancelEditFriends = () => {
+  return (dispatch, getState) => {
+    try {
+      return dispatch(cancelEditFriends());
+    } catch (e) {
+      console.log('Error!', e);
+    }
+  }
+};
+
 export const populateFriendList = (friendList) => ({
   type: 'POPULATE_FRIEND_LIST',
   friendList

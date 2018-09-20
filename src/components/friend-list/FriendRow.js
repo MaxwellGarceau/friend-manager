@@ -26,9 +26,9 @@ class FriendRow extends React.Component {
     const formattedCountry = friend.location.country ? `${friend.location.country}` : '';
     return (
       <tr key={friend._id} className="friends-list__row">
-        <td className="friends-list__name"><input {...isReadOnly} className={`friends-list__input ${isReadOnly}`} value={friend.name} /></td>
-        <td className="friends-list__relationship"><input {...isReadOnly} className={`friends-list__input ${isReadOnly}`} value={capitalize(friend.relationship)} /></td>
-        <td className="friends-list__location"><input {...isReadOnly} className={`friends-list__input ${isReadOnly}`} value={`${formattedCity}${formattedRegion}${formattedCountry}`} /></td>
+        <td className="friends-list__name">{friend.name}</td>
+        <td className="friends-list__relationship">{capitalize(friend.relationship)}</td>
+        <td className="friends-list__location">{`${formattedCity}${formattedRegion}${formattedCountry}`}</td>
         <td className="friends-list__ranking">
           <StarRatingComponent
             name="output-friend-ranking"
