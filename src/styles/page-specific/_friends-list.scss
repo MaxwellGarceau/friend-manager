@@ -83,11 +83,20 @@
     display: inline-block;
     margin-left: $xs-size;
   }
+  &__delete svg {
+    pointer-events: none;
+  }
   &__edit {
     @extend .friends-list__delete;
   }
+  &__edit svg {
+    pointer-events: none;
+  }
   &__cancel-edit {
     @extend .friends-list__delete;
+  }
+  &__cancel-edit svg {
+    pointer-events: none;
   }
 }
 

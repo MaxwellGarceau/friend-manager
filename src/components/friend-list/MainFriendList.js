@@ -85,9 +85,9 @@ class MainFriendList extends React.Component {
           <tbody>
             {this.state.friends.map((friend) => {
               if (!!friend.canEditFriend) {
-                return <EditFriendRow friend={friend} canEditFriends={canEditFriends} handleOnSubmit={this.handleStartEditFriend} />;
+                return <EditFriendRow key={friend._id} friend={friend} canEditFriends={canEditFriends} handleOnSubmit={this.handleStartEditFriend} />;
               } else {
-                return <FriendRow friend={friend} canEditFriends={canEditFriends} />;
+                return <FriendRow key={friend._id} friend={friend} canEditFriends={canEditFriends} />;
               }
             })}
             <EditFriendRow handleOnSubmit={this.handleStartAddFriend} />
