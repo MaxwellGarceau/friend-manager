@@ -59,12 +59,13 @@ export const startDeleteFriend = (_id) => {
   }
 };
 
-export const editFriend = (edittedFriend) => ({
+export const editFriend = (editedFriend, _id) => ({
   type: 'EDIT_FRIEND',
-  edittedFriend
+  editedFriend,
+  _id
 });
 
-export const startEditFriend = (edittedFriend) => {
+export const startEditFriend = (editedFriend) => {
   return async (dispatch, getState) => {
     const jwtToken = getJwtToken();
     const config = {
@@ -73,9 +74,10 @@ export const startEditFriend = (edittedFriend) => {
         'x-auth': jwtToken
       }
     };
+    const _id = editedFriend._id;
     try {
-      const response = await axios.patch(`/api/friend`, edittedFriend, config);
-      return dispatch(editFriend(response.data));
+      const response = await axios.patch(`/api/friend/${_id}`, editedFriend, config);
+      return dispatch(editFriend(response.data, response.data._id));
     } catch (e) {
       console.log('Error!', e);
     }

@@ -23,7 +23,9 @@ class ModifyFriendIcons extends React.Component {
   handleEditFriend = (e) => {
     const _id = e.target.dataset.friendId;
     if (!!this.state.canEditFriendRow) {
-      this.setState({ canEditFriendRow: false }, () => this.props.onSubmit());
+      // this.setState({ canEditFriendRow: false });
+      console.log('id', _id);
+      this.props.onSubmit(_id);
     } else {
       this.setState({ canEditFriendRow: true }, () => this.props.startCanEditFriend(_id));
     }

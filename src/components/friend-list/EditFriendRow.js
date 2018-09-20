@@ -36,7 +36,7 @@ class EditFriendRow extends React.Component {
     this.setState({ relationship });
   };
   setLocationState = (location) => this.setState({ location });
-  onSubmit = () => {
+  onSubmit = (_id = undefined) => {
     let { name, relationship, location, ranking } = this.state;
     location = {
       city: '',
@@ -47,14 +47,15 @@ class EditFriendRow extends React.Component {
       countryId: '',
       ...location
     };
-    const newFriend = {
+    const friend = {
       name,
       relationship,
       location,
-      ranking
+      ranking,
+      _id
     };
 
-    this.props.handleOnSubmit(newFriend);
+    this.props.handleOnSubmit(friend);
   };
   handleCancelEditFriend = () => {
     // Get the _id of the friend being edited from this.friend.prop
@@ -86,7 +87,7 @@ class EditFriendRow extends React.Component {
               renderStarIcon={() => <i className="far fa-star"></i>}
               className="manually-add-friend__dv-star-rating"
             />
-            {!!friend && friend.canEditFriend && <ModifyFriendIcons friend={this.props.friend} canEditFriendRow={true} onSubmit={this.props.onSubmit} />}
+            {!!friend && friend.canEditFriend && <ModifyFriendIcons friend={this.props.friend} canEditFriendRow={true} onSubmit={this.onSubmit} />}
           </td>
         </tr>
         {!friend && <tr><td><button type="button" onClick={this.onSubmit}>Add Friend</button></td></tr>}

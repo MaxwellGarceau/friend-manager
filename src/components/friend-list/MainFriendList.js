@@ -37,12 +37,11 @@ class MainFriendList extends React.Component {
   handleStartAddFriend = (newFriend) => {
     this.props.startAddFriend(newFriend);
   };
+  handleStartEditFriend = (editedFriend) => {
+    this.props.startEditFriend(editedFriend);
+  };
   toggleEditFriends = () => {
     !!this.state.canEditFriends ? this.setState({ canEditFriends: false }) : this.setState({ canEditFriends: true });
-  };
-  handleStartEditFriend = () => {
-    console.log('handle Edit Friends');
-    this.props.startEditFriend();
   };
   componentWillReceiveProps (nextProps) {
     if (nextProps.friends !== this.props.friends) {
@@ -105,7 +104,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  startEditFriend: (friend) => dispatch(startEditFriend(friend)),
+  startEditFriend: (editedFriend) => dispatch(startEditFriend(editedFriend)),
   startAddFriend: (newFriend) => dispatch(startAddFriend(newFriend))
 });
 

@@ -7,14 +7,16 @@ export default (state = [], action) => {
     case 'DELETE_FRIEND':
       return state.filter((friend) => friend._id !== action._id);
     case 'EDIT_FRIEND':
-      return state.map((oldFriend) => {
-        if (oldFriend._id === action.edittedFriend._id) {
-          return {
-            ...oldFriend,
-            ...action.edittedFriend
-          }
-        } else return oldFriend;
-      });
+      const filteredState = state.filter((friend) => friend._id !== action._id);
+      return [...filteredState, action.editedFriend];
+      // return state.map((oldFriend) => {
+      //   if (oldFriend._id === action.edittedFriend._id) {
+      //     return {
+      //       ...oldFriend,
+      //       ...action.edittedFriend
+      //     }
+      //   } else return oldFriend;
+      // });
     case 'CAN_EDIT_FRIEND':
       return state.map((friend) => {
         if (friend._id === action._id) {
