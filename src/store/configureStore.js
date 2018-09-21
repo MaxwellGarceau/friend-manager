@@ -9,7 +9,7 @@ import friendsReducer from '../reducers/friends';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-let blacklistTransform = createTransform(
+let resetCanEditFriend = createTransform(
   (inboundState, key) => {
     if (key !== 'friends') return inboundState
     else {
@@ -42,7 +42,7 @@ const rootReducer = (state, action) => {
 const rootPersistConfig = {
   key: 'root',
   storage,
-  transforms: [blacklistTransform]
+  transforms: [resetCanEditFriend]
 };
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
