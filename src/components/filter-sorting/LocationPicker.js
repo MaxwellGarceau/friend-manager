@@ -39,9 +39,9 @@ class LocationPicker extends React.Component {
       [`${area}Id`]: selection,
       [area]: areaName
     } }), () => {
-      this.props.setLocationState(this.state.location);
       switch (area) {
         case 'city':
+          this.props.setLocationState(this.state.location);
           break;
         case 'country':
           this.handleLocationRegion();
