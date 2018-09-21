@@ -90,7 +90,7 @@ class EditFriendRow extends React.Component {
           <td align="center">
             <StarRatingComponent
               name="manually-add-friend-ranking"
-              value={this.state.rank}
+              value={this.state.ranking}
               onStarClick={this.onStarClick}
               starCount={5}
               renderStarIcon={() => <i className="far fa-star"></i>}
