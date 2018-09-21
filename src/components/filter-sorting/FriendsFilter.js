@@ -1,6 +1,5 @@
 import React from 'react';
 import InputRange from 'react-input-range';
-// import axios from 'axios';
 import { cloneDeep } from 'lodash-es';
 
 import { connect } from 'react-redux';

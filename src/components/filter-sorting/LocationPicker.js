@@ -8,7 +8,7 @@ class LocationPicker extends React.Component {
     super(props);
 
     this.state = {
-      location: this.props.initialLocationState ? this.props.initialLocationState : {
+      location: this.props.location ? this.props.location : {
         country: '',
         countryId: 'initial',
         region: '',

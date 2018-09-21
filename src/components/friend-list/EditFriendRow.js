@@ -56,6 +56,20 @@ class EditFriendRow extends React.Component {
     };
 
     this.props.handleOnSubmit(friend);
+
+    this.setState({
+      name: '',
+      relationship: 'friend',
+      location: {
+        country: '',
+        countryId: 'initial',
+        region: '',
+        regionId: '',
+        city: '',
+        cityId: ''
+      },
+      ranking: 5
+    });
   };
   render () {
     const { friend } = this.props;
@@ -71,7 +85,7 @@ class EditFriendRow extends React.Component {
             </select>
           </td>
           <td align="center">
-            <LocationPicker setLocationState={this.setLocationState} initialLocationState={this.state.location} />
+            <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />
           </td>
           <td align="center">
             <StarRatingComponent
