@@ -3,22 +3,6 @@ import capitalize from 'lodash/capitalize';
 import StarRatingComponent from 'react-star-rating-component';
 import ModifyFriendIcons from './ModifyFriendIcons';
 
-// import { connect } from 'react-redux';
-// import { startDeleteFriend } from '../../actions/friends';
-
-// class FriendRow extends React.Component {
-// state = {
-//   friend: this.props.friend
-// };
-// handleDeleteFriend = (e) => {
-//   const _id = e.target.dataset.friendId;
-//   this.props.startDeleteFriend(_id);
-// };
-// setFriendName = (e, friendUpdate) => {
-//   const update = e.target.value;
-//   this.setState({ [friendUpdate]: update });
-// }
-// render (props) {
 const FriendRow = (props) => {
   const { friend, canEditFriends } = props;
   const formattedCity = friend.location.city ? `${friend.location.city}, ` : '';
@@ -42,12 +26,5 @@ const FriendRow = (props) => {
     </tr>
   );
 }
-// }
-// }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   startDeleteFriend: (_id) => dispatch(startDeleteFriend(_id))
-// });
-
-// export default connect(undefined, mapDispatchToProps)(FriendRow);
 export default FriendRow;
