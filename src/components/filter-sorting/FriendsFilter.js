@@ -18,8 +18,11 @@ const initialState = {
   },
   location: {
     country: '',
+    countryId: 'initial',
     region: '',
-    city: ''
+    regionId: '',
+    city: '',
+    cityId: ''
   }
 };
 
@@ -63,6 +66,7 @@ class FriendsFilter extends React.Component {
         this.refs[key].checked = false;
       }
     }
+
     let cloneDeeper = cloneDeep(cloneDeepState);
     this.setState(cloneDeeper, () => {
       this.handleUpdateFilter();

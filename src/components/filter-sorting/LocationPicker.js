@@ -10,7 +10,7 @@ class LocationPicker extends React.Component {
     this.state = {
       location: this.props.initialLocationState ? this.props.initialLocationState : {
         country: '',
-        countryId: '',
+        countryId: 'initial',
         region: '',
         regionId: '',
         city: '',
@@ -95,13 +95,13 @@ class LocationPicker extends React.Component {
     const { location } = this.state;
     return (
       <div className="location-picker-container">
-        <select className="select select__location-picker" value={this.state.countryId} onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
+        <select className="select select__location-picker" value={location.countryId} onChange={(e) => this.handleLocationPickerOnChange(e, 'country')}>
           <option value={location.countryId || 'initial'}>{location.country || '*Select A Country*'}</option>
           {!!this.state.allCountries && this.state.allCountries.map((country) => {
             return <option key={country.geonameId} value={country.geonameId} data-name={country.countryName}>{country.countryName}</option>;
           })}
         </select>
-        {!!location.countryId &&
+        {!!location.countryId && location.countryId !== 'initial' &&
           <LocationDropdown
             handleLocationPickerOnChange={this.handleLocationPickerOnChange}
             locationType="region"
