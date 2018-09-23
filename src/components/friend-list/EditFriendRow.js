@@ -57,6 +57,7 @@ class EditFriendRow extends React.Component {
 
     this.props.handleOnSubmit(friend);
 
+    // Resets state after adding a friend (if editng a friend, the component is removed anyways)
     this.setState({
       name: '',
       relationship: 'friend',
