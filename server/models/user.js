@@ -99,12 +99,12 @@ UserSchema.statics.findByCredentials = function (email, password) {
 
   return User.findOne({email}).then((user) => {
     if (!user) {
-      return Promise.reject();
+      return Promise.reject("That email does not exist in our records.");
     }
 
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, user.password, (err, res) => {
-        res ? resolve(user) : reject();
+        res ? resolve(user) : reject("The password you have entered is incorrect for that user account.");
       });
     });
   });

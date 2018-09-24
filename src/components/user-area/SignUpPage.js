@@ -16,7 +16,7 @@ export class SignUpPage extends React.Component {
   onSubmit = async (userCredentials) => {
     const response = await this.props.startSignUp(userCredentials);
     if (!!response && response.name === 'Error') {
-      this.setState(() => ({ error: `Error Occured **DON'T FORGET TO PRINT MONGOOSE'S VALIDATION ERRORS HERE =))))))!!!!!!**` }))
+      this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {
       history.push('/dashboard');
     }

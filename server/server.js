@@ -122,7 +122,7 @@ app.post('/api/users', async (req, res) => {
     res.cookie('jwtToken', token, cookieProperties);
     res.header('x-auth', token).send(user);
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send({ errorMessage: e });
   }
 });
 
@@ -142,7 +142,7 @@ app.post('/api/users/login', async (req, res) => {
     res.cookie('jwtToken', token, cookieProperties);
     res.header('x-auth', token).send(user);
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send({ errorMessage: e });
   }
 });
 

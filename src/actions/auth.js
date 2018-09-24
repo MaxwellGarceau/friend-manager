@@ -1,5 +1,5 @@
 import axios from 'axios';
-import moment from 'moment';
+// import moment from 'moment';
 
 import { getJwtToken } from '../utils/custom-validation/user-credentials';
 
@@ -54,7 +54,6 @@ export const startLogin = (userData) => {
 
     try {
       const response = await axios.post('/api/users/login', user);
-
       return dispatch(login({
         _id: response.data._id,
         signUpDate: response.data.signUpDate,

@@ -17,9 +17,9 @@ export class LoginPage extends React.Component {
   };
   onSubmit = async (userCredentials) => {
     const response = await this.props.startLogin(userCredentials);
-
+    console.log('front end response', JSON.stringify(response));
     if (!!response && response.name === 'Error') {
-      this.setState(() => ({ error: `Error Occured **DON'T FORGET TO PRINT MONGOOSE'S VALIDATION ERRORS HERE =))))))!!!!!!**` }))
+      this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {
       // Possibly use await (or something else) to force friends list to populate before page is loaded
       this.props.startPopulateFriendList();
