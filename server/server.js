@@ -112,6 +112,11 @@ app.post('/api/users', async (req, res) => {
     const user = new User(body);
 
     await user.save();
+
+    // if (!user) {
+    //   return res.status(400).send({ errorMessage: 'User already exists.' });
+    // }
+
     const token = await user.generateAuthToken();
     const cookieProperties = {
       // httpOnly: true,
@@ -122,7 +127,8 @@ app.post('/api/users', async (req, res) => {
     res.cookie('jwtToken', token, cookieProperties);
     res.header('x-auth', token).send(user);
   } catch (e) {
-    res.status(400).send({ errorMessage: e });
+    console.log('signUp error', e.message);
+    res.status(400).send({ errorMessage: e.message });
   }
 });
 

@@ -15,7 +15,8 @@ export class SignUpPage extends React.Component {
   };
   onSubmit = async (userCredentials) => {
     const response = await this.props.startSignUp(userCredentials);
-    if (!!response && response.name === 'Error') {
+    console.log('frontendresponse', JSON.stringify(response));
+    if (!!response && !!response.response.data.errorMessage) {
       this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {
       history.push('/dashboard');
