@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
-import { history } from '../routers/AppRouterContainer';
+// import { history } from '../routers/AppRouterContainer';
 
 export class Header extends React.Component {
   handleStartLogout = () => {
     this.props.startLogout();
-    history.push('/');
+    this.props.history.push('/');
   };
   render () {
     return (
@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch) => ({
   startLogout: () => dispatch(startLogout())
 });
 
-export default connect(undefined, mapDispatchToProps)(Header);
+export default connect(undefined, mapDispatchToProps)(withRouter(Header));
