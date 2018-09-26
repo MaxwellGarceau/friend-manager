@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { history } from '../../routers/AppRouter';
+import { history } from '../../routers/AppRouterContainer';
 
 import { startSignUp } from '../../actions/auth';
 import UserCredentialsForm from './UserCredentialsForm';

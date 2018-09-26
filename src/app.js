@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
-import AppRouter, { history } from './routers/AppRouter';
+import AppRouterContainer, { history } from './routers/AppRouterContainer';
 import configureStore from './store/configureStore';
 import { startPopulateFriendList } from './actions/friends';
 import { saveState } from './store/local-storage';
@@ -25,7 +25,7 @@ store.subscribe(() => {
 const jsx = (
   <Provider store={store}>
     <PersistGate loading={<LoadingPage />} persistor={persistor}>
-      <AppRouter />
+      <AppRouterContainer />
     </PersistGate>
   </Provider>
 );

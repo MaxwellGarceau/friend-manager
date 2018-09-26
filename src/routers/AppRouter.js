@@ -1,8 +1,6 @@
 import React from 'react';
-import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { Route, Switch, Link, NavLink, withRouter } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import DashboardPage from '../components/DashboardPage';
 import LoginPage from '../components/user-area/LoginPage';
@@ -11,20 +9,23 @@ import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
-export const history = createHistory();
-
-const AppRouter = () => (
-  <Router history={history}>
-    <div>
-      <Switch>
-        <PublicRoute path="/" component={LoginPage} exact={true} />
-        <PublicRoute path="/signup" component={SignUpPage} />
-        <PrivateRoute path="/dashboard" component={DashboardPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </div>
-  </Router>
+const AppRouter = ({ location }) => (
+  <TransitionGroup className="transition-group">
+    <CSSTransition
+      key={location.key}
+      timeout={{ enter: 300, exit: 300 }}
+      classNames={'fade'}
+    >
+      <section className="route-section">
+        <Switch location={location}>
+          <PublicRoute path="/" component={LoginPage} exact={true} />
+          <PublicRoute path="/signup" component={SignUpPage} />
+          <PrivateRoute path="/dashboard" component={DashboardPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </section>
+    </CSSTransition>
+  </TransitionGroup>
 );
 
-// export default AppRouter;
-export default DragDropContext(HTML5Backend)(AppRouter);
+export default withRouter(AppRouter);
