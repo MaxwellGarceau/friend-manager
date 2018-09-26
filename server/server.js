@@ -127,7 +127,9 @@ app.post('/api/users', async (req, res) => {
     res.cookie('jwtToken', token, cookieProperties);
     res.header('x-auth', token).send(user);
   } catch (e) {
-    console.log('signUp error', e.message);
+    if (e.code === 11000 || e.code === 11001) {
+      e.message = 'A user with this email already exists.';
+    }
     res.status(400).send({ errorMessage: e.message });
   }
 });
