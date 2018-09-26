@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-// ADD COUNTRY, REGION, AND CITY ID'S
+
 const friends = [{
   name: 'Rafael',
   relationship: 'friend',
@@ -11,9 +11,10 @@ const friends = [{
     city: 'Nashville',
     cityId: 'TN'
   },
+  dateAdded: new Date(),
   ranking: 5,
-  _id: ObjectID('5b9d38a38fbeaf13bc4a2e88'),
-  _creator: '5b97cf9503dc841653c6f108'
+  _id: new ObjectID('5b9d38a38fbeaf13bc4a2e88'),
+  _creator: new ObjectID('5b97cf9503dc841653c6f108')
 }, {
   name: 'Keenan',
   relationship: 'friend',
@@ -25,9 +26,10 @@ const friends = [{
     city: 'Nashville',
     cityId: 'TN'
   },
+  dateAdded: new Date(),
   ranking: 5,
-  _id: ObjectID('5b9d38a38fbeaf13bc4a2e89'),
-  _creator: '5b97cf9503dc841653c6f108'
+  _id: new ObjectID('5b9d38a38fbeaf13bc4a2e89'),
+  _creator: new ObjectID('5b97cf9503dc841653c6f108')
 }, {
   name: 'Kyle',
   relationship: 'friend',
@@ -39,9 +41,10 @@ const friends = [{
     city: 'Nashville',
     cityId: 'TN'
   },
+  dateAdded: new Date(),
   ranking: 5,
-  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8a'),
-  _creator: '5b97cf9503dc841653c6f108'
+  _id: new ObjectID('5b9d38a38fbeaf13bc4a2e8a'),
+  _creator: new ObjectID('5b97cf9503dc841653c6f108')
 }, {
   name: 'Jorge',
   relationship: 'friend',
@@ -53,9 +56,10 @@ const friends = [{
     city: 'Huntsville',
     cityId: 'AL'
   },
+  dateAdded: new Date(),
   ranking: 5,
-  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8b'),
-  _creator: '5b97cf9503dc841653c6f108'
+  _id: new ObjectID('5b9d38a38fbeaf13bc4a2e8b'),
+  _creator: new ObjectID('5b97cf9503dc841653c6f108')
 }, {
   name: 'Jose',
   relationship: 'acquaintance',
@@ -67,9 +71,10 @@ const friends = [{
     city: 'El Paso',
     cityId: 'TX'
   },
+  dateAdded: new Date(),
   ranking: 3,
-  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8c'),
-  _creator: '5b97cf9503dc841653c6f108'
+  _id: new ObjectID('5b9d38a38fbeaf13bc4a2e8c'),
+  _creator: new ObjectID('5b97cf9503dc841653c6f108')
 }, {
   name: 'Juan',
   relationship: 'acquaintance',
@@ -81,9 +86,10 @@ const friends = [{
     city: 'Birmingham',
     cityId: 'AL'
   },
+  dateAdded: new Date(),
   ranking: 1,
-  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8d'),
-  _creator: '5b97cf9503dc841653c6f108'
+  _id: new ObjectID('5b9d38a38fbeaf13bc4a2e8d'),
+  _creator: new ObjectID('5b97cf9503dc841653c6f108')
 }, {
   name: 'Raul',
   relationship: 'family',
@@ -95,9 +101,10 @@ const friends = [{
     city: 'Las Vegas',
     cityId: 'NV'
   },
+  dateAdded: new Date(),
   ranking: 5,
-  _id: ObjectID('5b9d38a38fbeaf13bc4a2e8e'),
-  _creator: '5b97cf9503dc841653c6f108'
+  _id: new ObjectID('5b9d38a38fbeaf13bc4a2e8e'),
+  _creator: new ObjectID('5b97cf9503dc841653c6f108')
 }];
 
 module.exports = {

@@ -11,11 +11,10 @@
     position: fixed;
     left: 0;
     top: 0;
-    background-color: rgba(0,0,0, 0.3);
+    background-color: rgba($pure-black, 0.3);
     z-index: 99999;
   }
   &--auth-page {
-    // background: url('/images/bg.jpg');
     background: url('/images/stick-figure-holding-one.jpg');
     background-size: cover;
   }
@@ -24,6 +23,7 @@
 .box-layout__box {
   background: $off-white;
   border-radius: 3px;
+  box-shadow: 5px 5px 15px rgba($off-black, 0.3);
   padding: $l-size $m-size;
   text-align: center;
 

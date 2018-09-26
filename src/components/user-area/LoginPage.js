@@ -17,7 +17,6 @@ export class LoginPage extends React.Component {
   };
   onSubmit = async (userCredentials) => {
     const response = await this.props.startLogin(userCredentials);
-    console.log('front end response', JSON.stringify(response));
     if (!!response && response.name === 'Error') {
       this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {

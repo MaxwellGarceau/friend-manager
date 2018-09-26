@@ -17,16 +17,6 @@ class LocationPicker extends React.Component {
         cityId: ''
       }
     }
-
-    // Initial API request to geonames for country data
-    this.handleLocationCountry();
-    // If friend data is being passed down check to render locationPicker list data
-    if (this.state.location.regionId) {
-      this.handleLocationRegion();
-    }
-    if (this.state.location.cityId) {
-      this.handleLocationCity();
-    }
   }
 
   handleLocationPickerOnChange = (e, area) => {
@@ -85,6 +75,17 @@ class LocationPicker extends React.Component {
     const response = await axios.get(`http://api.geonames.org/searchJSON?username=maxgarceau&featureClass=P&cities=cities15000&adminCode1=${adminCode1}`);
     const allCities = response.data.geonames;
     this.setState({ allCities });
+  };
+  componentDidMount () {
+    // Initial API request to geonames for country data
+    this.handleLocationCountry();
+    // If friend data is being passed down check to render locationPicker list data
+    if (this.state.location.regionId) {
+      this.handleLocationRegion();
+    }
+    if (this.state.location.cityId) {
+      this.handleLocationCity();
+    }
   };
   componentWillReceiveProps (nextProps) {
     if (nextProps.location !== this.props.location) {
