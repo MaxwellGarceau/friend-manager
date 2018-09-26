@@ -152,6 +152,7 @@ class FriendsFilter extends React.Component {
           <fieldset name="rankingFilter">
             <legend>Ranking</legend>
             <InputRange
+              allowSameValues={true}
               maxValue={5}
               minValue={1}
               formatLabel={value => `${value} star`}
