@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { history } from '../../routers/AppRouterContainer';
+import { history } from '../../routers/AppRouterContainer';
 import { withRouter } from 'react-router-dom';
 
 import { startLogin } from '../../actions/auth';
@@ -23,11 +23,13 @@ export class LoginPage extends React.Component {
     } else {
       // Possibly use await (or something else) to force friends list to populate before page is loaded
       this.props.startPopulateFriendList();
-      this.props.history.push('/dashboard');
+      // this.props.history.push('/dashboard');
+      history.push('/dashboard');
     }
   };
   handleToSignUp = () => {
-    this.props.history.push('/signup');
+    // this.props.history.push('/signup');
+    history.push('/signup');
   };
   componentDidMount () {
     clearState();
@@ -52,4 +54,5 @@ const mapDispatchToProps = (dispatch) => ({
   startPopulateFriendList: () => dispatch(startPopulateFriendList())
 });
 
-export default connect(undefined, mapDispatchToProps)(withRouter(LoginPage));
+// export default connect(undefined, mapDispatchToProps)(withRouter(LoginPage));
+export default connect(undefined, mapDispatchToProps)(LoginPage);

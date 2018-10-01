@@ -15,7 +15,8 @@ class LocationPicker extends React.Component {
         regionId: '',
         city: '',
         cityId: ''
-      }
+      },
+      mounted: true
     }
   }
 
@@ -77,15 +78,21 @@ class LocationPicker extends React.Component {
     this.setState({ allCities });
   };
   componentDidMount () {
-    // Initial API request to geonames for country data
-    this.handleLocationCountry();
-    // If friend data is being passed down check to render locationPicker list data
-    if (this.state.location.regionId) {
-      this.handleLocationRegion();
+    this._mounted = true;
+    if (!!this._mounted) {
+      // Initial API request to geonames for country data
+      this.handleLocationCountry();
+      // If friend data is being passed down check to render locationPicker list data
+      if (this.state.location.regionId) {
+        this.handleLocationRegion();
+      }
+      if (this.state.location.cityId) {
+        this.handleLocationCity();
+      }
     }
-    if (this.state.location.cityId) {
-      this.handleLocationCity();
-    }
+  };
+  componentWillUnmount () {
+    this._mounted = false;
   };
   componentWillReceiveProps (nextProps) {
     if (nextProps.location !== this.props.location) {
