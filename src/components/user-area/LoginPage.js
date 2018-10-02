@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { history } from '../../routers/AppRouterContainer';
-import { withRouter } from 'react-router-dom';
+import { history } from '../../routers/AppRouterContainer';
 
 import { startLogin } from '../../actions/auth';
 import { startPopulateFriendList } from '../../actions/friends';
-import { clearState } from '../../store/local-storage';
 import UserCredentialsForm from './UserCredentialsForm';
 
 export class LoginPage extends React.Component {
@@ -23,16 +21,11 @@ export class LoginPage extends React.Component {
     } else {
       // Possibly use await (or something else) to force friends list to populate before page is loaded
       this.props.startPopulateFriendList();
-      this.props.history.push('/dashboard');
-      // history.push('/dashboard');
+      history.push('/dashboard');
     }
   };
   handleToSignUp = () => {
-    this.props.history.push('/signup');
-    // history.push('/signup');
-  };
-  componentDidMount () {
-    clearState();
+    history.push('/signup');
   };
   render (props) {
     return (
@@ -54,5 +47,4 @@ const mapDispatchToProps = (dispatch) => ({
   startPopulateFriendList: () => dispatch(startPopulateFriendList())
 });
 
-export default withRouter(connect(undefined, mapDispatchToProps)(LoginPage));
-// export default connect(undefined, mapDispatchToProps)(LoginPage);
+export default connect(undefined, mapDispatchToProps)(LoginPage);

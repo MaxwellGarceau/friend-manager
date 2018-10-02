@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { history } from '../../routers/AppRouterContainer';
-import { withRouter } from 'react-router-dom';
+import { history } from '../../routers/AppRouterContainer';
 
 import { startSignUp } from '../../actions/auth';
 import UserCredentialsForm from './UserCredentialsForm';
@@ -20,13 +19,11 @@ export class SignUpPage extends React.Component {
     if (!!response && !!response.response.data.errorMessage) {
       this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {
-      this.props.history.push('/dashboard');
-      // history.push('/dashboard');
+      history.push('/dashboard');
     }
   };
   handleToLogin = () => {
-    this.props.history.push('/');
-    // history.push('/');
+    history.push('/');
   };
   render (props) {
     return (
@@ -47,5 +44,4 @@ const mapDispatchToProps = (dispatch) => ({
   startSignUp: (userData) => dispatch(startSignUp(userData))
 });
 
-export default withRouter(connect(undefined, mapDispatchToProps)(SignUpPage));
-// export default connect(undefined, mapDispatchToProps)(SignUpPage);
+export default connect(undefined, mapDispatchToProps)(SignUpPage);
