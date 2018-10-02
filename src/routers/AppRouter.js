@@ -10,12 +10,12 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
 const AppRouter = ({ location }) => (
-  // <TransitionGroup className="transition-group">
-  //   <CSSTransition
-  //     key={location.key}
-  //     timeout={{ enter: 300, exit: 300 }}
-  //     classNames={'fade'}
-  //   >
+  <TransitionGroup className="transition-group">
+    <CSSTransition
+      key={location.key}
+      timeout={{ enter: 300, exit: 300 }}
+      classNames={'fade'}
+    >
       <section className="route-section">
         <Switch location={location}>
           <PublicRoute path="/" component={LoginPage} exact={true} />
@@ -24,8 +24,8 @@ const AppRouter = ({ location }) => (
           <Route component={NotFoundPage} />
         </Switch>
       </section>
-  //   </CSSTransition>
-  // </TransitionGroup>
+    </CSSTransition>
+  </TransitionGroup>
 );
 
 export default withRouter(AppRouter);

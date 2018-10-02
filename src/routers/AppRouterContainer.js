@@ -11,7 +11,9 @@ export const history = createHistory();
 
 const AppRouterContainer = () => (
   <Router history={history} >
-    <AppRouter />
+    <div>
+      <AppRouter />
+    </div>
   </Router>
 );
 

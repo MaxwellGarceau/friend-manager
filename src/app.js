@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import AppRouterContainer, { history } from './routers/AppRouterContainer';
 import configureStore from './store/configureStore';
 import { startPopulateFriendList } from './actions/friends';
-import { saveState } from './store/local-storage';
+// import { saveState } from './store/local-storage';
 import { login, logout } from './actions/auth';
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
@@ -17,10 +17,10 @@ import LoadingPage from './components/LoadingPage';
 
 const { store, persistor } = configureStore();
 
-// Saves state from localStorage to redux
-store.subscribe(() => {
-  saveState(store.getState());
-});
+// // Saves state from localStorage to redux
+// store.subscribe(() => {
+//   saveState(store.getState());
+// });
 
 const jsx = (
   <Provider store={store}>
