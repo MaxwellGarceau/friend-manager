@@ -24,6 +24,30 @@ button:disabled {
 
 h1, h2, h3, h4, h5, h6 {
   color: basic-colors('white');
+  font-family: Helvetica;
+}
+
+h2 {
+  font-size: $xl-size;
+  font-weight: 200;
+  letter-spacing: .3em;
+  line-height: 3;
+  margin: 0;
+}
+
+p {
+  font-family: 'Open Sans';
+  font-weight: 300;
+}
+
+button {
+  font-family: 'Work Sans';
+  font-weight: 300;
+}
+
+input {
+  font-family: 'Open Sans';
+  font-weight: 400;
 }
 
 

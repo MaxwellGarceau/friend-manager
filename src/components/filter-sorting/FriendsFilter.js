@@ -125,8 +125,8 @@ class FriendsFilter extends React.Component {
       <div className={`friends-filter ${this.props.className}`}>
         <h2 className="friends-filter__title">Filter</h2>
         <form className="form friends-filter__form" onSubmit={this.handleUpdateFilter}>
-          <fieldset name="relationshipFilter">
-            <legend>Relationship</legend>
+          <fieldset className="friends-filter__form-section" name="relationshipFilter">
+            <legend className="friends-filter__form-subtitle">Relationship</legend>
             <input
               type="checkbox"
               name="friend"
@@ -149,8 +149,8 @@ class FriendsFilter extends React.Component {
               ref="acquaintanceCheckbox" /> Acquaintance
             <br />
           </fieldset>
-          <fieldset name="rankingFilter">
-            <legend>Ranking</legend>
+          <fieldset className="friends-filter__form-section" name="rankingFilter">
+            <legend className="friends-filter__form-subtitle">Ranking</legend>
             <InputRange
               allowSameValues={true}
               maxValue={5}
@@ -161,8 +161,8 @@ class FriendsFilter extends React.Component {
             />
             <br />
           </fieldset>
-          <fieldset name="locationFilter">
-            <legend>Location</legend>
+          <fieldset className="friends-filter__form-section" name="locationFilter">
+            <legend className="friends-filter__form-subtitle">Location</legend>
             <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />
           </fieldset>
           <div className="friends-filter__button-container">
