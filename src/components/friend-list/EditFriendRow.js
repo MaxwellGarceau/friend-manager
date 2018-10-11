@@ -100,7 +100,7 @@ class EditFriendRow extends React.Component {
             {!!friend && friend.canEditFriend && this.props.canEditFriends && <ModifyFriendIcons friend={this.props.friend} canEditFriendRow={true} onSubmit={this.onSubmit} />}
           </td>
         </tr>
-        {!friend && <tr><td><button type="button" onClick={this.onSubmit}>Add Friend</button></td></tr>}
+        {!friend && <tr><td><button type="button" className="button button--add-friends" onClick={this.onSubmit}>Add Friend</button></td></tr>}
       </React.Fragment>
     );
   }

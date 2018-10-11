@@ -6,6 +6,17 @@ $grey: #666;
 $pure-black: #000;
 $off-black: #1c1c1c;
 
+// Basic Color Scheme
+$basic-colors: (
+  'primary': #4CC5F2, 
+  'accent': #e83a30,
+  'primary-dark': #3944AD,
+  'primary-light': lighten(#4CC5F2, 25%),
+  'light-grey': #DEF4FD,
+  'white': #FDFDFB,
+  'black': #444444
+);
+
 $blue: #1c88bf;
 $dark-blue: #364051;
 $sky-blue: rgba(221, 235, 255, 0.75);

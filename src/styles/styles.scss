@@ -1,7 +1,8 @@
 // Base Styles
 @import './base/settings';
-@import './base/base';
 @import './base/mixins';
+@import './base/functions';
+@import './base/base';
 
 // Components
 @import './components/box-layout';

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn run start-local-db
+  /usr/local/bin/node /usr/local/bin/yarn run full-stacl-dev
 
 PATH: 
   /Users/maxgarceau/.rvm/gems/ruby-2.4.1/bin:/Users/maxgarceau/.rvm/gems/ruby-2.4.1@global/bin:/Users/maxgarceau/.rvm/rubies/ruby-2.4.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/maxgarceau/.rvm/bin
@@ -76,6 +76,7 @@ npm manifest:
       "react-star-rating-component": "^1.4.1",
       "redux": "4.0.0",
       "redux-mock-store": "1.5.3",
+      "redux-persist": "^5.10.0",
       "redux-thunk": "2.3.0",
       "sass-loader": "7.1.0",
       "style-loader": "0.22.1",
@@ -6507,6 +6508,10 @@ Lockfile:
     dependencies:
       lodash.isplainobject "^4.0.6"
   
+  redux-persist@^5.10.0:
+    version "5.10.0"
+    resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.10.0.tgz#5d8d802c5571e55924efc1c3a9b23575283be62b"
+  
   redux-thunk@2.3.0:
     version "2.3.0"
     resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
@@ -8248,16 +8253,14 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Command failed.
-  Exit code: 100
-  Command: sh
-  Arguments: -c cd ~/Computer\ Science\ Educational\ Material/mongodb/mongo/bin/ && ./mongod --dbpath ~/Computer\ Science\ Educational\ Material/mongodb/mongo-data/ --port 27018
-  Directory: /Users/maxgarceau/Computer Science Educational Material/react-personal-projects/friend-manager
-  Output:
-  
-      at ProcessTermError.MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
-      at new ProcessTermError (/usr/local/lib/node_modules/yarn/lib/cli.js:226:113)
-      at ChildProcess.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:30281:17)
-      at ChildProcess.emit (events.js:182:13)
-      at maybeClose (internal/child_process.js:961:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:248:5)
+  Error: Command "full-stacl-dev" not found. Did you mean "full-stack-dev"?
+      at new MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:87307:17
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:116:14
+      at new Promise (<anonymous>)
+      at new F (/usr/local/lib/node_modules/yarn/lib/cli.js:23451:28)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:95:12
+      at runCommand (/usr/local/lib/node_modules/yarn/lib/cli.js:87312:22)
+      at Object.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:87412:14)

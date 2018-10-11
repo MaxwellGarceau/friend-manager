@@ -15,8 +15,9 @@
     z-index: 99999;
   }
   &--auth-page {
-    background: url('/images/stick-figure-holding-one.jpg');
-    background-size: cover;
+    // background: url('/images/stick-figure-holding-one.jpg');
+    // background-size: cover;
+    background-color: basic-colors('white');
   }
 }
 
@@ -28,8 +29,9 @@
   text-align: center;
 
   &--auth-page {
-    width: 40rem;
+    background-color: basic-colors('primary');
     margin: 0 $s-size;
+    width: 40rem;
   }
 }
 

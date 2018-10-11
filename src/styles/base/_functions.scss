@@ -1,0 +1,3 @@
+@function basic-colors($key: 'primary') {
+  @return map-get($basic-colors, $key);
+}

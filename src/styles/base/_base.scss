@@ -8,6 +8,7 @@ html {
 
 body {
   color: $dark-grey;
+  background-color: basic-colors('primary');
 	font-family: Helvetica, Arial, sans-serif;
   font-size: $m-size;
   line-height: 1.6;
@@ -19,6 +20,10 @@ button {
 
 button:disabled {
 	cursor:default;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: basic-colors('white');
 }
 
 
