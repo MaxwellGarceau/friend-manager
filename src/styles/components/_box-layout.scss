@@ -15,7 +15,7 @@
     z-index: 99999;
   }
   &--auth-page {
-    // background: url('/images/stick-figure-holding-one.jpg');
+    // background: url('/images/stick-figure-holding-two.jpg');
     // background-size: cover;
     background-color: basic-colors('white');
   }
@@ -32,6 +32,10 @@
     background-color: basic-colors('primary');
     margin: 0 $s-size;
     width: 40rem;
+
+    p {
+      color: basic-colors('white');
+    }
   }
 }
 

@@ -12,6 +12,10 @@
 .friends-list {
   &__title {
     text-align: center;
+    background: url(/images/undraw_friendship_mni7.svg);
+    background-size: 225px;
+    background-position: 75% center;
+    background-repeat: no-repeat;
   }
   &__table {
     background-color: basic-colors('primary-light');
