@@ -22,15 +22,15 @@ let port;
 // Listens on a port exactly one number higher than specified in .env.development/.env.development
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   port = parseInt(process.env.PORT, 10) + 1 || 3000;
+
+  // Loads test fixture data into mongo db
+  const friendTestData = require('./tests/fixtures/friends-data').friends;
+  friendTestData.map((testFriend) => {
+    return mongoose.connection.collection('friends').replaceOne({ _id: testFriend._id }, testFriend, { upsert: true });
+  });
 } else {
   port = process.env.PORT;
 }
-
-// Loads test fixture data into mongo db
-const friendTestData = require('./tests/fixtures/friends-data').friends;
-friendTestData.map((testFriend) => {
-  return mongoose.connection.collection('friends').replaceOne({ _id: testFriend._id }, testFriend, { upsert: true });
-});
 
 app.use(bodyParser.json());
 
@@ -176,9 +176,12 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
   }
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
-});
+// app.get() was causing problems with production build
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(publicPath, 'index.html'));
+// });
+// app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use('/dist', express.static(path.join(publicPath, 'dist')));
 
 app.listen(port, () => {
   console.log(`Server is up on port: ${port}!`);
