@@ -176,11 +176,10 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
   }
 });
 
-// app.get() was causing problems with production build
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(publicPath, 'index.html'));
-// });
-// app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
+
 app.use('/public/dist', express.static(path.join(__dirname, '/public/dist')));
 
 app.listen(port, () => {
