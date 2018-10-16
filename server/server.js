@@ -17,8 +17,14 @@ const { Friend } = require('./models/friend');
 
 const app = express();
 const publicPath = path.join(__dirname, '..', 'public');
+
+let port;
 // Listens on a port exactly one number higher than specified in .env.development/.env.development
-const port = parseInt(process.env.PORT, 10) + 1 || 3000;
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  port = parseInt(process.env.PORT, 10) + 1 || 3000;
+} else {
+  port = process.env.PORT;
+}
 
 // Loads test fixture data into mongo db
 const friendTestData = require('./tests/fixtures/friends-data').friends;
