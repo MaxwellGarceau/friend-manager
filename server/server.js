@@ -181,7 +181,7 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
 //   res.sendFile(path.join(publicPath, 'index.html'));
 // });
 // app.use('/dist', express.static(path.join(__dirname, 'dist')));
-app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use('/public/dist', express.static(path.join(__dirname, '/public/dist')));
 
 app.listen(port, () => {
   console.log(`Server is up on port: ${port}!`);
