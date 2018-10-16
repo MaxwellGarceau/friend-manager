@@ -176,7 +176,7 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(publicPath, '/dist/bundle.js')));
+app.use('/dist', express.static(path.join(publicPath, '/dist/bundle.js')));
 
 // app.use('/dist', express.static(path.join(publicPath, '/dist/bundle.js')));
 
