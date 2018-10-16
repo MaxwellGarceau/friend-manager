@@ -176,13 +176,11 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
   }
 });
 
-app.use('/public/dist', express.static(path.join(publicPath, '/dist/bundle.js')));
+app.use('../public/dist', express.static(path.join(publicPath, '/dist/bundle.js')));
 
-// app.use('/dist', express.static(path.join(publicPath, '/dist/bundle.js')));
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(publicPath, 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Server is up on port: ${port}!`);
