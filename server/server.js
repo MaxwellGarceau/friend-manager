@@ -178,7 +178,7 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
 
 // app.use('../public/dist', express.static(path.join(publicPath, '/dist/bundle.js')));
 
-app.use(express.static(path.join(__dirname, '/public/dist')));
+app.use(express.static(path.join(publicPath, 'dist')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
