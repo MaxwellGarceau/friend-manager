@@ -1,0 +1,17 @@
+ @mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (max-width: 1200px) { @content ; }
+  }
+  @else if $point == ipad-horizontal {
+    @media (max-width: 1024px) { @content ; }
+  }
+  @else if $point == ipad-vertical {
+    @media (max-width: 768px)  { @content ; }
+  }
+  @else if $point == iphone-horizontal {
+    @media (max-width: 667px)  { @content ; }
+  }
+  @else if $point == iphone-vertical {
+    @media (max-width: 480px)  { @content ; }
+  }
+}

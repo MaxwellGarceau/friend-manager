@@ -10,8 +10,8 @@ class AlertModal extends React.Component {
   render () {
     return (
       <div className="box-layout box-layout--full-page box-layout--mandatory-overlay">
-        <div className="box-layout__box">
-          <h2>{this.props.mainText}</h2>
+        <div className="box-layout__box alert-modal__box">
+          <h2 className="alert-modal__main-text">{this.props.mainText}</h2>
           <p className="alert-modal__sub-text">{this.props.subText}</p>
           <div>
             <button onClick={this.props.confirmAction}>Confirm</button>

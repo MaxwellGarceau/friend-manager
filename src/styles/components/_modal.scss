@@ -1,6 +1,17 @@
 .alert-modal {
-  &__main-text {
 
+  &__box {
+    width: 50%;
+    min-width: 350px;
+
+    @include breakpoint(ipad-horizontal) {
+      width: 75%;
+    }
+  }
+  &__main-text {
+    color: basic-colors('black');
+    font-size: 2.5vmax;
+    line-height: 1.6;
   }
   &__sub-text {
     font-style: italic;

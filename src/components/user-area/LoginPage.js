@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { history } from '../../routers/AppRouterContainer';
+import has from 'lodash/has';
 
 import { startLogin } from '../../actions/auth';
 import { startPopulateFriendList } from '../../actions/friends';
@@ -16,7 +17,7 @@ export class LoginPage extends React.Component {
   };
   onSubmit = async (userCredentials) => {
     const response = await this.props.startLogin(userCredentials);
-    if (!!response && response.name === 'Error') {
+    if (!!response && has(response, 'response.data.errorMessage')) {
       this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {
       // Possibly use await (or something else) to force friends list to populate before page is loaded
