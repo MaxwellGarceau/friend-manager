@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { history } from '../../routers/AppRouterContainer';
+import has from 'lodash/has';
 
 import { startSignUp } from '../../actions/auth';
 import UserCredentialsForm from './UserCredentialsForm';
@@ -15,8 +16,7 @@ export class SignUpPage extends React.Component {
   };
   onSubmit = async (userCredentials) => {
     const response = await this.props.startSignUp(userCredentials);
-    console.log('frontendresponse', JSON.stringify(response));
-    if (!!response && !!response.response.data.errorMessage) {
+    if (!!response && has(response, 'response.data.errorMessage')) {
       this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {
       history.push('/dashboard');

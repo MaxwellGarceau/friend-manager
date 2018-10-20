@@ -8,14 +8,12 @@ require('./server/config/config');
 module.exports = (env) => {
   const isProduction = env === 'production';
   const CSSExtract = new ExtractTextPlugin('styles.css');
-  // const publicPath = path.join(__dirname, '..', 'public');
 
   console.log('env', env);
   return {
     entry: ['babel-polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
-      // path: path.join(publicPath, 'dist'),
       filename: 'bundle.js'
     },
     module: {
