@@ -34,23 +34,6 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
 
 app.use(bodyParser.json());
 
-// Enables CORS for certain domains
-app.use((req, res, next) => {
-  const allowedOrigins = ['http://api.geonames.org'];
-  const origin = req.headers.origin;
-  console.log(origin);
-
-  if (allowedOrigins.includes(origin)) {
-    console.log('includes fired');
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', true);
-  return next();
-});
-
 // Add Friend
 app.post('/api/friend', authenticate, async (req, res) => {
   try {
@@ -135,10 +118,6 @@ app.post('/api/users', async (req, res) => {
     const user = new User(body);
 
     await user.save();
-
-    // if (!user) {
-    //   return res.status(400).send({ errorMessage: 'User already exists.' });
-    // }
 
     const token = await user.generateAuthToken();
     const cookieProperties = {
