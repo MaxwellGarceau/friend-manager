@@ -61,19 +61,19 @@ class LocationPicker extends React.Component {
     });
   };
   handleLocationCountry = async () => {
-    const response = await axios.get('http://api.geonames.org/countryInfoJSON?username=maxgarceau');
+    const response = await axios.get('https://secure.geonames.org/countryInfoJSON?username=maxgarceau');
     const allCountries = response.data.geonames;
     this.setState({ allCountries });
   };
   handleLocationRegion = async () => {
     const geonameId = this.state.location.countryId;
-    const response = await axios.get(`http://api.geonames.org/childrenJSON?username=maxgarceau&geonameId=${geonameId}`);
+    const response = await axios.get(`https://secure.geonames.org/childrenJSON?username=maxgarceau&geonameId=${geonameId}`);
     const allRegions = response.data.geonames;
     this.setState({ allRegions });
   };
   handleLocationCity = async () => {
     const adminCode1 = this.state.location.regionId;
-    const response = await axios.get(`http://api.geonames.org/searchJSON?username=maxgarceau&featureClass=P&cities=cities15000&adminCode1=${adminCode1}`);
+    const response = await axios.get(`https://secure.geonames.org/searchJSON?username=maxgarceau&featureClass=P&cities=cities15000&adminCode1=${adminCode1}`);
     const allCities = response.data.geonames;
     this.setState({ allCities });
   };
