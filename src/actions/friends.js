@@ -11,12 +11,13 @@ export const startAddFriend = (newFriend = {}) => {
   return async (dispatch, getState) => {
     const {
       name,
+      order,
       relationship,
       location,
       ranking,
       dateAdded = new Date()
     } = newFriend;
-    const addNewFriend = { name, relationship, location, ranking, dateAdded };
+    const addNewFriend = { name, order, relationship, location, ranking, dateAdded };
     const jwtToken = getJwtToken();
     const config = {
       headers: {

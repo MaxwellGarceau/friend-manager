@@ -35,7 +35,12 @@ class MainFriendList extends React.Component {
     this.setState({ activeSort });
   };
   handleStartAddFriend = (newFriend) => {
-    this.props.startAddFriend(newFriend);
+    this.props.startAddFriend({
+      order: {
+        default: this.props.totalFriendCount
+      },
+      ...newFriend
+    });
   };
   handleStartEditFriend = (editedFriend) => {
     this.props.startEditFriend(editedFriend);
@@ -100,7 +105,8 @@ class MainFriendList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   friendsListFilters: state.filters.friendsListFilters,
-  friends: friendsListMasterFilter(state.friends, state.filters.friendsListFilters)
+  friends: friendsListMasterFilter(state.friends, state.filters.friendsListFilters),
+  totalFriendCount: state.friends.length
 });
 
 const mapDispatchToProps = (dispatch) => ({

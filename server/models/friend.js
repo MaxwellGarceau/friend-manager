@@ -7,6 +7,12 @@ const FriendSchema = new mongoose.Schema({
     minlength: 1,
     required: true
   },
+  order: {
+    default: {
+      type: Number,
+      required: true
+    }
+  },
   relationship: {
     type: String,
     require: true
