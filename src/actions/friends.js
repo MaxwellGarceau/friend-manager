@@ -132,7 +132,11 @@ export const startPopulateFriendList = () => {
       const response = await axios.get('/api/friend', config);
       const friendsList = response.data.map((friend) => ({
         ...friend,
-        canEditFriend: false
+        canEditFriend: false,
+        order: {
+          ...friend.order,
+          current: friend.order.default
+        }
       }));
 
       return dispatch(populateFriendList(friendsList));
