@@ -56,6 +56,7 @@ class MainFriendList extends React.Component {
   render () {
     const { canEditFriends } = this.state;
     const toggleEditFriendsButtonText = !!canEditFriends ? 'Cancel' : 'Edit Friends';
+    const sortedFriendsList = this.state.friends.sort((a, b) => a.order.current - b.order.current);
     return (
       <div className="friends-list">
         <h2 className="friends-list__title">Friends List</h2>
@@ -88,7 +89,7 @@ class MainFriendList extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.friends.map((friend) => {
+            {sortedFriendsList.map((friend) => {
               if (!!friend.canEditFriend) {
                 return <EditFriendRow key={friend._id} friend={friend} canEditFriends={canEditFriends} handleOnSubmit={this.handleStartEditFriend} />;
               } else {
