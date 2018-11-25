@@ -1,10 +1,13 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import { startCase } from 'lodash-es';
 import StarRatingComponent from 'react-star-rating-component';
 import ModifyFriendIcons from './ModifyFriendIcons';
 
 import LocationPicker from '../filter-sorting/LocationPicker';
+import { findFriendById } from '../../selectors/friends';
 
 class EditFriendRow extends React.Component {
   constructor (props) {
@@ -47,7 +50,11 @@ class EditFriendRow extends React.Component {
       countryId: '',
       ...location
     };
-    const friend = {
+
+    const friend = findFriendById(this.props.completeFriendsList, _id);
+
+    const editedFriend = {
+      ...friend,
       name,
       relationship,
       location,
@@ -55,7 +62,7 @@ class EditFriendRow extends React.Component {
       _id
     };
 
-    this.props.handleOnSubmit(friend);
+    this.props.handleOnSubmit(editedFriend);
 
     // Resets state after adding a friend (if editng a friend, the component is removed anyways)
     this.setState({
@@ -106,4 +113,8 @@ class EditFriendRow extends React.Component {
   }
 }
 
-export default EditFriendRow;
+const mapStateToProps = (state, ownProps) => ({
+  completeFriendsList: state.friends
+});
+
+export default connect(mapStateToProps)(EditFriendRow);

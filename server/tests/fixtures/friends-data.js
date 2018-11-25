@@ -3,7 +3,8 @@ const { ObjectID } = require('mongodb');
 const friends = [{
   name: 'Rafael',
   order: {
-    default: 0
+    default: 0,
+    current: 0
   },
   relationship: 'friend',
   location: {
@@ -21,7 +22,8 @@ const friends = [{
 }, {
   name: 'Keenan',
   order: {
-    default: 1
+    default: 1,
+    current: 1
   },
   relationship: 'friend',
   location: {
@@ -39,7 +41,8 @@ const friends = [{
 }, {
   name: 'Kyle',
   order: {
-    default: 2
+    default: 2,
+    current: 2
   },
   relationship: 'friend',
   location: {
@@ -57,7 +60,8 @@ const friends = [{
 }, {
   name: 'Jorge',
   order: {
-    default: 3
+    default: 3,
+    current: 3
   },
   relationship: 'friend',
   location: {
@@ -75,7 +79,8 @@ const friends = [{
 }, {
   name: 'Jose',
   order: {
-    default: 4
+    default: 4,
+    current: 4
   },
   relationship: 'acquaintance',
   location: {
@@ -93,7 +98,8 @@ const friends = [{
 }, {
   name: 'Juan',
   order: {
-    default: 5
+    default: 5,
+    current: 5
   },
   relationship: 'acquaintance',
   location: {
@@ -111,7 +117,8 @@ const friends = [{
 }, {
   name: 'Raul',
   order: {
-    default: 6
+    default: 6,
+    current: 6
   },
   relationship: 'family',
   location: {
