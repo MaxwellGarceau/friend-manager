@@ -8,10 +8,6 @@ class FriendListContainer extends React.Component {
     return (
       <div className="friends-area__container">
         <MainFriendList />
-        <div className="friends-query__container">
-          <div className="friends-query__item"></div>
-          <FriendsFilter className="friends-query__item" />
-        </div>
       </div>
     );
   }

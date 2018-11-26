@@ -7,13 +7,16 @@ import { friendsListMasterFilter } from '../../selectors/friend-list-filters';
 import FriendListTableCategoryTitle from './FriendListTableCategoryTitle';
 import EditFriendRow from './EditFriendRow';
 import FriendRow from './FriendRow';
+import FriendsFilter from '../filter-sorting/FriendsFilter';
+import Modal from '../misc-components/Modal';
 import { sortAlphabetically, sortNumerically, sortByLocation } from '../../utils/sorting-logic/main-friend-list-sorting';
 
 class MainFriendList extends React.Component {
   state = {
     friends: this.props.friends,
     activeSort: '',
-    canEditFriends: false
+    canEditFriends: false,
+    displayFilter: false
   };
   handleSortByName = (sortDirection) => {
     const friends = sortAlphabetically(this.state.friends, sortDirection, 'name');
@@ -48,6 +51,9 @@ class MainFriendList extends React.Component {
   toggleEditFriends = () => {
     !!this.state.canEditFriends ? this.setState({ canEditFriends: false }, () => this.props.startCancelEditFriends()) : this.setState({ canEditFriends: true });
   };
+  toggleDisplayFilter = () => {
+    !!this.state.displayFilter ? this.setState({ displayFilter: false }) : this.setState({ displayFilter: true });
+  };
   componentWillReceiveProps (nextProps) {
     if (nextProps.friends !== this.props.friends) {
       this.setState({ friends: nextProps.friends });
@@ -62,6 +68,10 @@ class MainFriendList extends React.Component {
         <h2 className="friends-list__title">Friends List</h2>
         <div className="friends-list__edit-friends-container">
           <button className="button button--modify-friends" onClick={this.toggleEditFriends}>{toggleEditFriendsButtonText}</button>
+        </div>
+        <div className="friends-list__options-container">
+          <button className="button button--filter" onClick={this.toggleDisplayFilter}>Filters</button>
+          {this.state.displayFilter && <Modal closeModal={this.toggleDisplayFilter} children={<FriendsFilter closeModal={this.toggleDisplayFilter} className="friends-query__item" />} />}
         </div>
         <table className="friends-list__table">
           <thead>
@@ -107,6 +117,7 @@ class MainFriendList extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   friendsListFilters: state.filters.friendsListFilters,
   friends: friendsListMasterFilter(state.friends, state.filters.friendsListFilters),
+  allFriends: state.friends,
   totalFriendCount: state.friends.length
 });
 

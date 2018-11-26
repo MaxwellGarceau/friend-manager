@@ -57,6 +57,7 @@ class FriendsFilter extends React.Component {
 
     const selectedFilters = [...this.state.selectedFilters, locationFilter, rankingFilter];
     this.props.startUpdateFriendListFilters(selectedFilters);
+    this.handleCloseModal();
   };
   handleResetFilter = () => {
     // Iterates through refs and unchecks inputs with checkbox type
@@ -69,6 +70,7 @@ class FriendsFilter extends React.Component {
     let cloneDeeper = cloneDeep(cloneDeepState);
     this.setState(cloneDeeper, () => {
       this.handleUpdateFilter();
+      this.handleCloseModal();
     });
   };
   handleCheckboxChange = (e) => {
@@ -119,6 +121,11 @@ class FriendsFilter extends React.Component {
         params: [...prevParams, name]
       });
     });
+  };
+  handleCloseModal = () => {
+    if (!!this.props.closeModal) {
+      this.props.closeModal();
+    }
   };
   render () {
     return (
