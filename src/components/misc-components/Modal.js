@@ -8,13 +8,12 @@ class Modal extends React.Component {
     document.querySelector('body').style.overflow = 'scroll';
   };
   render () {
+    const modalClasses = this.props.modalClasses ? this.props.modalClasses : '';
     return (
       <div className="box-layout box-layout--full-page box-layout--mandatory-overlay">
-        <div className="box-layout__box alert-modal__box">
+        <div className={`box-layout__box alert-modal__box ${modalClasses}`}>
+          <button className="button button--cancel alert-modal__cancel" onClick={this.props.closeModal}>X</button>
           {this.props.children}
-          <div>
-            <button onClick={this.props.closeModal}>X</button>
-          </div>
         </div>
       </div>
     );

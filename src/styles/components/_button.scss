@@ -1,7 +1,7 @@
 .button {
   background: $off-black;
   border: none;
-  border-radius: 3px;
+  border-radius: $default-button-border-radius;
   color: $pure-white;
   display: inline-block;
   font-family: 'Work Sans';
@@ -36,4 +36,8 @@
 
 .button--add-friends {
   background-color: lighten($pure-black, 10%); 
+}
+
+.button--cancel {
+  border-radius: 0;
 }

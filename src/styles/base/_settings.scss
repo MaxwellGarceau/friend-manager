@@ -11,6 +11,7 @@ $basic-colors: (
   'primary': #4CC5F2, 
   'accent': #e83a30,
   'primary-dark': #3944AD,
+  'primary-dark-15' : darken(#4CC5F2, 15%),
   'primary-light': lighten(#4CC5F2, 25%),
   'light-grey': #DEF4FD,
   'white': #FDFDFB,
@@ -33,3 +34,7 @@ $m-size: 1.6rem;
 $l-size: 3.2rem;
 $xl-size: 4.8rem;
 $desktop-breakpoint: 45rem;
+
+// Misc
+
+$default-button-border-radius: 3px;

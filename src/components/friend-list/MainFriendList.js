@@ -66,12 +66,14 @@ class MainFriendList extends React.Component {
     return (
       <div className="friends-list">
         <h2 className="friends-list__title">Friends List</h2>
-        <div className="friends-list__edit-friends-container">
-          <button className="button button--modify-friends" onClick={this.toggleEditFriends}>{toggleEditFriendsButtonText}</button>
-        </div>
-        <div className="friends-list__options-container">
-          <button className="button button--filter" onClick={this.toggleDisplayFilter}>Filters</button>
-          {this.state.displayFilter && <Modal closeModal={this.toggleDisplayFilter} children={<FriendsFilter closeModal={this.toggleDisplayFilter} className="friends-query__item" />} />}
+        <div className="friends-list__tab-container">
+          <div className="friends-list__options-container">
+            <button className="button button--filter" onClick={this.toggleDisplayFilter}>Filters</button>
+            {this.state.displayFilter && <Modal modalClasses="alert-modal__filter" closeModal={this.toggleDisplayFilter} children={<FriendsFilter closeModal={this.toggleDisplayFilter} className="friends-query__item" />} />}
+          </div>
+          <div className="friends-list__edit-friends-container">
+            <button className="button button--modify-friends" onClick={this.toggleEditFriends}>{toggleEditFriendsButtonText}</button>
+          </div>
         </div>
         <table className="friends-list__table">
           <thead>

@@ -1,12 +1,21 @@
 .alert-modal {
 
   &__box {
-    width: 50%;
     min-width: 350px;
+    position: relative;
+    width: 50%;
 
     @include breakpoint(ipad-horizontal) {
       width: 75%;
     }
+  }
+  &__cancel {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  &__filter {
+    background-color: basic-colors('primary-dark-15');
   }
   &__main-text {
     color: basic-colors('black');
