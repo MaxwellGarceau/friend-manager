@@ -15,9 +15,11 @@ export const startAddFriend = (newFriend = {}) => {
       relationship,
       location,
       ranking,
+      canEditFriend = false,
+      isVisible = true,
       dateAdded = new Date()
     } = newFriend;
-    const addNewFriend = { name, order, relationship, location, ranking, dateAdded };
+    const addNewFriend = { name, order, relationship, location, ranking, canEditFriend, isVisible, dateAdded };
     const jwtToken = getJwtToken();
     const config = {
       headers: {
@@ -133,6 +135,7 @@ export const startPopulateFriendList = () => {
       const friendsList = response.data.map((friend) => ({
         ...friend,
         canEditFriend: false,
+        isVisible: true,
         order: {
           ...friend.order,
           current: friend.order.default
