@@ -14,7 +14,7 @@ const FriendSchema = new mongoose.Schema({
     }
   },
   relationship: {
-    type: String,
+    type: mongoose.Schema.Types.Mixed,
     require: true
   },
   location: {

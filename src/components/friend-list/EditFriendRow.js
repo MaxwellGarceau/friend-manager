@@ -7,6 +7,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import ModifyFriendIcons from './ModifyFriendIcons';
 
 import LocationPicker from '../filter-sorting/LocationPicker';
+import Dropdown from '../form-elements/Dropdown';
 import { findFriendById } from '../../selectors/friends';
 
 class EditFriendRow extends React.Component {
@@ -15,10 +16,13 @@ class EditFriendRow extends React.Component {
     const { friend } = props;
 
     this.state = {
-      relationshipOptions: ['friend', 'family', 'acquaintance'],
       ranking: friend ? friend.ranking : 5,
       name: friend ? friend.name : '',
-      relationship: friend ? friend.relationship : 'friend',
+      relationship: friend ? friend.relationship : {
+        friend: false,
+        family: false,
+        acquaintance: true
+      },
       location: friend ? friend.location : {
         country: '',
         region: '',
@@ -34,9 +38,20 @@ class EditFriendRow extends React.Component {
     const name = e.target.value;
     this.setState({ name });
   };
-  handleRelationship = (e) => {
-    const relationship = e.target.value;
-    this.setState({ relationship });
+  handleRelationship = (selectedOption) => {
+    console.log('selectedOption', selectedOption);
+    this.setState((prevState) => {
+      // If the option had been selected previously then unselect it now
+      const isSelected = !!prevState.relationship[selectedOption] ? false : true;
+      return {
+        relationship: {
+          ...prevState.relationship,
+          [selectedOption.value]: isSelected
+        }
+      }
+    });
+    // const relationship = e.target.value;
+    // this.setState({ relationship });
   };
   setLocationState = (location) => this.setState({ location });
   onSubmit = (_id = undefined) => {
@@ -67,7 +82,11 @@ class EditFriendRow extends React.Component {
     // Resets state after adding a friend (if editng a friend, the component is removed anyways)
     this.setState({
       name: '',
-      relationship: 'friend',
+      relationship: {
+        friend: false,
+        family: false,
+        acquaintance: true
+      },
       location: {
         country: '',
         countryId: 'initial',
@@ -79,18 +98,38 @@ class EditFriendRow extends React.Component {
       ranking: 5
     });
   };
+  handleCheckboxChange = (filterCategory) => {
+    this.setState(filterCategory);
+  };
   render () {
     const { friend } = this.props;
+    const checkboxOptions = [{
+      name: 'friend',
+      label: 'Friend',
+      checked: false,
+      filterCategory: 'relationship'
+    }, {
+      name: 'family',
+      label: 'Family',
+      checked: false,
+      filterCategory: 'relationship'
+    }, {
+      name: 'acquaintance',
+      label: 'Acquaintance',
+      checked: false,
+      filterCategory: 'relationship'
+    }];
     return (
       <React.Fragment>
         <tr className="manually-add-friend">
           <td align="center"><input type="text" className="text-input" placeholder="Name" value={this.state.name} onChange={this.handleName} /></td>
           <td align="center">
-            <select value={this.state.relationship} className="select" onChange={this.handleRelationship} placeholder="Relationship">
-              {this.state.relationshipOptions.map((option, ind) => {
-                return <option key={`add-friend-relationship-option-key-${ind}`} value={option}>{startCase(option)}</option>;
-              })}
-            </select>
+            {/*<select value={this.state.relationship} className="select" onChange={this.handleRelationship} placeholder="Relationship">
+                  {this.state.relationshipOptions.map((option, ind) => {
+                    return <option key={`add-friend-relationship-option-key-${ind}`} value={option}>{startCase(option)}</option>;
+                  })}
+                </select>*/}
+                <Dropdown options={checkboxOptions} handleCheckboxChange={this.handleCheckboxChange}/>
           </td>
           <td align="center">
             <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />

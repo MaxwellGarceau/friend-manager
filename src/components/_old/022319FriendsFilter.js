@@ -22,11 +22,6 @@ const initialState = {
     regionId: '',
     city: '',
     cityId: ''
-  },
-  relationship: {
-    friend: false,
-    family: false,
-    acquaintance: false
   }
 };
 
@@ -38,7 +33,6 @@ class FriendsFilter extends React.Component {
 
     this.state = initialState;
     this.state.selectedFilters = this.props.selectedFilters ? this.props.selectedFilters : [];
-    console.log('state', this.state);
   };
   setLocationState = (location) => this.setState({ location });
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
@@ -62,17 +56,18 @@ class FriendsFilter extends React.Component {
       params: this.state.rankingSliderValue
     };
 
-    const relationshipFilter = {
-      filterCategory: 'relationship',
-      type: 'checkbox',
-      params: this.state.relationship.filter((param) => !!param)
-    }
-
-    const selectedFilters = [relationshipFilter, locationFilter, rankingFilter];
+    const selectedFilters = [...this.state.selectedFilters, locationFilter, rankingFilter];
     this.props.startUpdateFriendListFilters(selectedFilters);
     this.handleCloseModal();
   };
   handleResetFilter = () => {
+    // Iterates through refs and unchecks inputs with checkbox type
+    for (const key in this.refs) {
+      if (this.refs[key].type === 'checkbox') {
+        this.refs[key].checked = false;
+      }
+    }
+
     let cloneDeeper = cloneDeep(cloneDeepState);
     this.setState(cloneDeeper, () => {
       this.handleUpdateFilter();
@@ -80,16 +75,53 @@ class FriendsFilter extends React.Component {
     });
   };
   handleCheckboxChange = (e) => {
-    const checkboxName = e.target.name;
-    const checkboxChecked = e.target.checked;
-    const filterCategory = e.target.dataset.filterCategory;
+    const input = e.target;
+    const type = input.type;
+    const filterCategory = input.dataset.filterCategory;
+    const name = input.name;
+    const selectedFilters = this.state.selectedFilters;
+    let prevFilter = false;
+    // If there are previous filters...
+    if (selectedFilters.length > 0) {
+      // Return filter that input field belongs to
+      prevFilter = selectedFilters.filter((filter) => {
+        return filter.filterCategory === filterCategory;
+      })[0];
+    }
+    // Location of filter in selected filters array
+    const prevFilterIndex = selectedFilters.indexOf(prevFilter);
+    const prevParams = prevFilter ? prevFilter.params : [];
 
-    this.setState((prevState) => ({
-      [filterCategory]: {
-        ...prevState[filterCategory],
-        [checkboxName]: checkboxChecked
-      }
-    }));
+    // Remove params and filters
+    if (!input.checked) {
+      this.setState((prevState) => {
+        // Deep copy without mutating state
+        let stateCopy = Object.assign({}, prevState);
+        stateCopy.selectedFilters = stateCopy.selectedFilters.slice();
+        stateCopy.selectedFilters[prevFilterIndex] = Object.assign({}, stateCopy.selectedFilters[prevFilterIndex]);
+        stateCopy.selectedFilters[prevFilterIndex].params = stateCopy.selectedFilters[prevFilterIndex].params.filter((param) => param !== name);
+        // Set state
+        return stateCopy;
+      }, () => {
+        const selectedFilters = this.state.selectedFilters;
+        if (!selectedFilters[prevFilterIndex].params.length > 0) {
+          this.setState({
+            selectedFilters: selectedFilters.filter((filter) => filter.filterCategory !== filterCategory)
+          });
+        }
+      });
+      return;
+    }
+
+    // Add params and filters
+    this.setState((prevState) => {
+      selectedFilters.splice(prevFilterIndex, 1);
+      return selectedFilters.push({
+        filterCategory,
+        type,
+        params: [...prevParams, name]
+      });
+    });
   };
   handleCloseModal = () => {
     if (!!this.props.closeModal) {
@@ -106,29 +138,23 @@ class FriendsFilter extends React.Component {
             <input
               type="checkbox"
               name="friend"
-              checked={this.state.relationship.friend}
               onChange={this.handleCheckboxChange}
               data-filter-category="relationship"
-              ref="friendCheckbox" />
-            <label> Friend</label>
+              ref="friendCheckbox" /> Friend
             <br />
             <input
               type="checkbox"
               name="family"
-              checked={this.state.relationship.family}
               onChange={this.handleCheckboxChange}
               data-filter-category="relationship"
-              ref="familyCheckbox" />
-            <label> Family</label>
+              ref="familyCheckbox" /> Family
             <br />
             <input
               type="checkbox"
               name="acquaintance"
-              checked={this.state.relationship.acquaintance}
               onChange={this.handleCheckboxChange}
               data-filter-category="relationship"
-              ref="acquaintanceCheckbox" />
-            <label> Acquaintance</label>
+              ref="acquaintanceCheckbox" /> Acquaintance
             <br />
           </fieldset>
           <fieldset className="friends-filter__form-section" name="rankingFilter">

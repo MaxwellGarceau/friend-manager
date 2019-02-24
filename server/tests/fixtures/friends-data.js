@@ -6,7 +6,11 @@ const friends = [{
     default: 0,
     current: 0
   },
-  relationship: 'friend',
+  relationship: {
+    friend: true,
+    family: false,
+    acquaintance: false
+  },
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -25,7 +29,11 @@ const friends = [{
     default: 1,
     current: 1
   },
-  relationship: 'friend',
+  relationship: {
+    friend: true,
+    family: false,
+    acquaintance: false
+  },
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -44,7 +52,11 @@ const friends = [{
     default: 2,
     current: 2
   },
-  relationship: 'friend',
+  relationship: {
+    friend: true,
+    family: false,
+    acquaintance: false
+  },
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -63,7 +75,11 @@ const friends = [{
     default: 3,
     current: 3
   },
-  relationship: 'friend',
+  relationship: {
+    friend: true,
+    family: false,
+    acquaintance: false
+  },
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -82,7 +98,11 @@ const friends = [{
     default: 4,
     current: 4
   },
-  relationship: 'acquaintance',
+  relationship: {
+    friend: false,
+    family: false,
+    acquaintance: true
+  },
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -101,7 +121,11 @@ const friends = [{
     default: 5,
     current: 5
   },
-  relationship: 'acquaintance',
+  relationship: {
+    friend: false,
+    family: false,
+    acquaintance: true
+  },
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -120,7 +144,11 @@ const friends = [{
     default: 6,
     current: 6
   },
-  relationship: 'family',
+  relationship: {
+    friend: false,
+    family: true,
+    acquaintance: false
+  },
   location: {
     country: 'United States',
     countryId: '6252001',
