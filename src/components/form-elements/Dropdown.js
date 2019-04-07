@@ -4,7 +4,6 @@ class Dropdown extends React.Component {
   constructor (props) {
     super(props);
 
-    // Initialize empty state to prevent error of undefined this.state
     // Sets which checkboxes will be checked on load
     this.state = {
       [this.props.dropdownType]: this.props.defaultSelection
@@ -13,9 +12,9 @@ class Dropdown extends React.Component {
   checkbox = (option) => {
     const {
       name,
-      label,
-      filterCategory
+      label
     } = option;
+    const filterCategory = this.props.dropdownType;
 
     const isChecked =
       this.state.hasOwnProperty(filterCategory) &&
@@ -62,7 +61,8 @@ class Dropdown extends React.Component {
   handleCheckboxClick = (e) => {
     const name = e.target.name;
     const isChecked = e.target.checked;
-    const filterCategory = e.target.dataset.filterCategory;
+    // const filterCategory = e.target.dataset.filterCategory;
+    const filterCategory = this.props.dropdownType;
     const label = e.target.dataset.label;
     this.handleCheckboxChange({ name, isChecked, filterCategory, label });
   };
