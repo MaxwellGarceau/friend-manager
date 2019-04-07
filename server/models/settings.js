@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const SettingsSchema = new mongoose.Schema({
+  name: {
+    type: String
+  },
   relationship: {
     type: mongoose.Schema.Types.Mixed
   },

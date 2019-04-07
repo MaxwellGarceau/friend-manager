@@ -9,6 +9,7 @@ import ModifyFriendIcons from './ModifyFriendIcons';
 import LocationPicker from '../filter-sorting/LocationPicker';
 import Dropdown from '../form-elements/Dropdown';
 import { findFriendById } from '../../selectors/friends';
+import { selectRelationshipOptions, selectRelationshipSettings } from '../../selectors/settings';
 
 class EditFriendRow extends React.Component {
   constructor (props) {
@@ -38,7 +39,6 @@ class EditFriendRow extends React.Component {
     this.setState({ name });
   };
   handleRelationship = (selectedOption) => {
-    console.log('selectedOption', selectedOption);
     this.setState((prevState) => {
       // If the option had been selected previously then unselect it now
       const isSelected = !!prevState.relationship[selectedOption] ? false : true;
@@ -101,12 +101,13 @@ class EditFriendRow extends React.Component {
   render () {
     const { friend } = this.props;
     const dropDownOptions = this.props.relationshipOptions;
+    const dropDownDefaultSelection = this.props.relationshipSettings
     return (
       <React.Fragment>
         <tr className="manually-add-friend">
           <td align="center"><input type="text" className="text-input" placeholder="Name" value={this.state.name} onChange={this.handleName} /></td>
           <td align="center">
-            <Dropdown options={dropDownOptions} handleCheckboxChange={this.handleCheckboxChange} />
+            <Dropdown options={dropDownOptions} dropdownType={'relationship'} defaultSelection={dropDownDefaultSelection} handleCheckboxChange={this.handleCheckboxChange} />
           </td>
           <td align="center">
             <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />
@@ -131,7 +132,8 @@ class EditFriendRow extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   completeFriendsList: state.friends,
-  relationshipOptions: state.settings.relationship
+  relationshipOptions: selectRelationshipOptions(state.settings),
+  relationshipSettings: selectRelationshipSettings(state.settings)
 });
 
 export default connect(mapStateToProps)(EditFriendRow);

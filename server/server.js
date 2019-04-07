@@ -31,15 +31,17 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   });
 
   // Loads settings test fixture data into mongo db
-  const { defaultFriendFields } = require('./data-structures/fields');
+  const { defaultOptions } = require('./data-structures/fields');
+  const { defaultSettings } = require('./data-structures/settings');
   const testObjectId = '5b97cf9503dc841653c6f108';
-  const setDefaultFriendFields = async () => {
+  const updateSettings = async (name, data) => {
     await Settings.findOneAndUpdate(
       {
-        _creator: testObjectId
+        _creator: testObjectId,
+        name
       },
       {
-        $set: defaultFriendFields
+        $set: data
       },
       {
         new: true,
@@ -47,7 +49,8 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
       }
     );
   }
-  setDefaultFriendFields();
+  updateSettings('defaultOptions', defaultOptions);
+  updateSettings('defaultSettings', defaultSettings);
 } else {
   port = process.env.PORT;
 }
@@ -195,10 +198,9 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
 // Initialize Settings
 app.get('/api/settings', authenticate, async (req, res) => {
   try {
-    const response = await Settings.findOne({
+    const response = await Settings.find({
       _creator: req.user._id
     });
-    console.log('server side response', response);
     res.send(response);
   } catch (e) {
     res.status(400).send(e);

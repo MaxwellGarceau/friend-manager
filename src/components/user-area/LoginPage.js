@@ -22,8 +22,8 @@ export class LoginPage extends React.Component {
       this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {
       // Possibly use await (or something else) to force friends list to populate before page is loaded
-      this.props.startPopulateSettings();
-      this.props.startPopulateFriendList();
+      await this.props.startPopulateSettings();
+      await this.props.startPopulateFriendList();
       history.push('/dashboard');
     }
   };

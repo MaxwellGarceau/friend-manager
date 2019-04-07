@@ -1,6 +1,7 @@
 const { ObjectID } = require('mongodb');
 
-const defaultFriendFields = {
+const defaultOptions = {
+  name: 'defaultOptions',
   relationship: [
     {
       name: 'acquaintance',
@@ -22,5 +23,5 @@ const defaultFriendFields = {
 };
 
 module.exports = {
-  defaultFriendFields
+  defaultOptions
 }

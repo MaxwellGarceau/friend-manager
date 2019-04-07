@@ -1,5 +1,10 @@
 const defaultSettings = {
-  friendRelationships: ['acquaintance']
+  name: 'defaultSettings',
+  relationship: [{
+    name: 'acquaintance',
+    label: 'Acquaintance',
+    filterCategory: 'relationship'
+  }]
 };
 
 module.exports = {

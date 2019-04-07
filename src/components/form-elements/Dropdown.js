@@ -1,12 +1,13 @@
 import React from 'react';
 
 class Dropdown extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
 
     // Initialize empty state to prevent error of undefined this.state
+    // Sets which checkboxes will be checked on load
     this.state = {
-
+      [this.props.dropdownType]: this.props.defaultSelection
     };
   }
   checkbox = (option) => {
@@ -26,19 +27,14 @@ class Dropdown extends React.Component {
           type="checkbox"
           name={name}
           checked={isChecked}
-          onChange={this.handleCheckboxChange}
+          onChange={this.handleCheckboxClick}
           data-filter-category={filterCategory}
           data-label={label} />
         {label}
       </label>
     )
   };
-  handleCheckboxChange = (e) => {
-    const name = e.target.name;
-    const isChecked = e.target.checked;
-    const filterCategory = e.target.dataset.filterCategory;
-    const label = e.target.dataset.label;
-
+  handleCheckboxChange = ({ name, isChecked, filterCategory, label }) => {
     this.setState((prevState) => {
       const validatedPrevState = prevState[filterCategory] ? prevState[filterCategory] : [];
 
@@ -48,7 +44,8 @@ class Dropdown extends React.Component {
             ...validatedPrevState,
             {
               label,
-              name
+              name,
+              filterCategory
             }
           ]
         }
@@ -61,6 +58,22 @@ class Dropdown extends React.Component {
     }, () => {
       this.props.handleCheckboxChange(this.state);
     });
+  };
+  handleCheckboxClick = (e) => {
+    const name = e.target.name;
+    const isChecked = e.target.checked;
+    const filterCategory = e.target.dataset.filterCategory;
+    const label = e.target.dataset.label;
+    this.handleCheckboxChange({ name, isChecked, filterCategory, label });
+  };
+  setDefaultSelection = () => {
+    const defaultSelection = this.props.defaultSelection ? this.props.defaultSelection : [];
+
+    if (defaultSelection.length > 0) {
+      return this.props.options.filter((option) => {
+        return defaultSelection.filter((defaultOption) => defaultOption === option.name).length > 0;
+      });
+    }
   };
   render () {
     return (
