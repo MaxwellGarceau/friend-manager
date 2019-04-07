@@ -44,10 +44,12 @@ class Dropdown extends React.Component {
 
     this.setState((prevState) => {
       const validatedPrevState = prevState[filterCategory] ? prevState[filterCategory] : [];
+
       if (isChecked) {
         return {
           [filterCategory]: [
-            ...validatedPrevState, {
+            ...validatedPrevState,
+            {
               label,
               name
             }

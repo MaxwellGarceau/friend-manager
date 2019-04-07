@@ -49,8 +49,6 @@ class EditFriendRow extends React.Component {
         }
       }
     });
-    // const relationship = e.target.value;
-    // this.setState({ relationship });
   };
   setLocationState = (location) => this.setState({ location });
   onSubmit = (_id = undefined) => {
