@@ -1,24 +1,29 @@
 import React from 'react';
 
-const Checkbox = (props) => {
-  const {
-    name,
-    label,
-    checked = false,
-    filterCategory
-  } = props.options;
+class Checkbox extends React.Component {
+  handleCheckboxChange = () => {
 
-  return (
-    <React.Fragment>
-      <input
-        type="checkbox"
-        name={name}
-        checked={checked}
-        onChange={props.onChange}
-        data-filter-category={filterCategory} />
-      <label> {label}</label>
-    </React.Fragment>
-  );
+  };
+  render () {
+    const {
+      name,
+      label,
+      checked = false,
+      filterCategory
+    } = this.props.options;
+
+    return (
+      <React.Fragment>
+        <input
+          type="checkbox"
+          name={name}
+          checked={checked}
+          onChange={this.props.sendCheckboxChange}
+          data-filter-category={filterCategory} />
+        <label> {label}</label>
+      </React.Fragment>
+    );
+  }
 };
 
 export default Checkbox;

@@ -14,6 +14,7 @@ const { authenticate } = require('./middleware/user-authentication');
 // Models
 const { User } = require('./models/user');
 const { Friend } = require('./models/friend');
+const { Settings } = require('./models/settings');
 
 const app = express();
 const publicPath = path.join(__dirname, '..', 'public');
@@ -23,11 +24,30 @@ let port;
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   port = parseInt(process.env.PORT, 10) + 1 || 3000;
 
-  // Loads test fixture data into mongo db
+  // Loads friends test fixture data into mongo db
   const friendTestData = require('./tests/fixtures/friends-data').friends;
   friendTestData.map((testFriend) => {
     return mongoose.connection.collection('friends').replaceOne({ _id: testFriend._id }, testFriend, { upsert: true });
   });
+
+  // Loads settings test fixture data into mongo db
+  const { defaultFriendFields } = require('./data-structures/fields');
+  const testObjectId = '5b97cf9503dc841653c6f108';
+  const setDefaultFriendFields = async () => {
+    await Settings.findOneAndUpdate(
+      {
+        _creator: testObjectId
+      },
+      {
+        $set: defaultFriendFields
+      },
+      {
+        new: true,
+        upsert: true
+      }
+    );
+  }
+  setDefaultFriendFields();
 } else {
   port = process.env.PORT;
 }
@@ -167,6 +187,19 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
     await req.user.removeToken(req.token);
     res.clearCookie('jwtToken');
     res.status(200).send();
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+// Initialize Settings
+app.get('/api/settings', authenticate, async (req, res) => {
+  try {
+    const response = await Settings.findOne({
+      _creator: req.user._id
+    });
+    console.log('server side response', response);
+    res.send(response);
   } catch (e) {
     res.status(400).send(e);
   }

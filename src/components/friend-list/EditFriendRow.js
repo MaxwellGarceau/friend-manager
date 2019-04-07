@@ -19,9 +19,8 @@ class EditFriendRow extends React.Component {
       ranking: friend ? friend.ranking : 5,
       name: friend ? friend.name : '',
       relationship: friend ? friend.relationship : {
-        friend: false,
-        family: false,
-        acquaintance: true
+        label: 'Acquaintance',
+        name: 'acquaintance'
       },
       location: friend ? friend.location : {
         country: '',
@@ -103,33 +102,13 @@ class EditFriendRow extends React.Component {
   };
   render () {
     const { friend } = this.props;
-    const checkboxOptions = [{
-      name: 'friend',
-      label: 'Friend',
-      checked: false,
-      filterCategory: 'relationship'
-    }, {
-      name: 'family',
-      label: 'Family',
-      checked: false,
-      filterCategory: 'relationship'
-    }, {
-      name: 'acquaintance',
-      label: 'Acquaintance',
-      checked: false,
-      filterCategory: 'relationship'
-    }];
+    const dropDownOptions = this.props.relationshipOptions;
     return (
       <React.Fragment>
         <tr className="manually-add-friend">
           <td align="center"><input type="text" className="text-input" placeholder="Name" value={this.state.name} onChange={this.handleName} /></td>
           <td align="center">
-            {/*<select value={this.state.relationship} className="select" onChange={this.handleRelationship} placeholder="Relationship">
-                  {this.state.relationshipOptions.map((option, ind) => {
-                    return <option key={`add-friend-relationship-option-key-${ind}`} value={option}>{startCase(option)}</option>;
-                  })}
-                </select>*/}
-                <Dropdown options={checkboxOptions} handleCheckboxChange={this.handleCheckboxChange}/>
+            <Dropdown options={dropDownOptions} handleCheckboxChange={this.handleCheckboxChange} />
           </td>
           <td align="center">
             <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />
@@ -153,7 +132,8 @@ class EditFriendRow extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  completeFriendsList: state.friends
+  completeFriendsList: state.friends,
+  relationshipOptions: state.settings.relationship
 });
 
 export default connect(mapStateToProps)(EditFriendRow);

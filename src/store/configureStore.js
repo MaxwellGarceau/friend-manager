@@ -1,11 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { persistStore, persistReducer, createTransform } from 'redux-persist';
-import { omit } from 'lodash/omit';
+// import { omit } from 'lodash/omit';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import authReducer from '../reducers/auth';
 import filterReducer from '../reducers/filters';
 import friendsReducer from '../reducers/friends';
+import settingsReducer from '../reducers/settings';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,7 +26,8 @@ let resetCanEditFriend = createTransform(
 const appReducer = combineReducers({
   auth: authReducer,
   filters: filterReducer,
-  friends: friendsReducer
+  friends: friendsReducer,
+  settings: settingsReducer
 });
 
 const rootReducer = (state, action) => {
