@@ -1,7 +1,4 @@
 import React from 'react';
-import { omit } from 'lodash-es';
-
-import Checkbox from './Checkbox';
 
 class Dropdown extends React.Component {
   constructor () {
