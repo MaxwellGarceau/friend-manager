@@ -38,7 +38,8 @@ class FriendsFilter extends React.Component {
 
     this.state = initialState;
     this.state.selectedFilters = this.props.selectedFilters ? this.props.selectedFilters : [];
-    this.state.rankingSliderValue = this.props.rankingSliderDefaults ? this.props.rankingSliderDefaults : { min: 1, max: 5 };
+    this.state.rankingSliderValue = this.props.rankingSliderDefaults ? this.props.rankingSliderDefaults : this.state.rankingSliderValue;
+    this.state.location = this.props.locationDefaults ? this.props.locationDefaults : this.state.locationDefaults;
   };
   setLocationState = (location) => this.setState({ location });
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
@@ -47,13 +48,14 @@ class FriendsFilter extends React.Component {
       e.preventDefault();
     }
 
-    const {country, region, city} = this.state.location;
-    const paramsArr = [country, region, city].filter((param) => !!param);
+    // const {country, region, city} = this.state.location;
+    // const paramsArr = [country, region, city].filter((param) => !!param);
 
     const locationFilter = {
       filterCategory: 'location',
-      type: 'dropdown',
-      params: paramsArr
+      type: 'location',
+      // params: paramsArr
+      params: this.state.location
     };
 
     const rankingFilter = {
@@ -130,8 +132,9 @@ class FriendsFilter extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   selectedFilters: state.filters.friendsListFilters,
   relationshipOptions: selectRelationshipOptions(state.settings),
-  relationshipDropdownDefaults: getFiltersByFilterCategory(state.filters.friendsListFilters, ['relationship'])[0].params,
-  rankingSliderDefaults: getFiltersByFilterCategory(state.filters.friendsListFilters, ['ranking'])[0].params
+  relationshipDropdownDefaults: getFiltersByFilterCategory(state.filters.friendsListFilters, ['relationship']).length > 0 ? getFiltersByFilterCategory(state.filters.friendsListFilters, ['relationship'])[0].params : [],
+  rankingSliderDefaults: getFiltersByFilterCategory(state.filters.friendsListFilters, ['ranking']).length > 0 ? getFiltersByFilterCategory(state.filters.friendsListFilters, ['ranking'])[0].params : false,
+  locationDefaults: getFiltersByFilterCategory(state.filters.friendsListFilters, ['location']).length > 0 ? getFiltersByFilterCategory(state.filters.friendsListFilters, ['location'])[0].params : false
 });
 
 const mapDispatchToProps = (dispatch) => ({

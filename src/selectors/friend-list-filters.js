@@ -1,5 +1,6 @@
 // import _ from 'lodash';
-import { isEmpty } from 'lodash-es';
+import { isEmpty, pickBy, identity } from 'lodash-es';
+import { arrayContainsArray } from './filters';
 
 export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
   const allFriendsListFilters = new AllFriendsListFilters();
@@ -12,8 +13,8 @@ export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
     if (!isEmpty(filter.params)) {
       const filterMethod = filter.type;
       const filterCategory = filter.filterCategory;
-      const activeFilters = filter.params;
-      filteredFriendsList = allFriendsListFilters[filterMethod](filteredFriendsList, activeFilters, filterCategory);
+      const filterParams = filter.params;
+      filteredFriendsList = allFriendsListFilters[filterMethod](filteredFriendsList, filterParams, filterCategory);
     }
   });
   return filteredFriendsList;
@@ -53,6 +54,19 @@ class AllFriendsListFilters {
           }
         }
       }).length === paramsArr.length;
+    });
+  };
+
+  location = (friendsList, params, filterCategory) => {
+    return friendsList.filter((friend) => {
+      // Validation/formatting:
+      // pickBy() removes empty object properties
+      // values() converts object property values into an array
+      const friendListLocationsArr = Object.values(pickBy(friend.location, identity));
+      const filterLocationsArr = Object.values(pickBy(params, identity));
+
+      // console.log('arrayContainsArray', pickBy(friend.location, identity));
+      return arrayContainsArray(filterLocationsArr, friendListLocationsArr);
     });
   };
 }
