@@ -1,0 +1,11 @@
+$dropdown-input-margin: 5px;
+$dropdown-label-margin: 5px;
+
+.dropdown {
+  &-input {
+    margin-right: $dropdown-input-margin;
+  }
+  &-label {
+    margin-right: $dropdown-label-margin;
+  }
+}

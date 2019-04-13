@@ -3,10 +3,11 @@ import React from 'react';
 class Dropdown extends React.Component {
   constructor (props) {
     super(props);
+    const { defaultSelection, dropdownType } = props;
 
     // Sets which checkboxes will be checked on load
     this.state = {
-      [this.props.dropdownType]: this.props.defaultSelection
+      [dropdownType]: defaultSelection ? defaultSelection : []
     };
   }
   checkbox = (option) => {
@@ -18,11 +19,13 @@ class Dropdown extends React.Component {
 
     const isChecked =
       this.state.hasOwnProperty(filterCategory) &&
+      this.state[filterCategory].length > 0 &&
       this.state[filterCategory].some((relationship) => relationship.name === name);
 
     return (
-      <label key={`edit-friend-row-${name}-checkbox`}>
+      <label className="dropdown-label" key={`edit-friend-row-${name}-checkbox`}>
         <input
+          className="dropdown-input"
           type="checkbox"
           name={name}
           checked={isChecked}
@@ -61,7 +64,6 @@ class Dropdown extends React.Component {
   handleCheckboxClick = (e) => {
     const name = e.target.name;
     const isChecked = e.target.checked;
-    // const filterCategory = e.target.dataset.filterCategory;
     const filterCategory = this.props.dropdownType;
     const label = e.target.dataset.label;
     this.handleCheckboxChange({ name, isChecked, filterCategory, label });
@@ -78,7 +80,7 @@ class Dropdown extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <div>
+        <div className="dropdown-container">
           {this.props.options.map((option) => this.checkbox(option))}
         </div>
       </React.Fragment>

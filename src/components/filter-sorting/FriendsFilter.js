@@ -7,6 +7,9 @@ import { startUpdateFriendListFilters } from '../../actions/filters';
 
 import LocationDropdown from './LocationDropdown';
 import LocationPicker from './LocationPicker';
+import Dropdown from '../form-elements/Dropdown';
+
+import { selectRelationshipOptions } from '../../selectors/settings';
 
 // Initial State and deep copy
 const initialState = {
@@ -23,11 +26,7 @@ const initialState = {
     city: '',
     cityId: ''
   },
-  relationship: {
-    friend: false,
-    family: false,
-    acquaintance: false
-  }
+  relationship: []
 };
 
 const cloneDeepState = cloneDeep(initialState);
@@ -79,17 +78,20 @@ class FriendsFilter extends React.Component {
       this.handleCloseModal();
     });
   };
-  handleCheckboxChange = (e) => {
-    const checkboxName = e.target.name;
-    const checkboxChecked = e.target.checked;
-    const filterCategory = e.target.dataset.filterCategory;
+  // handleCheckboxChange = (e) => {
+  //   const checkboxName = e.target.name;
+  //   const checkboxChecked = e.target.checked;
+  //   const filterCategory = e.target.dataset.filterCategory;
 
-    this.setState((prevState) => ({
-      [filterCategory]: {
-        ...prevState[filterCategory],
-        [checkboxName]: checkboxChecked
-      }
-    }));
+  //   this.setState((prevState) => ({
+  //     [filterCategory]: {
+  //       ...prevState[filterCategory],
+  //       [checkboxName]: checkboxChecked
+  //     }
+  //   }));
+  // };
+  handleCheckboxChange = (filterCategory) => {
+    this.setState(filterCategory);
   };
   handleCloseModal = () => {
     if (!!this.props.closeModal) {
@@ -97,41 +99,47 @@ class FriendsFilter extends React.Component {
     }
   };
   render () {
+    {/*<input
+      type="checkbox"
+      name="friend"
+      checked={this.state.relationship.friend}
+      onChange={this.handleCheckboxChange}
+      data-filter-category="relationship"
+      ref="friendCheckbox" />
+    <label> Friend</label>
+    <br />
+    <input
+      type="checkbox"
+      name="family"
+      checked={this.state.relationship.family}
+      onChange={this.handleCheckboxChange}
+      data-filter-category="relationship"
+      ref="familyCheckbox" />
+    <label> Family</label>
+    <br />
+    <input
+      type="checkbox"
+      name="acquaintance"
+      checked={this.state.relationship.acquaintance}
+      onChange={this.handleCheckboxChange}
+      data-filter-category="relationship"
+      ref="acquaintanceCheckbox" />
+    <label> Acquaintance</label>
+    <br />*/}
+    const dropDownOptions = this.props.relationshipOptions;
     return (
       <div className={`friends-filter ${this.props.className}`}>
         <h2 className="friends-filter__title">Filter</h2>
         <form className="form friends-filter__form" onSubmit={this.handleUpdateFilter}>
-          <fieldset className="friends-filter__form-section" name="relationshipFilter">
+          <fieldset className="friends-filter__form-section friends-filter__relationship-filter" name="relationshipFilter">
             <legend className="friends-filter__form-subtitle">Relationship</legend>
-            <input
-              type="checkbox"
-              name="friend"
-              checked={this.state.relationship.friend}
-              onChange={this.handleCheckboxChange}
-              data-filter-category="relationship"
-              ref="friendCheckbox" />
-            <label> Friend</label>
-            <br />
-            <input
-              type="checkbox"
-              name="family"
-              checked={this.state.relationship.family}
-              onChange={this.handleCheckboxChange}
-              data-filter-category="relationship"
-              ref="familyCheckbox" />
-            <label> Family</label>
-            <br />
-            <input
-              type="checkbox"
-              name="acquaintance"
-              checked={this.state.relationship.acquaintance}
-              onChange={this.handleCheckboxChange}
-              data-filter-category="relationship"
-              ref="acquaintanceCheckbox" />
-            <label> Acquaintance</label>
-            <br />
+            <Dropdown
+              options={dropDownOptions}
+              dropdownType={'relationship'}
+              // defaultSelection={dropDownDefaultSelection}
+              handleCheckboxChange={this.handleCheckboxChange} />
           </fieldset>
-          <fieldset className="friends-filter__form-section" name="rankingFilter">
+          <fieldset className="friends-filter__form-section friends-filter__ranking-filter" name="rankingFilter">
             <legend className="friends-filter__form-subtitle">Ranking</legend>
             <InputRange
               allowSameValues={true}
@@ -143,7 +151,7 @@ class FriendsFilter extends React.Component {
             />
             <br />
           </fieldset>
-          <fieldset className="friends-filter__form-section" name="locationFilter">
+          <fieldset className="friends-filter__form-section friends-filter__location-filter" name="locationFilter">
             <legend className="friends-filter__form-subtitle">Location</legend>
             <LocationPicker setLocationState={this.setLocationState} location={this.state.location} />
           </fieldset>
@@ -158,7 +166,8 @@ class FriendsFilter extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  selectedFilters: state.filters.friendsListFilters
+  selectedFilters: state.filters.friendsListFilters,
+  relationshipOptions: selectRelationshipOptions(state.settings)
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -18,8 +18,6 @@
   &__form {
     background-color: basic-colors('primary-light');
     border-radius: 10px;
-    // box-shadow: 10px 10px 15px #96b2ff;
-    // box-shadow: inset 0 0 100px rgba(0,0,0,.5);
     box-shadow: inset 0 0 10px $pure-white;
     padding: 1.2rem;
 
@@ -28,11 +26,20 @@
       font-family: 'Work Sans';
       font-weight: 600;
     }
+  }
 
-    &-section {
-      font-family: 'Open Sans';
-      font-weight: 300;
-      text-align: left;
+  // All filter sections
+  &__form-section {
+    font-family: 'Open Sans';
+    font-weight: 300;
+    text-align: left;
+  }
+
+  // Specific filter sections
+  &__relationship-filter {
+    .dropdown-container {
+      display: flex;
+      flex-direction: column;
     }
   }
 }
