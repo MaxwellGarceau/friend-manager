@@ -6,11 +6,13 @@ const friends = [{
     default: 0,
     current: 0
   },
-  relationship: {
-    friend: true,
-    family: false,
-    acquaintance: false
-  },
+  relationship: [
+    {
+      name: 'friend',
+      label: 'Friend',
+      filterCategory: 'relationship'
+    }
+  ],
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -29,11 +31,13 @@ const friends = [{
     default: 1,
     current: 1
   },
-  relationship: {
-    friend: true,
-    family: false,
-    acquaintance: false
-  },
+  relationship: [
+    {
+      name: 'friend',
+      label: 'Friend',
+      filterCategory: 'relationship'
+    }
+  ],
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -52,11 +56,13 @@ const friends = [{
     default: 2,
     current: 2
   },
-  relationship: {
-    friend: true,
-    family: false,
-    acquaintance: false
-  },
+  relationship: [
+    {
+      name: 'friend',
+      label: 'Friend',
+      filterCategory: 'relationship'
+    }
+  ],
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -75,11 +81,13 @@ const friends = [{
     default: 3,
     current: 3
   },
-  relationship: {
-    friend: true,
-    family: false,
-    acquaintance: false
-  },
+  relationship: [
+    {
+      name: 'acquaintance',
+      label: 'Acquaintance',
+      filterCategory: 'relationship'
+    }
+  ],
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -98,11 +106,13 @@ const friends = [{
     default: 4,
     current: 4
   },
-  relationship: {
-    friend: false,
-    family: false,
-    acquaintance: true
-  },
+  relationship: [
+    {
+      name: 'acquaintance',
+      label: 'Acquaintance',
+      filterCategory: 'relationship'
+    }
+  ],
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -121,11 +131,13 @@ const friends = [{
     default: 5,
     current: 5
   },
-  relationship: {
-    friend: false,
-    family: false,
-    acquaintance: true
-  },
+  relationship: [
+    {
+      name: 'acquaintance',
+      label: 'Acquaintance',
+      filterCategory: 'relationship'
+    }
+  ],
   location: {
     country: 'United States',
     countryId: '6252001',
@@ -144,11 +156,13 @@ const friends = [{
     default: 6,
     current: 6
   },
-  relationship: {
-    friend: false,
-    family: true,
-    acquaintance: false
-  },
+  relationship: [
+    {
+      name: 'family',
+      label: 'Family',
+      filterCategory: 'relationship'
+    }
+  ],
   location: {
     country: 'United States',
     countryId: '6252001',

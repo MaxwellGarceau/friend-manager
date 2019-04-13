@@ -14,15 +14,12 @@ import { selectRelationshipOptions, selectRelationshipSettings } from '../../sel
 class EditFriendRow extends React.Component {
   constructor (props) {
     super(props);
-    const { friend } = props;
+    const { friend, defaultRelationshipSettings } = props;
 
     this.state = {
       ranking: friend ? friend.ranking : 5,
       name: friend ? friend.name : '',
-      relationship: friend ? friend.relationship : {
-        label: 'Acquaintance',
-        name: 'acquaintance'
-      },
+      relationship: friend ? friend.relationship : defaultRelationshipSettings,
       location: friend ? friend.location : {
         country: '',
         region: '',
@@ -79,11 +76,13 @@ class EditFriendRow extends React.Component {
     // Resets state after adding a friend (if editng a friend, the component is removed anyways)
     this.setState({
       name: '',
-      relationship: {
-        friend: false,
-        family: false,
-        acquaintance: true
-      },
+      relationship: [
+        {
+          name: 'acquaintance',
+          label: 'Acquaintance',
+          filterCategory: 'relationship'
+        }
+      ],
       location: {
         country: '',
         countryId: 'initial',
@@ -101,7 +100,7 @@ class EditFriendRow extends React.Component {
   render () {
     const { friend } = this.props;
     const dropDownOptions = this.props.relationshipOptions;
-    const dropDownDefaultSelection = this.props.relationshipSettings
+    const dropDownDefaultSelection = this.state.relationship;
     return (
       <React.Fragment>
         <tr className="manually-add-friend">
@@ -133,7 +132,7 @@ class EditFriendRow extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   completeFriendsList: state.friends,
   relationshipOptions: selectRelationshipOptions(state.settings),
-  relationshipSettings: selectRelationshipSettings(state.settings)
+  defaultRelationshipSettings: selectRelationshipSettings(state.settings)
 });
 
 export default connect(mapStateToProps)(EditFriendRow);
