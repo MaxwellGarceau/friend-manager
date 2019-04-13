@@ -38,6 +38,7 @@ class FriendsFilter extends React.Component {
 
     this.state = initialState;
     this.state.selectedFilters = this.props.selectedFilters ? this.props.selectedFilters : [];
+    this.state.rankingSliderValue = this.props.rankingSliderDefaults ? this.props.rankingSliderDefaults : { min: 1, max: 5 };
   };
   setLocationState = (location) => this.setState({ location });
   handleRankingSliderChange = (rankingSliderValue) => this.setState({ rankingSliderValue });
@@ -129,7 +130,8 @@ class FriendsFilter extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   selectedFilters: state.filters.friendsListFilters,
   relationshipOptions: selectRelationshipOptions(state.settings),
-  relationshipDropdownDefaults: getFiltersByFilterCategory(state.filters.friendsListFilters, ['relationship'])[0].params
+  relationshipDropdownDefaults: getFiltersByFilterCategory(state.filters.friendsListFilters, ['relationship'])[0].params,
+  rankingSliderDefaults: getFiltersByFilterCategory(state.filters.friendsListFilters, ['ranking'])[0].params
 });
 
 const mapDispatchToProps = (dispatch) => ({
