@@ -20,7 +20,7 @@ class Dropdown extends React.Component {
     const isChecked =
       this.state.hasOwnProperty(filterCategory) &&
       this.state[filterCategory].length > 0 &&
-      this.state[filterCategory].some((relationship) => relationship.name === name);
+      this.state[filterCategory].some((filterCategory) => filterCategory.name === name);
 
     return (
       <label className="dropdown-label" key={`edit-friend-row-${name}-checkbox`}>

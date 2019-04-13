@@ -21,9 +21,13 @@ export const friendsListMasterFilter = (friendsList, filterSettings = []) => {
 
 // User Filters for Querying Friends List
 class AllFriendsListFilters {
-  checkbox = (friendsList, paramsArr, filterCategory) => {
+  checkbox = (friendsList, params, filterCategory) => {
+    const filterParamsArr = params.map(({ name }) => name);
+
     return friendsList.filter((friend) => {
-      return paramsArr.filter((param) => friend[filterCategory] === param).join();
+      // If friend contains ANY of the filter parameters: same as the "||" operand...
+      const friendParamsArr = friend[filterCategory].map(({ name }) => name);
+      return filterParamsArr.some((filterParam) => friendParamsArr.includes(filterParam));
     });
   };
 
@@ -41,9 +45,9 @@ class AllFriendsListFilters {
     return friendsList.filter((friend) => {
       const friendListLocation = friend.location;
       return paramsArr.filter((param) => {
-        console.log('params', param);
+        // console.log('params', param);
         for (const location in friendListLocation) {
-          console.log('iterate through friend.location', friendListLocation[location]);
+          // console.log('iterate through friend.location', friendListLocation[location]);
           if (friendListLocation[location] === param) {
             return param;
           }
@@ -52,10 +56,3 @@ class AllFriendsListFilters {
     });
   };
 }
-
-// // Filter friendslist by _creator
-// export const filterFriendsByCreator = (friendsList, creatorId) => {
-//   console.log('insideFilter Friendslist', friendsList);
-//   console.log('insideFilter creatorId', creatorId);
-//   return friendsList.filter((friend) => friend._creator === creatorId);
-// }
