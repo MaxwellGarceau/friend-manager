@@ -2,28 +2,48 @@ import axios from 'axios';
 
 import { getJwtToken } from '../utils/custom-validation/user-credentials';
 
-export const populateSettings = (settings) => ({
-  type: 'POPULATE_SETTINGS',
+const getRequestConfig = () => {
+  const jwtToken = getJwtToken();
+  return {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth': jwtToken
+    }
+  };
+}
+
+export const populateFriendSettings = (settings) => ({
+  type: 'POPULATE_FRIEND_SETTINGS',
   settings
 });
 
-export const startPopulateSettings = () => {
+export const startPopulateFriendSettings = () => {
+  const config = getRequestConfig();
   return async (dispatch, getState) => {
     try {
-      const jwtToken = getJwtToken();
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth': jwtToken
-        }
-      };
-      const response = await axios.get('/api/settings', config);
-      console.log('response', response);
-      const settings = response.data;
+      const settings = await axios.get('/api/settings', config);
 
-      return dispatch(populateSettings(settings));
+      return dispatch(populateFriendSettings(settings.data));
     } catch (e) {
       console.log('Error!', e);
     }
   }
-};
+}
+
+export const populateFilterSettings = (filterSettings) => ({
+  type: 'POPULATE_FILTER_SETTINGS',
+  filterSettings
+});
+
+export const startPopulateFilterSettings = () => {
+  const config = getRequestConfig();
+  return async (dispatch, getState) => {
+    try {
+      const settings = await axios.get('/api/settings/filters', config);
+
+      return dispatch(populateFilterSettings(settings.data));
+    } catch (e) {
+      console.log('Error!', e);
+    }
+  }
+}

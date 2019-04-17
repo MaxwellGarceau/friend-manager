@@ -5,7 +5,7 @@ import has from 'lodash/has';
 
 import { startLogin } from '../../actions/auth';
 import { startPopulateFriendList } from '../../actions/friends';
-import { startPopulateSettings } from '../../actions/settings';
+import { startPopulateFriendSettings, startPopulateFilterSettings } from '../../actions/settings';
 import UserCredentialsForm from './UserCredentialsForm';
 
 export class LoginPage extends React.Component {
@@ -22,7 +22,8 @@ export class LoginPage extends React.Component {
       this.setState(() => ({ error: response.response.data.errorMessage }))
     } else {
       // Possibly use await (or something else) to force friends list to populate before page is loaded
-      await this.props.startPopulateSettings();
+      await this.props.startPopulateFriendSettings();
+      await this.props.startPopulateFilterSettings();
       await this.props.startPopulateFriendList();
       history.push('/dashboard');
     }
@@ -48,7 +49,8 @@ export class LoginPage extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   startLogin: (userData) => dispatch(startLogin(userData)),
   startPopulateFriendList: () => dispatch(startPopulateFriendList()),
-  startPopulateSettings: () => dispatch(startPopulateSettings())
+  startPopulateFriendSettings: () => dispatch(startPopulateFriendSettings()),
+  startPopulateFilterSettings: () => dispatch(startPopulateFilterSettings())
 });
 
 export default connect(undefined, mapDispatchToProps)(LoginPage);

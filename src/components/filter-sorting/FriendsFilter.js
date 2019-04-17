@@ -48,13 +48,9 @@ class FriendsFilter extends React.Component {
       e.preventDefault();
     }
 
-    // const {country, region, city} = this.state.location;
-    // const paramsArr = [country, region, city].filter((param) => !!param);
-
     const locationFilter = {
       filterCategory: 'location',
       type: 'location',
-      // params: paramsArr
       params: this.state.location
     };
 

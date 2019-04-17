@@ -14,7 +14,7 @@ const { authenticate } = require('./middleware/user-authentication');
 // Models
 const { User } = require('./models/user');
 const { Friend } = require('./models/friend');
-const { Settings } = require('./models/settings');
+const { Settings, FilterSettings } = require('./models/settings');
 
 const app = express();
 const publicPath = path.join(__dirname, '..', 'public');
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
 
   // Loads settings test fixture data into mongo db
   const { defaultOptions } = require('./data-structures/fields');
-  const { defaultSettings } = require('./data-structures/settings');
+  const { defaultSettings, defaultFilterSettings } = require('./data-structures/settings');
   const testObjectId = '5b97cf9503dc841653c6f108';
   const updateSettings = async (name, data) => {
     await Settings.findOneAndUpdate(
@@ -48,9 +48,25 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
         upsert: true
       }
     );
-  }
+  };
+  const updateFilterSettings = async (name, data) => {
+    await FilterSettings.findOneAndUpdate(
+      {
+        _creator: testObjectId,
+        name
+      },
+      {
+        $set: data
+      },
+      {
+        new: true,
+        upsert: true
+      }
+    );
+  };
   updateSettings('defaultOptions', defaultOptions);
   updateSettings('defaultSettings', defaultSettings);
+  updateFilterSettings('defaultFilterSettings', defaultFilterSettings);
 } else {
   port = process.env.PORT;
 }
@@ -199,6 +215,18 @@ app.delete('/api/users/me/token', authenticate, async (req, res) => {
 app.get('/api/settings', authenticate, async (req, res) => {
   try {
     const response = await Settings.find({
+      _creator: req.user._id
+    });
+    res.send(response);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+// Initialize Filter Settings
+app.get('/api/settings/filters', authenticate, async (req, res) => {
+  try {
+    const response = await FilterSettings.find({
       _creator: req.user._id
     });
     res.send(response);
