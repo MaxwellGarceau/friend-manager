@@ -10,7 +10,7 @@
     "client": "webpack-dev-server",
     "server": "nodemon server/server.js --watch",
     "full-stack-dev": "concurrently \"yarn run server\" \"yarn run client\"",
-    "start-local-db": "cd ~/Computer\\ Science\\ Educational\\ Material/mongodb/mongo/bin/ && ./mongod --dbpath ~/Computer\\ Science\\ Educational\\ Material/mongodb/mongo-data/ --port 27018",
+    "start-local-db": "cd ~/computer-science-educational-material/Web\\ Development/mongodb/mongo/bin/ && ./mongod --dbpath ~/computer-science-educational-material/Web\\ Development/mongodb/mongo-data/ --port 27018",
     "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
     "start": "node server/server.js",
     "heroku-postbuild": "yarn run build:prod"
